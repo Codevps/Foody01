@@ -1,0 +1,7 @@
+auth when done wrong servers stops running=>{
+    so do error handling,
+    also there is no checking whether the password is there or not
+}
+
+
+use middleware for cart and if user puts item in cart then mark that item and store it in cart database and if user deletes so delete from database
