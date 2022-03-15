@@ -9,20 +9,21 @@ const Cart = () => {
   const { items } = useSelector((state) => state.items);
   const user = JSON.parse(localStorage.getItem("profile"));
 
-  var sum = 0;
-  var newSum = 0;
-  var deliveryCharge = 1;
+  let sum = 0;
+  let total = 0;
+  let tSum = 0;
+  let deliveryCharge = 1;
 
   items.map(
     (item) =>
       user?.result.email === item?.creator && (
         <div key={item._id} style={{ paddingLeft: "5.7rem", display: "none" }}>
-          {(sum += item.price * item.quantity)}
-          {(newSum += sum)}
+          {(sum = item.price * item.quantity)}
+          {(tSum += sum)}
         </div>
       )
-    // amount displaying is wrong
   );
+  total = tSum;
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -84,7 +85,7 @@ const Cart = () => {
                     <b>Grand Total</b>
                   </span>
                   <span style={{ color: "green", paddingRight: "1rem" }}>
-                    <b>Rs.{newSum + deliveryCharge}</b>
+                    <b>Rs.{total + deliveryCharge}</b>
                   </span>
                 </div>
               </Typography>

@@ -37,7 +37,7 @@ const CartItem = ({ item, items }) => {
 
   const deleted = () => {
     dispatch(deleteItem(item._id));
-    window.alert(`${item.title} will be removed from cart`);
+    // window.alert(`${item.title} will be removed from cart`);
   };
 
   return (

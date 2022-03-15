@@ -10,10 +10,10 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { deletePost } from "../../../actions/posts";
-import { createItem } from "../../../api";
+import { createItem } from "../../../actions/cart";
 import bg from "../../../images/bg.png";
 import useStyles from "./styles";
 
@@ -21,6 +21,7 @@ const Post = ({ post, setCurrentId }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const classes = useStyles();
+  const { items } = useSelector((state) => state.items);
   const user = JSON.parse(localStorage.getItem("profile"));
   const [itemData, setItemData] = useState({
     creator: user?.result.email,
@@ -35,6 +36,15 @@ const Post = ({ post, setCurrentId }) => {
   const openPost = () => {
     navigate("/client");
   };
+
+  const isPresent = (item) => {
+    if (item.title === post.title) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const goCart = () => {
     setItemData({
       creator: user?.result.email,
@@ -46,10 +56,25 @@ const Post = ({ post, setCurrentId }) => {
       description: post.description,
       selectedFile: post.selectedFile,
     });
-    window.alert("Item added to cart");
-    navigate("/cart");
-    dispatch(createItem(itemData, navigate));
+
+    // items.map((item) => {
+    //   if (item.title === post.title) {
+    //     window.alert("Item is already added to cart.");
+    //   } else {
+    //     window.alert("Item added to cart");
+    //     dispatch(createItem(itemData, navigate));
+    //   }
+    // });
+
+    console.log(isPresent());
+    if (items.map((item) => isPresent(item)) === true) {
+      window.alert("Item is already added to cart.");
+    } else {
+      window.alert("Item added to cart");
+      dispatch(createItem(itemData, navigate));
+    }
   };
+
   return (
     <Card
       className={
