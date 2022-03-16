@@ -37,12 +37,20 @@ const Post = ({ post, setCurrentId }) => {
     navigate("/client");
   };
 
-  const isPresent = (item) => {
-    if (item.title === post.title) {
-      return true;
-    } else {
-      return false;
-    }
+  const isPresent = (post) => {
+    let count = 0;
+    let val;
+    items.map((item) => {
+      count = 0;
+      val = "";
+      while (user?.result.email === item?.creator && count <= items.length) {
+        if (item.title === post) {
+          val = item.title;
+        }
+        count++;
+      }
+    });
+    return val;
   };
 
   const goCart = () => {
@@ -57,22 +65,13 @@ const Post = ({ post, setCurrentId }) => {
       selectedFile: post.selectedFile,
     });
 
-    // items.map((item) => {
-    //   if (item.title === post.title) {
-    //     window.alert("Item is already added to cart.");
-    //   } else {
-    //     window.alert("Item added to cart");
-    //     dispatch(createItem(itemData, navigate));
-    //   }
-    // });
-
-    console.log(isPresent());
-    if (items.map((item) => isPresent(item)) === true) {
+    if (isPresent(post.title) === post.title) {
       window.alert("Item is already added to cart.");
     } else {
       window.alert("Item added to cart");
       dispatch(createItem(itemData, navigate));
     }
+    console.log(isPresent(post.title));
   };
 
   return (
