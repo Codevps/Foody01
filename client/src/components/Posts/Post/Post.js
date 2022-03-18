@@ -38,19 +38,13 @@ const Post = ({ post, setCurrentId }) => {
   };
 
   const isPresent = (post) => {
-    let count = 0;
-    let val;
-    items.map((item) => {
-      count = 0;
-      val = "";
-      while (user?.result.email === item?.creator && count <= items.length) {
-        if (item.title === post) {
-          val = item.title;
-        }
-        count++;
+    const map = new Map(items.map((item) => [item.creator, item]));
+    for (const [key, value] of map) {
+      if (post === value.title && key === user?.result.email) {
+        console.log(value.title);
+        return value.title;
       }
-    });
-    return val;
+    }
   };
 
   const goCart = () => {
@@ -67,11 +61,11 @@ const Post = ({ post, setCurrentId }) => {
 
     if (isPresent(post.title) === post.title) {
       window.alert("Item is already added to cart.");
+      return;
     } else {
       window.alert("Item added to cart");
       dispatch(createItem(itemData, navigate));
     }
-    console.log(isPresent(post.title));
   };
 
   return (

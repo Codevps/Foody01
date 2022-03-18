@@ -11,7 +11,6 @@ import Cart from "./components/Cart/Cart";
 
 const App = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
-  console.log(user?.result._id);
 
   return (
     <div>
