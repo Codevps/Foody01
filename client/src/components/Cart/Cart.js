@@ -1,6 +1,7 @@
 import { Button, Container, Grid, Paper, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { getItems } from "../../actions/cart";
 import CartItems from "../CartItems/CartItems";
 import useStyles from "./styles";
@@ -90,7 +91,13 @@ const Cart = () => {
                 </div>
               </Typography>
               <br />
-              <Button className={classes.btn}>Proceed to Checkout</Button>
+              <Button
+                className={classes.btn}
+                component={Link}
+                to="/cart/checkout"
+              >
+                Proceed to Checkout
+              </Button>
               <Typography variant="body1" style={{ paddingLeft: "2px" }}>
                 (Inclusive of delivery charges and tax of Rs.{deliveryCharge})
               </Typography>

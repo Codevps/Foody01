@@ -8,6 +8,7 @@ import DashBoard from "./components/DashBoard/DashBoard";
 import Home from "./components/Home/Home";
 import NavBar from "./components/NavBar/NavBar";
 import Cart from "./components/Cart/Cart";
+import Checkout from "./components/Checkout/Checkout";
 
 const App = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -43,6 +44,7 @@ const App = () => {
             element={<DashBoard />}
           />
           <Route path={`/cart`} exact element={<Cart />} />
+          <Route path={`/cart/checkout`} exact element={<Checkout />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -91,7 +91,7 @@ export default function Footer() {
       </Grid>
       <Container className={classes.copy}>
         <Typography className={classes.footEnd}>
-          <i> Copyright &copy; www.Foody.com. All rights reserved!</i>
+          <i> Copyright &copy; www.foody.com. All rights reserved!</i>
         </Typography>
       </Container>
     </Grid>
