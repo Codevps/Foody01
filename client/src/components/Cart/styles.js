@@ -33,7 +33,8 @@ export default makeStyles((theme) => ({
   btn: {
     marginBottom: 10,
     color: "white",
-    padding: "10px",
+    padding: "10px 16px",
+    fontSize: "1rem",
     backgroundColor: "black",
     "&:hover": {
       color: "white",
