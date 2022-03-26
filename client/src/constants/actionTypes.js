@@ -17,3 +17,7 @@ export const ADD_ITEM = "ADD_ITEM";
 export const REMOVE_ITEM = "REMOVE_ITEM";
 export const CREATE_ITEM = "CREATE_ITEM";
 export const DELETE_ITEM = "DELETE_ITEM";
+
+//checkout:
+export const GET_ADDRESS = "GET_ADDRESS";
+export const CREATE_ADDRESS = "CREATE_ADDRESS";

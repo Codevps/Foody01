@@ -36,3 +36,8 @@ export const addItem = (id, updatedPost) =>
   API.patch(`/customer/cart/${id}/addItem`, updatedPost);
 export const removeItem = (id, updatedPost) =>
   API.patch(`/customer/cart/${id}/removeItem`, updatedPost);
+
+// routes for crud address:
+export const getAddress = () => API.get("/customer/cart/checkout");
+export const createAddress = (newItem) =>
+  API.post("/customer/cart/checkout", newItem);
