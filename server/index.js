@@ -6,6 +6,7 @@ import restaurantRouter from "./routes/restaurant.js";
 import { CONNECTION_URL } from "./secret.js";
 import postRoutes from "./routes/posts.js";
 import cartRoutes from "./routes/cart.js";
+import addressRoutes from "./routes/customerAddress.js";
 
 const app = express();
 app.use(cors());
@@ -16,6 +17,7 @@ app.use("/customer", customerRouter);
 app.use("/restaurant", restaurantRouter);
 app.use("/restaurant/posts", postRoutes);
 app.use("/customer/cart", cartRoutes);
+app.use("/customer/cart/checkout", addressRoutes);
 
 const PORT = process.env.PORT || 5000;
 
