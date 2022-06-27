@@ -39,10 +39,11 @@ const Post = ({ post, setCurrentId }) => {
 
   const isPresent = (post) => {
     const map = new Map(items.map((item) => [item.creator, item]));
-    for (const [key, value] of map) {
-      if (post === value.title && key === user?.result.email) {
-        console.log(value.title);
-        return value.title;
+    for (let [key, value] of map) {
+      if (value.title === post && key === user?.result.email) {
+        return true;
+      } else {
+        value++;
       }
     }
   };
@@ -59,12 +60,11 @@ const Post = ({ post, setCurrentId }) => {
       selectedFile: post.selectedFile,
     });
 
-    if (isPresent(post.title) === post.title) {
-      window.alert("Item is already added to cart.");
-      return;
-    } else {
+    if (!isPresent(itemData.title)) {
       window.alert("Item added to cart");
       dispatch(createItem(itemData, navigate));
+    } else {
+      window.alert("Item already exists in cart.");
     }
   };
   const goAuth = () => {
