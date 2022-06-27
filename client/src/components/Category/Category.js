@@ -20,7 +20,12 @@ const Category = () => {
         className={classes.container}
       >
         <Grid xs={12} sm={12} md={4} item>
-          <Card className={classes.card} elevation={3}>
+          <Card
+            className={classes.card}
+            elevation={3}
+            component={Link}
+            to="/breakfastCategory"
+          >
             <br />
             <CardMedia className={classes.media} image={breakfast} />
             <CardContent>
@@ -29,8 +34,6 @@ const Category = () => {
                 style={{ fontSize: "1.4rem", textDecoration: "none" }}
                 color="textSecondary"
                 className={classes.link}
-                component={Link}
-                to="/breakfastCategory"
               >
                 <b>Breakfast</b>
               </Typography>
@@ -38,7 +41,12 @@ const Category = () => {
           </Card>
         </Grid>
         <Grid xs={12} sm={12} md={4} item>
-          <Card className={classes.card} elevation={3}>
+          <Card
+            className={classes.card}
+            elevation={3}
+            component={Link}
+            to="/lunchCategory"
+          >
             <br />
             <CardMedia className={classes.media} image={lunch} />
             <CardContent>
@@ -47,8 +55,6 @@ const Category = () => {
                 style={{ fontSize: "1.4rem", textDecoration: "none" }}
                 color="textSecondary"
                 className={classes.link}
-                component={Link}
-                to="/lunchCategory"
               >
                 <p>
                   <b>Lunch</b>
@@ -58,7 +64,12 @@ const Category = () => {
           </Card>
         </Grid>
         <Grid xs={12} sm={12} md={4} item>
-          <Card className={classes.card} elevation={3}>
+          <Card
+            className={classes.card}
+            elevation={3}
+            component={Link}
+            to="/dinnerCategory"
+          >
             <br />
             <CardMedia className={classes.media} image={dinner} />
             <CardContent>
@@ -67,8 +78,6 @@ const Category = () => {
                 style={{ fontSize: "1.4rem", textDecoration: "none" }}
                 color="textSecondary"
                 className={classes.link}
-                component={Link}
-                to="/dinnerCategory"
               >
                 <b>Dinner</b>
               </Typography>

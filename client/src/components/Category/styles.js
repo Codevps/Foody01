@@ -19,6 +19,7 @@ export default makeStyles((theme) => ({
     height: "100%",
     position: "relative",
     alignItems: "center",
+    textDecoration: "none",
   },
   grid: {
     display: "flex",
@@ -58,6 +59,15 @@ export default makeStyles((theme) => ({
   },
   link: {
     color: "black",
-    textDecoration: "underline",
+  },
+  mainContainer: {
+    display: "flex",
+    flexDirection: "row",
+    margin: ".2rem",
+  },
+  dashboard: {
+    padding: ".5rem",
+    display: "flex",
+    flexDirection: "row",
   },
 }));

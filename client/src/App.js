@@ -9,6 +9,9 @@ import Home from "./components/Home/Home";
 import NavBar from "./components/NavBar/NavBar";
 import Cart from "./components/Cart/Cart";
 import DeliveryDetails from "./components/DeliveryDetails/DeliveryDetails";
+import Breakfast from "./components/Category/Breakfast/Breakfast";
+import Lunch from "./components/Category/Lunch/Lunch";
+import Dinner from "./components/Category/Dinner/Dinner";
 
 const App = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -45,6 +48,9 @@ const App = () => {
           />
           <Route path={`/cart`} exact element={<Cart />} />
           <Route path={`/cart/checkout`} exact element={<DeliveryDetails />} />
+          <Route path={`breakfastCategory`} exact element={<Breakfast />} />
+          <Route path={`lunchCategory`} exact element={<Lunch />} />
+          <Route path={`dinnerCategory`} exact element={<Dinner />} />
         </Routes>
       </BrowserRouter>
     </div>

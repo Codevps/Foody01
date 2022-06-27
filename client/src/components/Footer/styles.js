@@ -16,6 +16,8 @@ export default makeStyles((theme) => ({
     color: "white",
     backgroundColor: "black",
     padding: "8px",
+    border: "1px solid transparent",
+
     "&:hover": {
       backgroundColor: "white",
       color: "coral",
@@ -29,6 +31,8 @@ export default makeStyles((theme) => ({
     marginLeft: 10,
     marginTop: 8,
     padding: "7px",
+    border: "1px solid transparent",
+
     "&:hover": {
       backgroundColor: "white",
       color: "coral",

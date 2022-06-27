@@ -57,8 +57,7 @@ export default makeStyles((theme) => ({
   },
   purple: {
     backgroundColor: "coral",
-    marginRight: "15px",
-    marginLeft: "15px",
-    padding: "2px",
+    marginRight: "20px",
+    marginLeft: "20px",
   },
 }));

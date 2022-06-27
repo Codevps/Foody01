@@ -67,7 +67,9 @@ const Post = ({ post, setCurrentId }) => {
       dispatch(createItem(itemData, navigate));
     }
   };
-
+  const goAuth = () => {
+    navigate("/customerAuth");
+  };
   return (
     <Card
       className={
@@ -123,7 +125,7 @@ const Post = ({ post, setCurrentId }) => {
             style={{ marginRight: "1rem" }}
             className={classes.btn2}
             variant="contained"
-            onClick={goCart}
+            onClick={user?.result.email ? goCart : goAuth}
           >
             Add to Cart
           </Button>
