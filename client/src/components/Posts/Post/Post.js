@@ -26,7 +26,7 @@ const Post = ({ post, setCurrentId }) => {
   const [itemData, setItemData] = useState({
     creator: user?.result.email,
     customerName: user?.result.name,
-    restaurantName: post.name,
+    restaurantName: post.restaurantName,
     title: post.title,
     quantity: 1,
     price: post.price,
@@ -52,7 +52,7 @@ const Post = ({ post, setCurrentId }) => {
     setItemData({
       creator: user?.result.email,
       customerName: user?.result.name,
-      restaurantName: post.name,
+      restaurantName: post.restaurantName,
       title: post.title,
       price: post.price,
       quantity: 1,

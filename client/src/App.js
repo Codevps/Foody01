@@ -12,6 +12,7 @@ import DeliveryDetails from "./components/DeliveryDetails/DeliveryDetails";
 import Breakfast from "./components/Category/Breakfast/Breakfast";
 import Lunch from "./components/Category/Lunch/Lunch";
 import Dinner from "./components/Category/Dinner/Dinner";
+import CusOrder from "./components/OrderPage/CusOrder/CusOrder";
 
 const App = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -49,12 +50,12 @@ const App = () => {
           <Route path={`/cart`} exact element={<Cart />} />
           <Route path={`/cart/checkout`} exact element={<DeliveryDetails />} />
           <Route path={`breakfastCategory`} exact element={<Breakfast />} />
-          <Route path={`lunchCategory`} exact element={<Lunch />} />
-          <Route path={`dinnerCategory`} exact element={<Dinner />} />
+          <Route path={`/lunchCategory`} exact element={<Lunch />} />
+          <Route path={`/dinnerCategory`} exact element={<Dinner />} />
+          <Route path={`/cart/ordered`} exact element={<CusOrder />} />
         </Routes>
       </BrowserRouter>
     </div>
   );
 };
-
 export default App;
