@@ -1,9 +1,9 @@
 import { Button, Container, Paper, Typography } from "@mui/material";
-import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import CusOrder from "../OrderPage/CusOrder/CusOrder";
 import useStyles from "./styles";
-const Details = ({ method }) => {
+const Details = ({ method, newAddress }) => {
   const classes = useStyles();
   const { items } = useSelector((state) => state.items);
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -23,6 +23,29 @@ const Details = ({ method }) => {
       )
   );
   total = tSum;
+  const navigate = useNavigate();
+  const send = () => {
+    navigate("/cart/ordered");
+  };
+  let cAddress;
+  if (
+    newAddress?.apartmentName &&
+    newAddress?.locality &&
+    newAddress?.street &&
+    newAddress?.zipCode &&
+    newAddress?.contactNo !== ""
+  ) {
+    cAddress = { ...newAddress };
+  }
+  console.log(cAddress);
+
+  /*
+  hotel name using for loop
+  contact no 
+  summary: item and price (copy the details page wala part as it is and make summary object inside object)
+  *delivery address
+  order will have 2 types : seller(accept order) and customer(cancell order)
+   */
 
   return (
     <Container className={classes.container}>
@@ -77,9 +100,14 @@ const Details = ({ method }) => {
             Proceed to checkout
           </Button>
         ) : (
-          <Button className={classes.btn} component={Link} to="/cart/ordered">
-            Place Order
-          </Button>
+          <div>
+            <Button className={classes.btn} onClick={send}>
+              Place Order
+            </Button>
+            <div style={{ display: "none" }}>
+              <CusOrder newAddress={cAddress} />;
+            </div>
+          </div>
         )}
 
         <Typography variant="body1" style={{ paddingLeft: "2px" }}>

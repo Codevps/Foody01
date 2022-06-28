@@ -1,7 +1,7 @@
 import { Button, Container, Grid, Paper, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getAddresses, saveAddresses } from "../../actions/address";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { saveAddresses } from "../../actions/address";
 import Details from "../Cart/Details";
 import Payment from "../Payment/Payment";
 import Input from "./Input";
@@ -11,9 +11,6 @@ const DeliveryDetails = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { address } = useSelector((state) => state.address);
-
-  //do it in such a way that if address is already present then  dont show the add new address tab show the address showing tab and a button to add new address or delete previous address
 
   const [cAddress, setCAddress] = useState({
     apartmentName: "",
@@ -25,18 +22,12 @@ const DeliveryDetails = () => {
   const handleChange = (e) => {
     setCAddress({ ...cAddress, [e.target.name]: e.target.value });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if address is already in data base then add a fetch method
     dispatch(saveAddresses({ ...cAddress, creator: user?.result.email }));
   };
-  const findAddress = () => {
-    console.log(address);
-  };
-  // useEffect(() => {
-  //   dispatch(getAddresses());
-  // }, [dispatch]);
-
+  let newAddress = { ...cAddress, creator: user?.result.email };
   return (
     <div>
       <Grid>
@@ -94,13 +85,13 @@ const DeliveryDetails = () => {
                 >
                   Save Address
                 </Button>
-                <Button
+                {/* <Button
                   variant="contained"
                   className={classes.submit}
                   onClick={findAddress}
                 >
                   Get saved address
-                </Button>
+                </Button> */}
               </Grid>
             </form>
             <div>
@@ -115,7 +106,7 @@ const DeliveryDetails = () => {
                 justifyContent: "center",
               }}
             >
-              <Details />
+              <Details newAddress={newAddress} />
             </div>
           </Paper>
         </Container>

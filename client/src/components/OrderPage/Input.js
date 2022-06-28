@@ -1,9 +1,14 @@
 import React from "react";
-import { Card, CardContent, Grid, Typography } from "@mui/material";
+import {
+  Card,
+  CardActions,
+  CardContent,
+  Grid,
+  Typography,
+} from "@mui/material";
 // import { useSelector } from "react-redux";
 const Input = (item) => {
   // const { items } = useSelector((state) => state.items);
-  const user = JSON.parse(localStorage.getItem("profile"));
   return (
     <div>
       <Typography /*className={classes.heading}*/>
@@ -18,25 +23,40 @@ const Input = (item) => {
         <Grid xs={12} sm={12} md={4} item>
           <Card /*className={classes.card}*/>
             <CardContent>
-              <Typography> name:{user.name} </Typography>
-
-              <Typography> C.no:{/* {user.contactno} */}</Typography>
+              {/* will not be included in card put it outside as heading */}
               <div>
-                <Typography variant="h5">Summary</Typography>
-                {/*put for loop for total number of items*/}
-                <Typography variant="body1">
-                  {item.restaurantName}: {item.title} * {item.quantity}
-                </Typography>
+                <Typography> CustomerInfo: </Typography>
+                <Typography> Name: </Typography>
+                <Typography> Email: </Typography>
+                <Typography> Contact No.</Typography>
               </div>
-              <div>Order placed Cancel Order button here acc to conditions</div>
+              <div>
+                {/* ony for restaurant wala */}
+                <Typography> DeliveryDetails: </Typography>
+                <Typography> apartmentName: </Typography>
+                <Typography> locality: </Typography>
+                <Typography> street No.</Typography>
+                <Typography> zipCode</Typography>
+              </div>
+              <div>
+                {/* Summary */}
+                {/* in for loop for multiple items */}
+                <Typography> Summary: </Typography>
+                <Typography> restaurantName: </Typography>
+                <Typography> item: </Typography>
+                <Typography> price: </Typography>
+                <Typography> quantity</Typography>
+              </div>
+              <div> Grandtotal:</div>
             </CardContent>
-            <div>
-              <b>
-                First do the address thing and then move on to first storing the
-                data to the data base when order placed and then display the
-                info and buttons to cancel order in the order page
-              </b>
-            </div>
+            <CardActions>
+              {/* for restaurant */}
+              <div>Accept Order</div>
+              <div>Order Completed</div>
+              {/* for customer */}
+              <div>Cancel Order</div>
+            </CardActions>
+            <div>Created at</div>
           </Card>
         </Grid>
       </Grid>
