@@ -16,10 +16,7 @@ const Details = ({ method, newAddress }) => {
       zipCode: "",
     },
     summary: {
-      restaurantName: " ",
-      item: "",
-      price: "",
-      quantity: "",
+      pit: { restaurantName: " ", item: "", price: "", quantity: "" },
     },
     total: "",
     cusCancelOrder: false,
@@ -37,25 +34,6 @@ const Details = ({ method, newAddress }) => {
   let tSum = 0;
   let deliveryCharge = 1;
 
-  // items.map(
-  //   (item) =>
-  //     user?.result.email === item?.creator && (
-  //       <div key={item._id} style={{ paddingLeft: "5.7rem", display: "none" }}>
-  //         {(sum = item.price * item.quantity)}
-  //         {(tSum += sum)}
-  //         {setOrderData({
-  //           summary: {
-  //             restaurantName: item.restaurantName,
-  //             item: item.title,
-  //             price: item.price,
-  //             quantity: item.quantity,
-  //           },
-  //         })}
-  //       </div>
-  //     )
-  // );
-  // total = tSum;
-
   let cAddress;
   if (
     newAddress?.apartmentName &&
@@ -66,39 +44,37 @@ const Details = ({ method, newAddress }) => {
   ) {
     cAddress = { ...newAddress };
   }
-  const resend = () => {
-    items.map(
-      (item) =>
-        user?.result.email === item?.creator && (
-          <div
-            key={item._id}
-            style={{ paddingLeft: "5.7rem", display: "none" }}
-          >
-            {setOrderData({
-              summary: {
-                restaurantName: item.restaurantName,
-                item: item.title,
-                price: item.price,
-                quantity: item.quantity,
-              },
-            })}
-          </div>
-        )
-    );
+  // -------------------------------------------------
+  // search on google for this
+  const resend1 = (item) => {
+    setOrderData({
+      summary: {
+        pit: {
+          restaurantName: item.restaurantName,
+          item: item.title,
+          price: item.price,
+          quantity: item.quantity,
+        },
+      },
+    });
+    console.log(orderData?.summary.pit);
   };
-  console.log(orderData.deliveryDetails.contactNo);
+  const resend = () => {
+    items.map((item) => user?.result.email === item?.creator && resend1(item));
+  };
+  // -------------------------------------------------
 
   const send = () => {
-    resend();
+    // resend();
     setOrderData({
       deliveryDetails: {
         name: user?.result.name,
         email: user?.result.email,
-        contactNo: cAddress.contactNo,
-        apartmentName: cAddress.apartmentName,
-        locality: cAddress.locality,
-        street: cAddress.street,
-        zipCode: cAddress.zipCode,
+        contactNo: cAddress?.contactNo,
+        apartmentName: cAddress?.apartmentName,
+        locality: cAddress?.locality,
+        street: cAddress?.street,
+        zipCode: cAddress?.zipCode,
       },
       total: total,
       cusCancelOrder: false,
@@ -106,8 +82,8 @@ const Details = ({ method, newAddress }) => {
       orderCompleted: false,
       createdAt: "",
     });
-    navigate("/cart/ordered");
-    console.log(orderData);
+    console.log(orderData?.deliveryDetails);
+    // navigate("/cart/ordered");
   };
   return (
     <Container className={classes.container}>
@@ -173,7 +149,7 @@ const Details = ({ method, newAddress }) => {
           </Button>
         ) : (
           <div>
-            <Button className={classes.btn} onClick={() => send()}>
+            <Button className={classes.btn} onClick={() => resend()}>
               Place Order
             </Button>
             <div style={{ display: "none" }}>
