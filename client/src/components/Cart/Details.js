@@ -1,32 +1,61 @@
 import { Button, Container, Paper, Typography } from "@mui/material";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import CusOrder from "../OrderPage/CusOrder/CusOrder";
 import useStyles from "./styles";
 const Details = ({ method, newAddress }) => {
+  const [orderData, setOrderData] = useState({
+    deliveryDetails: {
+      name: "",
+      email: "",
+      contactNo: "",
+      apartmentName: "",
+      locality: "",
+      street: "",
+      zipCode: "",
+    },
+    summary: {
+      restaurantName: " ",
+      item: "",
+      price: "",
+      quantity: "",
+    },
+    total: "",
+    cusCancelOrder: false,
+    resAcceptOrder: false,
+    orderCompleted: false,
+    createdAt: "",
+  });
   const classes = useStyles();
   const { items } = useSelector((state) => state.items);
   const user = JSON.parse(localStorage.getItem("profile"));
+  const navigate = useNavigate();
 
   let sum = 0;
   let total = 0;
   let tSum = 0;
   let deliveryCharge = 1;
 
-  items.map(
-    (item) =>
-      user?.result.email === item?.creator && (
-        <div key={item._id} style={{ paddingLeft: "5.7rem", display: "none" }}>
-          {(sum = item.price * item.quantity)}
-          {(tSum += sum)}
-        </div>
-      )
-  );
-  total = tSum;
-  const navigate = useNavigate();
-  const send = () => {
-    navigate("/cart/ordered");
-  };
+  // items.map(
+  //   (item) =>
+  //     user?.result.email === item?.creator && (
+  //       <div key={item._id} style={{ paddingLeft: "5.7rem", display: "none" }}>
+  //         {(sum = item.price * item.quantity)}
+  //         {(tSum += sum)}
+  //         {setOrderData({
+  //           summary: {
+  //             restaurantName: item.restaurantName,
+  //             item: item.title,
+  //             price: item.price,
+  //             quantity: item.quantity,
+  //           },
+  //         })}
+  //       </div>
+  //     )
+  // );
+  // total = tSum;
+
   let cAddress;
   if (
     newAddress?.apartmentName &&
@@ -37,16 +66,49 @@ const Details = ({ method, newAddress }) => {
   ) {
     cAddress = { ...newAddress };
   }
-  console.log(cAddress);
+  const resend = () => {
+    items.map(
+      (item) =>
+        user?.result.email === item?.creator && (
+          <div
+            key={item._id}
+            style={{ paddingLeft: "5.7rem", display: "none" }}
+          >
+            {setOrderData({
+              summary: {
+                restaurantName: item.restaurantName,
+                item: item.title,
+                price: item.price,
+                quantity: item.quantity,
+              },
+            })}
+          </div>
+        )
+    );
+  };
+  console.log(orderData.deliveryDetails.contactNo);
 
-  /*
-  hotel name using for loop
-  contact no 
-  summary: item and price (copy the details page wala part as it is and make summary object inside object)
-  *delivery address
-  order will have 2 types : seller(accept order) and customer(cancell order)
-   */
-
+  const send = () => {
+    resend();
+    setOrderData({
+      deliveryDetails: {
+        name: user?.result.name,
+        email: user?.result.email,
+        contactNo: cAddress.contactNo,
+        apartmentName: cAddress.apartmentName,
+        locality: cAddress.locality,
+        street: cAddress.street,
+        zipCode: cAddress.zipCode,
+      },
+      total: total,
+      cusCancelOrder: false,
+      resAcceptOrder: false,
+      orderCompleted: false,
+      createdAt: "",
+    });
+    navigate("/cart/ordered");
+    console.log(orderData);
+  };
   return (
     <Container className={classes.container}>
       <Paper className={classes.paper} elevation={6}>
@@ -58,29 +120,39 @@ const Details = ({ method, newAddress }) => {
         {items.map(
           (item) =>
             user?.result.email === item?.creator && (
-              <Typography variant="body1">
+              <div>
                 <div
-                  className={classes.flex}
-                  style={{
-                    fontSize: "1rem",
-                    fontFamily: "arial",
-                    marginBottom: ".3rem",
-                  }}
                   key={item._id}
+                  style={{ paddingLeft: "5.7rem", display: "none" }}
                 >
-                  <span
-                    style={{
-                      paddingLeft: "1rem",
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    <b>{item.title}</b>
-                  </span>
-                  <span style={{ paddingRight: "1rem" }}>
-                    {item.price} x {item.quantity}
-                  </span>
+                  {(sum = item.price * item.quantity)}
+                  {(tSum += sum)}
                 </div>
-              </Typography>
+                <div style={{ display: "none" }}> {(total = tSum)}</div>
+                <Typography variant="body1">
+                  <div
+                    className={classes.flex}
+                    style={{
+                      fontSize: "1rem",
+                      fontFamily: "arial",
+                      marginBottom: ".3rem",
+                    }}
+                    key={item._id}
+                  >
+                    <span
+                      style={{
+                        paddingLeft: "1rem",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      <b>{item.title}</b>
+                    </span>
+                    <span style={{ paddingRight: "1rem" }}>
+                      {item.price} x {item.quantity}
+                    </span>
+                  </div>
+                </Typography>
+              </div>
             )
         )}
         <hr />
@@ -101,7 +173,7 @@ const Details = ({ method, newAddress }) => {
           </Button>
         ) : (
           <div>
-            <Button className={classes.btn} onClick={send}>
+            <Button className={classes.btn} onClick={() => send()}>
               Place Order
             </Button>
             <div style={{ display: "none" }}>

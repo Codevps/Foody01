@@ -1,10 +1,13 @@
 import Input from "../Input";
-const CusOrder = (item) => {
+const CusOrder = () => {
   return (
     <div>
-      {/* put a for loop over her CusOrder acts like <<Posts>> and <Input acts like Post> */}
-      {/* put a for loop here: */}
-      <Input item={item} />
+      {/* put conditions to only see your orders
+        over here CusOrder acts like <<Posts>> and <Input acts like Post> */}
+
+      {/* display delivery address and customer info in the top of the page and not in the order card section */}
+
+      <Input />
     </div>
   );
 };
