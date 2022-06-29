@@ -1,13 +1,30 @@
+import { Grid, Typography } from "@mui/material";
 import Input from "../Input";
+
 const CusOrder = () => {
+  let orders;
   return (
     <div>
-      {/* put conditions to only see your orders
-        over here CusOrder acts like <<Posts>> and <Input acts like Post> */}
-
-      {/* display delivery address and customer info in the top of the page and not in the order card section */}
-
-      <Input />
+      <Typography variant="h5">Order History</Typography>
+      <Grid item container direction="row">
+        <Grid item xs={12} sm={1} />
+        <Grid item xs={12} sm={10}>
+          <Grid container spacing={2}>
+            {orders ? (
+              orders.length > 0 ? (
+                orders.map((order) => (
+                  <Grid item xs={12} sm={4} key={order._id}>
+                    <Input order={order} />
+                  </Grid>
+                ))
+              ) : (
+                <p>No Orders present.</p>
+              )
+            ) : null}
+          </Grid>
+        </Grid>
+        <Grid item xs={12} sm={1} />
+      </Grid>
     </div>
   );
 };

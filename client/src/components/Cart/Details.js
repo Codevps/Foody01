@@ -33,6 +33,7 @@ const Details = ({ method, newAddress }) => {
   let total = 0;
   let tSum = 0;
   let deliveryCharge = 1;
+  let count = 0;
 
   let cAddress;
   if (
@@ -45,23 +46,17 @@ const Details = ({ method, newAddress }) => {
     cAddress = { ...newAddress };
   }
   // -------------------------------------------------
-  // search on google for this
-  const resend1 = (item) => {
-    setOrderData({
-      summary: {
-        pit: {
-          restaurantName: item.restaurantName,
-          item: item.title,
-          price: item.price,
-          quantity: item.quantity,
-        },
-      },
-    });
-    console.log(orderData?.summary.pit);
-  };
-  const resend = () => {
-    items.map((item) => user?.result.email === item?.creator && resend1(item));
-  };
+  // create an array of store them from down below the return statment and then split them
+  items.map((item) => user?.result.email === item?.creator && count++);
+  console.log(count);
+  let arr = Array(count);
+  console.log(arr[0]);
+
+  // items.map((item) => user?.result.email === item?.creator &&                   {
+  // for (var i = 0; i < arr.length; i++){
+  //  arr[i] = item.restaurantName + item.title + item.price + item.quantity;
+  // });
+
   // -------------------------------------------------
 
   const send = () => {
@@ -149,7 +144,7 @@ const Details = ({ method, newAddress }) => {
           </Button>
         ) : (
           <div>
-            <Button className={classes.btn} onClick={() => resend()}>
+            <Button className={classes.btn} onClick={() => send()}>
               Place Order
             </Button>
             <div style={{ display: "none" }}>

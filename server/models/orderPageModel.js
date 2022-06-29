@@ -28,10 +28,12 @@ const orderPageSchema = mongoose.Schema({
   ],
   summary: [
     {
-      restaurantName: { type: String, required: true },
-      item: { type: String, required: true },
-      price: { type: Number, required: true },
-      quantity: { type: Number, required: true },
+      pit: {
+        restaurantName: { type: String, required: true },
+        item: { type: String, required: true },
+        price: { type: Number, required: true },
+        quantity: { type: Number, required: true },
+      },
     },
   ],
   total: { type: Number, required: true },
