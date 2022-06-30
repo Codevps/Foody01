@@ -1,11 +1,12 @@
 import { Grid } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getItems } from "../../actions/cart";
 import CartItems from "../CartItems/CartItems";
 import Details from "./Details";
 import useStyles from "./styles";
 const Cart = () => {
+  const [deletion, setDeletion] = useState(false);
   const classes = useStyles();
   const { items } = useSelector((state) => state.items);
   const dispatch = useDispatch();
@@ -23,10 +24,18 @@ const Cart = () => {
         className={classes.mainContainer}
       >
         <Grid item xs={12} sm={12} md={5} lg={7}>
-          <CartItems items={items} />
+          <CartItems
+            items={items}
+            deletion={deletion}
+            setDeletion={setDeletion}
+          />
         </Grid>
         <Grid item xs={12} sm={12} md={5} lg={5}>
-          <Details method={method} />
+          <Details
+            method={method}
+            deletion={deletion}
+            setDeletion={setDeletion}
+          />
         </Grid>
       </Grid>
     </div>
