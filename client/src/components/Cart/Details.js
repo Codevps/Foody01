@@ -16,7 +16,6 @@ const Details = ({ method, newAddress }) => {
       zipCode: "",
     },
     summary: {
-      // pit: { restaurantName: " ", item: "", price: "", quantity: "" }
       pit: "",
     },
     total: "",
@@ -60,7 +59,6 @@ const Details = ({ method, newAddress }) => {
     });
     return filtered;
   };
-  // ---------------------------------------
   items.map((item) => user?.result.email === item?.creator && count++);
   let arr = Array(count);
   let final = Array(count);
@@ -70,9 +68,7 @@ const Details = ({ method, newAddress }) => {
         user?.result.email === item?.creator && resend1(item, arr, final)
     );
   };
-
-  // -------------------------------------------------
-
+  // -----------------------------------
   const send = () => {
     resend();
     setOrderData({
@@ -127,11 +123,6 @@ const Details = ({ method, newAddress }) => {
                     }}
                     key={item._id}
                   >
-                    {/* <div style={{display:"none"}}>
-                     ( for (var i = 0; i < arr.size; i++) {
-                        arr.push(`${item.restaurantName} ${item.title} ${item.price} ${item.quantity}`)
-                      }) */}
-                    {/* </div> */}
                     <span
                       style={{
                         paddingLeft: "1rem",
