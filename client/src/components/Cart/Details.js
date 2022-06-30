@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import CusOrder from "../OrderPage/CusOrder/CusOrder";
 import useStyles from "./styles";
-const Details = ({ method, newAddress }) => {
+const Details = ({ method, deletion, setDeletion, newAddress }) => {
   const [orderData, setOrderData] = useState({
     deliveryDetails: {
       name: "",

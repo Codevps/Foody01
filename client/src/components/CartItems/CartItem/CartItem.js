@@ -42,7 +42,7 @@ const CartItem = ({ item, items, deletion, setDeletion }) => {
     dispatch(deleteItem(item._id));
     // window.alert(`${item.title} will be removed from cart`);
   };
-
+  console.log(deletion);
   if (deletion) {
     items.map((item) => user?.result.email === item?.creator && deleted(item));
     setDeletion((prevDeletion) => !prevDeletion);

@@ -3,7 +3,7 @@ import React from "react";
 import CartItem from "../CartItems/CartItem/CartItem";
 import useStyles from "./styles";
 
-const CartItems = ({ items, setTotal, total, setSumTotal }) => {
+const CartItems = ({ items, deletion, setDeletion }) => {
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem("profile"));
 
@@ -29,7 +29,12 @@ const CartItems = ({ items, setTotal, total, setSumTotal }) => {
               lg={12}
               xl={12}
             >
-              <CartItem item={item} items={items} />
+              <CartItem
+                item={item}
+                items={items}
+                deletion={deletion}
+                setDeletion={setDeletion}
+              />
             </Grid>
           )}
         </div>
