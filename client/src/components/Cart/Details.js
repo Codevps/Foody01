@@ -1,10 +1,11 @@
 import { Button, Container, Paper, Typography } from "@mui/material";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { deleteItem } from "../../actions/cart";
 import { Link, useNavigate } from "react-router-dom";
-import CusOrder from "../OrderPage/CusOrder/CusOrder";
+import { useDispatch } from "react-redux";
 import useStyles from "./styles";
-const Details = ({ method, deletion, setDeletion, newAddress }) => {
+const Details = ({ method, newAddress }) => {
   const [orderData, setOrderData] = useState({
     deliveryDetails: {
       name: "",
@@ -28,6 +29,7 @@ const Details = ({ method, deletion, setDeletion, newAddress }) => {
   const { items } = useSelector((state) => state.items);
   const user = JSON.parse(localStorage.getItem("profile"));
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   let sum = 0;
   let total = 0;
@@ -69,7 +71,7 @@ const Details = ({ method, deletion, setDeletion, newAddress }) => {
     );
   };
   // -----------------------------------
-  const send = () => {
+  const send1 = () => {
     resend();
     setOrderData({
       deliveryDetails: {
@@ -91,8 +93,16 @@ const Details = ({ method, deletion, setDeletion, newAddress }) => {
       createdAt: "",
     });
     console.log(orderData);
+  };
+  const deleted = (item) => {
+    dispatch(deleteItem(item._id));
+  };
+  const send = () => {
+    send1();
+    items.map((item) => user?.result.email === item?.creator && deleted(item));
     navigate("/cart/ordered");
   };
+
   return (
     <Container className={classes.container}>
       <Paper className={classes.paper} elevation={6}>
@@ -160,12 +170,8 @@ const Details = ({ method, deletion, setDeletion, newAddress }) => {
             <Button className={classes.btn} onClick={() => send()}>
               Place Order
             </Button>
-            <div style={{ display: "none" }}>
-              <CusOrder newAddress={cAddress} />;
-            </div>
           </div>
         )}
-
         <Typography variant="body1" style={{ paddingLeft: "2px" }}>
           (Inclusive of delivery charges and tax of Rs.{deliveryCharge})
         </Typography>

@@ -10,15 +10,12 @@ import {
   Typography,
 } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { addItem, deleteItem, removeItem } from "../../../actions/cart";
 import bg from "../../../images/bg.png";
 import useStyles from "./styles";
 
 const CartItem = ({ item, items, deletion, setDeletion }) => {
-  const user = JSON.parse(localStorage.getItem("profile"));
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const classes = useStyles();
   const openItem = () => {};
   const remove = () => {
@@ -40,16 +37,8 @@ const CartItem = ({ item, items, deletion, setDeletion }) => {
 
   const deleted = (item) => {
     dispatch(deleteItem(item._id));
-    // window.alert(`${item.title} will be removed from cart`);
+    window.alert(`${item.title} removed from cart`);
   };
-  console.log(deletion);
-  if (deletion) {
-    items.map((item) => user?.result.email === item?.creator && deleted(item));
-    setDeletion((prevDeletion) => !prevDeletion);
-    navigate("/");
-  } else {
-    console.log("no");
-  }
   return (
     <Card className={classes.card} elevation={6}>
       <ButtonBase

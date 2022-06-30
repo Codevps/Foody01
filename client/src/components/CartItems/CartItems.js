@@ -29,12 +29,7 @@ const CartItems = ({ items, deletion, setDeletion }) => {
               lg={12}
               xl={12}
             >
-              <CartItem
-                item={item}
-                items={items}
-                deletion={deletion}
-                setDeletion={setDeletion}
-              />
+              <CartItem item={item} items={items} />
             </Grid>
           )}
         </div>
