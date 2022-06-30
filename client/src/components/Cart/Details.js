@@ -47,7 +47,7 @@ const Details = ({ method, newAddress }) => {
     cAddress = { ...newAddress };
   }
   // -------------------------------------------------
-
+  var filtered;
   const resend1 = (item, arr, final) => {
     for (let i = 0; i < arr.length; i++) {
       arr[
@@ -55,15 +55,10 @@ const Details = ({ method, newAddress }) => {
       ] = `${item.restaurantName} ${item.title} ${item.price} ${item.quantity}`;
     }
     final.push(arr[0]);
-    var filtered = final.filter(function (el) {
+    filtered = final.filter(function (el) {
       return el != null;
     });
-    console.log(filtered);
-    setOrderData({
-      summary: {
-        pit: filtered,
-      },
-    });
+    return filtered;
   };
   // ---------------------------------------
   items.map((item) => user?.result.email === item?.creator && count++);
@@ -79,7 +74,7 @@ const Details = ({ method, newAddress }) => {
   // -------------------------------------------------
 
   const send = () => {
-    // resend();
+    resend();
     setOrderData({
       deliveryDetails: {
         name: user?.result.name,
@@ -90,14 +85,17 @@ const Details = ({ method, newAddress }) => {
         street: cAddress?.street,
         zipCode: cAddress?.zipCode,
       },
+      summary: {
+        pit: filtered,
+      },
       total: total,
       cusCancelOrder: false,
       resAcceptOrder: false,
       orderCompleted: false,
       createdAt: "",
     });
-    console.log(orderData?.deliveryDetails);
-    // navigate("/cart/ordered");
+    console.log(orderData);
+    navigate("/cart/ordered");
   };
   return (
     <Container className={classes.container}>
@@ -168,7 +166,7 @@ const Details = ({ method, newAddress }) => {
           </Button>
         ) : (
           <div>
-            <Button className={classes.btn} onClick={() => resend()}>
+            <Button className={classes.btn} onClick={() => send()}>
               Place Order
             </Button>
             <div style={{ display: "none" }}>
