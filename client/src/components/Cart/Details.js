@@ -16,7 +16,8 @@ const Details = ({ method, newAddress }) => {
       zipCode: "",
     },
     summary: {
-      pit: { restaurantName: " ", item: "", price: "", quantity: "" },
+      // pit: { restaurantName: " ", item: "", price: "", quantity: "" }
+      pit: "",
     },
     total: "",
     cusCancelOrder: false,
@@ -34,6 +35,7 @@ const Details = ({ method, newAddress }) => {
   let tSum = 0;
   let deliveryCharge = 1;
   let count = 0;
+  let n;
 
   let cAddress;
   if (
@@ -46,16 +48,36 @@ const Details = ({ method, newAddress }) => {
     cAddress = { ...newAddress };
   }
   // -------------------------------------------------
-  // create an array of store them from down below the return statment and then split them
-  items.map((item) => user?.result.email === item?.creator && count++);
-  console.log(count);
-  let arr = Array(count);
-  console.log(arr[0]);
 
-  // items.map((item) => user?.result.email === item?.creator &&                   {
-  // for (var i = 0; i < arr.length; i++){
-  //  arr[i] = item.restaurantName + item.title + item.price + item.quantity;
-  // });
+  const resend1 = (item, arr, final, n, count) => {
+    for (let i = 0; i < arr.length; i++) {
+      arr[
+        i
+      ] = `${item.restaurantName} ${item.title} ${item.price} ${item.quantity}`;
+    }
+    final.push(arr[0]);
+    var filtered = final.filter(function (el) {
+      return el != null;
+    });
+    console.log(filtered);
+    setOrderData({
+      summary: {
+        pit: filtered,
+      },
+    });
+  };
+  // ---------------------------------------
+  items.map((item) => user?.result.email === item?.creator && count++);
+  let arr = Array(count);
+  let final = Array(count);
+  let i = 0;
+  const resend = () => {
+    items.map(
+      (item) =>
+        user?.result.email === item?.creator &&
+        resend1(item, arr, final, n, count)
+    );
+  };
 
   // -------------------------------------------------
 
@@ -110,6 +132,11 @@ const Details = ({ method, newAddress }) => {
                     }}
                     key={item._id}
                   >
+                    {/* <div style={{display:"none"}}>
+                     ( for (var i = 0; i < arr.size; i++) {
+                        arr.push(`${item.restaurantName} ${item.title} ${item.price} ${item.quantity}`)
+                      }) */}
+                    {/* </div> */}
                     <span
                       style={{
                         paddingLeft: "1rem",
@@ -144,7 +171,7 @@ const Details = ({ method, newAddress }) => {
           </Button>
         ) : (
           <div>
-            <Button className={classes.btn} onClick={() => send()}>
+            <Button className={classes.btn} onClick={() => resend()}>
               Place Order
             </Button>
             <div style={{ display: "none" }}>
