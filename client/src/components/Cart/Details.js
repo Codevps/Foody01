@@ -35,7 +35,6 @@ const Details = ({ method, newAddress }) => {
   let tSum = 0;
   let deliveryCharge = 1;
   let count = 0;
-  let n;
 
   let cAddress;
   if (
@@ -49,7 +48,7 @@ const Details = ({ method, newAddress }) => {
   }
   // -------------------------------------------------
 
-  const resend1 = (item, arr, final, n, count) => {
+  const resend1 = (item, arr, final) => {
     for (let i = 0; i < arr.length; i++) {
       arr[
         i
@@ -70,12 +69,10 @@ const Details = ({ method, newAddress }) => {
   items.map((item) => user?.result.email === item?.creator && count++);
   let arr = Array(count);
   let final = Array(count);
-  let i = 0;
   const resend = () => {
     items.map(
       (item) =>
-        user?.result.email === item?.creator &&
-        resend1(item, arr, final, n, count)
+        user?.result.email === item?.creator && resend1(item, arr, final)
     );
   };
 
