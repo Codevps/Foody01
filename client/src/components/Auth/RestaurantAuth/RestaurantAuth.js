@@ -84,7 +84,7 @@ const CustomerAuth = () => {
               <>
                 <Input
                   name="name"
-                  label="Restaurant Name"
+                  label="Restaurant Name (Don't give spaces, eg: VegTreat)"
                   handleChange={handleChange}
                   autoFocus
                 />
