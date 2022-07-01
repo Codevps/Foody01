@@ -59,6 +59,14 @@ const NavBar = () => {
             <div className={classes.profile}>
               {!user?.result.role && (
                 <>
+                  <Button
+                    className={classes.btn2}
+                    variant="contained"
+                    component={Link}
+                    to="/cart/ordered"
+                  >
+                    Orders
+                  </Button>
                   <Button>
                     <ShoppingCartIcon
                       fontSize="large"

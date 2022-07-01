@@ -18,8 +18,8 @@ app.use("/customer", customerRouter);
 app.use("/restaurant", restaurantRouter);
 app.use("/restaurant/posts", postRoutes);
 app.use("/customer/cart", cartRoutes);
-app.use("/customer/cart/checkout", addressRoutes);
-app.use("/customer/cart/orders", orderRoutes);
+app.use("/customer/checkout", addressRoutes);
+app.use("/customer/orders", orderRoutes);
 
 const PORT = process.env.PORT || 5000;
 

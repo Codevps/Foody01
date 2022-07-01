@@ -18,6 +18,7 @@ export const createOrder = async (req, res) => {
   const newOrder = new OrderPageModel(order);
   try {
     await newOrder.save();
+    console.log(newOrder);
     res.status(201).json(newOrder);
   } catch (error) {
     console.log(error);

@@ -1,8 +1,11 @@
 import { Grid, Typography } from "@mui/material";
+import { useSelector } from "react-redux";
 import Input from "../Input";
 
 const CusOrder = () => {
-  let orders;
+  const { orders } = useSelector((state) => state.orders);
+  console.log(orders.length);
+  console.log(orders);
   return (
     <div>
       <Typography variant="h5">Order History</Typography>

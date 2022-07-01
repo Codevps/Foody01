@@ -5,6 +5,6 @@ const orderRoutes = express.Router();
 
 orderRoutes.get("/", getOrders);
 orderRoutes.post("/", auth, createOrder);
-orderRoutes.patch("/:id", auth, updateOrder);
+orderRoutes.patch("/:id/updateOrder", auth, updateOrder);
 
 export default orderRoutes;
