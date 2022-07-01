@@ -7,6 +7,7 @@ import { CONNECTION_URL } from "./secret.js";
 import postRoutes from "./routes/posts.js";
 import cartRoutes from "./routes/cart.js";
 import addressRoutes from "./routes/customerAddress.js";
+import orderRoutes from "./routes/orders.js";
 
 const app = express();
 app.use(cors());
@@ -18,6 +19,7 @@ app.use("/restaurant", restaurantRouter);
 app.use("/restaurant/posts", postRoutes);
 app.use("/customer/cart", cartRoutes);
 app.use("/customer/cart/checkout", addressRoutes);
+app.use("/customer/cart/orders", orderRoutes);
 
 const PORT = process.env.PORT || 5000;
 

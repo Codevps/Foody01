@@ -8,9 +8,8 @@ import {
 } from "@mui/material";
 const Input = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
-
   return (
-    /**seller wala condition will have if ((user.role)) */
+    //customer will have delivery details and user info on top:
     <div>
       <Typography /*className={classes.heading}*/>
         <b>Order Page</b>
@@ -26,22 +25,23 @@ const Input = () => {
             <CardContent>
               {user?.result.role && (
                 <div>
-                  <Typography> CustomerInfo: </Typography>
-                  <Typography> Name: </Typography>
-                  <Typography> Email: </Typography>
-                  <Typography> Contact No.</Typography>
-                </div>
-              )}
-              {user?.result.role && (
-                <div>
-                  <Typography> DeliveryDetails: </Typography>
-                  <Typography> apartmentName: </Typography>
-                  <Typography> locality: </Typography>
-                  <Typography> street No.</Typography>
-                  <Typography> zipCode</Typography>
+                  <div>
+                    <Typography> CustomerInfo: </Typography>
+                    <Typography> Name: </Typography>
+                    <Typography> Email: </Typography>
+                    <Typography> Contact No.</Typography>
+                  </div>
+                  <div>
+                    <Typography> DeliveryDetails: </Typography>
+                    <Typography> apartmentName: </Typography>
+                    <Typography> locality: </Typography>
+                    <Typography> street No.</Typography>
+                    <Typography> zipCode</Typography>
+                  </div>
                 </div>
               )}
               <div>
+                <Typography> OrderId: </Typography>
                 {/* Summary */}
                 {/* in for loop for multiple items */}
                 {/* in a single line */}

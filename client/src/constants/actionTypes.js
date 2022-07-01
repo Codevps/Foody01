@@ -21,3 +21,8 @@ export const DELETE_ITEM = "DELETE_ITEM";
 //checkout:
 export const GET_ADDRESS = "GET_ADDRESS";
 export const CREATE_ADDRESS = "CREATE_ADDRESS";
+
+// order
+export const FETCH_ORDERS = "FETCH_ORDERS";
+export const UPDATE_ORDER = "UPDATE_ORDER";
+export const CREATE_ORDER = "CREATE_ORDER";

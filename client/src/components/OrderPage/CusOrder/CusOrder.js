@@ -6,8 +6,8 @@ const CusOrder = () => {
   return (
     <div>
       <Typography variant="h5">Order History</Typography>
+      {/* 
       <Grid item container direction="row">
-        <Grid item xs={12} sm={1} />
         <Grid item xs={12} sm={10}>
           <Grid container spacing={2}>
             {orders ? (
@@ -23,7 +23,17 @@ const CusOrder = () => {
             ) : null}
           </Grid>
         </Grid>
-        <Grid item xs={12} sm={1} />
+      </Grid>
+       */}
+      <Grid
+        container
+        alignItems="stretch"
+        spacing={3}
+        // className={classes.container}
+      >
+        <Grid xs={10} sm={10} md={6} lg={6} xl={6}>
+          <Input />
+        </Grid>
       </Grid>
     </div>
   );

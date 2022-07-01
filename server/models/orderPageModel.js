@@ -31,6 +31,7 @@ const orderPageSchema = mongoose.Schema({
       pit: {
         type: [String],
         required: true,
+        default: [],
       },
     },
   ],
@@ -43,4 +44,4 @@ const orderPageSchema = mongoose.Schema({
     default: new Date(),
   },
 });
-export default mongoose.model("orderPageModel", orderPageSchema);
+export default mongoose.model("OrderPageModel", orderPageSchema);

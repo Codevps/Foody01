@@ -41,3 +41,10 @@ export const removeItem = (id, updatedPost) =>
 export const getAddress = (id) => API.get(`/customer/cart/checkout/${id}`);
 export const saveAddress = (newItem) =>
   API.post("/customer/cart/checkout", newItem);
+
+//routes for crud of orders
+export const fetchOrders = () => API.get("/customer/cart/orders");
+export const createOrder = (newPost) =>
+  API.post("/customer/cart/orders", newPost);
+export const updateOrder = (id, updatedPost) =>
+  API.patch(`/customer/cart/orders/${id}`, updatedPost);

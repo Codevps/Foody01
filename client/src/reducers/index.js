@@ -4,6 +4,7 @@ import restaurant from "./restaurant";
 import posts from "./posts";
 import items from "./cart";
 import address from "./address";
+import orders from "./orders";
 
 export const reducers = combineReducers({
   customer,
@@ -11,4 +12,5 @@ export const reducers = combineReducers({
   posts,
   items,
   address,
+  orders,
 });

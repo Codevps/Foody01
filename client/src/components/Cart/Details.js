@@ -5,6 +5,7 @@ import { deleteItem } from "../../actions/cart";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import useStyles from "./styles";
+import { createOrder } from "../../actions/orders";
 const Details = ({ method, newAddress }) => {
   const [orderData, setOrderData] = useState({
     deliveryDetails: {
@@ -92,15 +93,14 @@ const Details = ({ method, newAddress }) => {
       orderCompleted: false,
       createdAt: "",
     });
-    console.log(orderData);
   };
   const deleted = (item) => {
     dispatch(deleteItem(item._id));
   };
   const send = () => {
     send1();
+    dispatch(createOrder(orderData, navigate));
     items.map((item) => user?.result.email === item?.creator && deleted(item));
-    navigate("/cart/ordered");
   };
 
   return (
