@@ -7,8 +7,6 @@ const CartItems = ({ items, deletion, setDeletion }) => {
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem("profile"));
 
-  if (!items.length) return "No items in cart yet, continue shopping";
-
   return (
     <Grid
       container
@@ -19,18 +17,26 @@ const CartItems = ({ items, deletion, setDeletion }) => {
     >
       {items.map((item) => (
         <div key={item._id}>
-          {item.creator === user?.result.email && (
-            <Grid
-              className={classes.grid}
-              item
-              xs={12}
-              sm={12}
-              md={12}
-              lg={12}
-              xl={12}
+          {item.creator === user?.result.email ? (
+            <div>
+              <Grid
+                className={classes.grid}
+                item
+                xs={12}
+                sm={12}
+                md={12}
+                lg={12}
+                xl={12}
+              >
+                <CartItem item={item} items={items} />
+              </Grid>
+            </div>
+          ) : (
+            <div
+              style={{ padding: "2rem", fontWidth: "800", fontSize: "1.5rem" }}
             >
-              <CartItem item={item} items={items} />
-            </Grid>
+              No items in Cart yet,continue Shopping.
+            </div>
           )}
         </div>
       ))}
