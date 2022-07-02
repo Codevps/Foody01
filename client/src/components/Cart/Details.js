@@ -6,7 +6,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import useStyles from "./styles";
 import { createOrder } from "../../actions/orders";
-const Details = ({ method, newAddress }) => {
+const Details = ({ method }) => {
+  const { address } = useSelector((state) => state.address);
+
   const [orderData, setOrderData] = useState({
     deliveryDetails: {
       name: "",
@@ -39,15 +41,7 @@ const Details = ({ method, newAddress }) => {
   let count = 0;
 
   let cAddress;
-  if (
-    newAddress?.apartmentName &&
-    newAddress?.locality &&
-    newAddress?.street &&
-    newAddress?.zipCode &&
-    newAddress?.contactNo !== ""
-  ) {
-    cAddress = { ...newAddress };
-  }
+
   // -------------------------------------------------
   var filtered;
   const resend1 = (item, arr, final) => {
@@ -63,9 +57,13 @@ const Details = ({ method, newAddress }) => {
     return filtered;
   };
   items.map((item) => user?.result.email === item?.creator && count++);
+  // if (count === 0) {
+  //   return <div>No items in Cart</div>;
+  // }
   let arr = Array(count);
   let final = Array(count);
   const resend = () => {
+    address.map((add) => user?.result.email === add?.email && (cAddress = add));
     items.map(
       (item) =>
         user?.result.email === item?.creator && resend1(item, arr, final)
@@ -75,18 +73,14 @@ const Details = ({ method, newAddress }) => {
   const send1 = () => {
     resend();
     setOrderData({
-      deliveryDetails: {
-        name: user?.result.name,
-        email: user?.result.email,
-        contactNo: cAddress?.contactNo,
-        apartmentName: cAddress?.apartmentName,
-        locality: cAddress?.locality,
-        street: cAddress?.street,
-        zipCode: cAddress?.zipCode,
-      },
-      summary: {
-        pit: filtered,
-      },
+      name: cAddress.name,
+      email: cAddress.email,
+      contactNo: cAddress?.contactNo,
+      apartmentName: cAddress?.apartmentName,
+      locality: cAddress?.locality,
+      street: cAddress?.street,
+      zipCode: cAddress?.zipCode,
+      summary: filtered,
       total: total,
       cusCancelOrder: false,
       resAcceptOrder: false,
@@ -122,7 +116,10 @@ const Details = ({ method, newAddress }) => {
                   {(sum = item.price * item.quantity)}
                   {(tSum += sum)}
                 </div>
-                <div style={{ display: "none" }}> {(total = tSum)}</div>
+                <div style={{ display: "none" }}>
+                  {" "}
+                  {(total = tSum + deliveryCharge)}
+                </div>
                 <Typography variant="body1">
                   <div
                     className={classes.flex}
@@ -167,7 +164,7 @@ const Details = ({ method, newAddress }) => {
           </Button>
         ) : (
           <div>
-            <Button className={classes.btn} onClick={() => send()}>
+            <Button className={classes.btn} onClick={send}>
               Place Order
             </Button>
           </div>

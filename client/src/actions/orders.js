@@ -17,7 +17,7 @@ export const createOrder = (order, navigate) => async (dispatch) => {
   try {
     const { data } = await api.createOrder(order);
     dispatch({ type: CREATE_ORDER, payload: data });
-    // navigate("/cart/ordered");
+    navigate("/cart/ordered");
   } catch (error) {
     console.log(error);
   }

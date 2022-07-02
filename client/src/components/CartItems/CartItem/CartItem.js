@@ -14,7 +14,7 @@ import { addItem, deleteItem, removeItem } from "../../../actions/cart";
 import bg from "../../../images/bg.png";
 import useStyles from "./styles";
 
-const CartItem = ({ item, items, deletion, setDeletion }) => {
+const CartItem = ({ item, items }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const openItem = () => {};
@@ -35,10 +35,11 @@ const CartItem = ({ item, items, deletion, setDeletion }) => {
     window.alert("Quantity cannot be more than 10");
   }
 
-  const deleted = (item) => {
+  const deleted = () => {
     dispatch(deleteItem(item._id));
-    window.alert(`${item.title} removed from cart`);
+    // window.alert(`${item.title} removed from cart`);
   };
+
   return (
     <Card className={classes.card} elevation={6}>
       <ButtonBase

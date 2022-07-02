@@ -6,52 +6,56 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-const Input = () => {
+const Show = ({ order }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
+  console.log(order.summary[0]);
+  let arr;
+  let title;
   return (
-    //customer will have delivery details and user info on top:
     <div>
-      <Typography /*className={classes.heading}*/>
-        <b>Order Page</b>
+      <Typography>
+        <b>Order Details </b>
       </Typography>
-      <Grid
-        container
-        alignItems="stretch"
-        spacing={3}
-        /*className={classes.container}*/
-      >
+      <Grid container alignItems="stretch" spacing={3}>
         <Grid xs={12} sm={12} md={4} item>
-          <Card /*className={classes.card}*/>
+          <Card>
             <CardContent>
+              <Typography style={{ fontSize: "0.8rem" }} variant="body1">
+                OrderId:{order._id}
+              </Typography>
               {user?.result.role && (
                 <div>
                   <div>
                     <Typography> CustomerInfo: </Typography>
-                    <Typography> Name: </Typography>
-                    <Typography> Email: </Typography>
-                    <Typography> Contact No.</Typography>
+                    <Typography> Name:{order.name} </Typography>
+                    <Typography> Email: {order.email}</Typography>
+                    <Typography> Contact No.:{order.contactNo}</Typography>
                   </div>
                   <div>
                     <Typography> DeliveryDetails: </Typography>
-                    <Typography> apartmentName: </Typography>
-                    <Typography> locality: </Typography>
-                    <Typography> street No.</Typography>
-                    <Typography> zipCode</Typography>
+                    <Typography>apartmentName:{order.apartmentName}</Typography>
+                    <Typography> locality: {order.locality}</Typography>
+                    <Typography> street No.:{order.street}</Typography>
+                    <Typography> zipCode:{order.zipCode}</Typography>
                   </div>
                 </div>
               )}
               <div>
-                <Typography> OrderId: </Typography>
-                {/* Summary */}
-                {/* in for loop for multiple items */}
-                {/* in a single line */}
+                {/* for loop coz array */}
                 <Typography> Summary: </Typography>
-                <Typography> restaurantName: </Typography>
-                <Typography> item: </Typography>
-                <Typography> price: </Typography>
-                <Typography> quantity</Typography>
+                {order.summary.map((item) => (
+                  <div>
+                    <div style={{ display: "none" }}>
+                      {(arr = item.split(" "))}
+                    </div>
+                    <Typography>restaurantName:{arr[0]}</Typography>
+                    <Typography> item: {arr[1]}</Typography>
+                    <Typography> price:{arr[2]} </Typography>
+                    <Typography> quantity:{arr[3]}</Typography>
+                  </div>
+                ))}
               </div>
-              <div> Grandtotal:</div>
+              <div> Grandtotal:{order.total}</div>
             </CardContent>
             <CardActions>
               {user?.result.role && (
@@ -60,10 +64,9 @@ const Input = () => {
                   <div>Order Completed</div>
                 </div>
               )}
-              {/* for everyone */}
               <div>Cancel Order</div>
             </CardActions>
-            <div>Created at</div>
+            <div>Created at:{order.createdAt}</div>
           </Card>
         </Grid>
       </Grid>
@@ -71,7 +74,7 @@ const Input = () => {
   );
 };
 
-export default Input;
+export default Show;
 /** <Paper
       style={{
         backgroundColor: "#faf7f7",
@@ -97,7 +100,7 @@ export default Input;
 
         {role === "ROLE_SELLER" && (
           <Typography gutterBottom variant="body1" color="textPrimary">
-            Address -{" "}
+            Address -
             {
               order.user.address.aptName + ", " + order.user.address.locality
               // (`${order.user.address.aptName}, ${order.user.address.locality}`,

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { getOrders } from "../../actions/orders";
 import { getPosts } from "../../actions/posts";
 import Add from "../Add/Add";
 import Category from "../Category/Category";
@@ -11,6 +12,7 @@ const Home = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getPosts());
+    dispatch(getOrders());
   }, [dispatch]);
   return (
     <div>

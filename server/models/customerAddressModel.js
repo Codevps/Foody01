@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 const addressSchema = mongoose.Schema({
-  creator: String,
+  name: String,
+  email: String,
   apartmentName: {
     type: String,
     required: true,

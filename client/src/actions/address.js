@@ -1,8 +1,8 @@
 import * as api from "../api";
 import { CREATE_ADDRESS, GET_ADDRESS } from "../constants/actionTypes";
-export const getAddresses = (id) => async (dispatch) => {
+export const getAddresses = () => async (dispatch) => {
   try {
-    const { data } = await api.getAddress(id);
+    const { data } = await api.getAddress();
     dispatch({ type: GET_ADDRESS, payload: data });
   } catch (error) {
     console.log(error);

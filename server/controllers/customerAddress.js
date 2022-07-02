@@ -1,11 +1,10 @@
 import express from "express";
-import mongoose from "mongoose";
 import AddressModel from "../models/customerAddressModel.js";
+const router = express.Router();
 
 export const getAddress = async (req, res) => {
-  const { id } = req.params;
   try {
-    const address = await AddressModel.findById(id);
+    const address = await AddressModel.find();
     res.status(200).json({ data: address });
   } catch (error) {
     console.log(error);
@@ -15,13 +14,14 @@ export const getAddress = async (req, res) => {
 
 export const saveAddress = async (req, res) => {
   const address = req.body;
-  const newPost = new AddressModel(address);
+  const newOrder = new AddressModel(address);
   try {
-    await newPost.save();
-    res.status(201).json(newPost);
-    console.log(newPost);
+    await newOrder.save();
+    res.status(201).json(newOrder);
+    console.log(newOrder);
   } catch (error) {
     console.log(error);
     return res.status(409).json({ message: error.message });
   }
 };
+export default router;

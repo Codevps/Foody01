@@ -7,6 +7,19 @@ const CartItems = ({ items, deletion, setDeletion }) => {
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem("profile"));
 
+  if (items.length === null)
+    return (
+      <div
+        style={{
+          padding: "2rem",
+          fontWidth: "800",
+          fontSize: "1.5rem",
+        }}
+      >
+        No items in Cart yet,continue Shopping.
+      </div>
+    );
+
   return (
     <Grid
       container
@@ -17,7 +30,7 @@ const CartItems = ({ items, deletion, setDeletion }) => {
     >
       {items.map((item) => (
         <div key={item._id}>
-          {item.creator === user?.result.email ? (
+          {item.creator === user?.result.email && (
             <div>
               <Grid
                 className={classes.grid}
@@ -30,12 +43,6 @@ const CartItems = ({ items, deletion, setDeletion }) => {
               >
                 <CartItem item={item} items={items} />
               </Grid>
-            </div>
-          ) : (
-            <div
-              style={{ padding: "2rem", fontWidth: "800", fontSize: "1.5rem" }}
-            >
-              No items in Cart yet,continue Shopping.
             </div>
           )}
         </div>
