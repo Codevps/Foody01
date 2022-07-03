@@ -13,6 +13,7 @@ import Breakfast from "./components/Category/Breakfast/Breakfast";
 import Lunch from "./components/Category/Lunch/Lunch";
 import Dinner from "./components/Category/Dinner/Dinner";
 import CusOrder from "./components/OrderPage/CusOrder/CusOrder";
+import ResOrder from "./components/OrderPage/ResOrder/ResOrder";
 
 const App = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -53,6 +54,7 @@ const App = () => {
           <Route path={`/lunchCategory`} exact element={<Lunch />} />
           <Route path={`/dinnerCategory`} exact element={<Dinner />} />
           <Route path={`/cart/ordered`} exact element={<CusOrder />} />
+          <Route path={`/orders`} exact element={<ResOrder />} />
         </Routes>
       </BrowserRouter>
     </div>

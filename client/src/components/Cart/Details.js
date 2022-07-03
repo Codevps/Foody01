@@ -81,7 +81,7 @@ const Details = ({ method }) => {
       street: cAddress?.street,
       zipCode: cAddress?.zipCode,
       summary: filtered,
-      total: total,
+      total: total + deliveryCharge,
       cusCancelOrder: false,
       resAcceptOrder: false,
       orderCompleted: false,
@@ -116,10 +116,7 @@ const Details = ({ method }) => {
                   {(sum = item.price * item.quantity)}
                   {(tSum += sum)}
                 </div>
-                <div style={{ display: "none" }}>
-                  {" "}
-                  {(total = tSum + deliveryCharge)}
-                </div>
+                <div style={{ display: "none" }}> {(total = tSum)}</div>
                 <Typography variant="body1">
                   <div
                     className={classes.flex}

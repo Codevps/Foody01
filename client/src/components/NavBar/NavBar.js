@@ -44,6 +44,16 @@ const NavBar = () => {
           Foody
         </Typography>
         <Toolbar className={classes.toolbar}>
+          {user?.result && (
+            <Button
+              className={!user?.result.role ? classes.btn2 : classes.btn}
+              variant="contained"
+              component={Link}
+              to={!user?.result.role ? "/cart/ordered" : "/orders"}
+            >
+              Orders
+            </Button>
+          )}
           {user?.result.role && (
             <Button
               style={{ marginRight: "1rem" }}
@@ -59,14 +69,6 @@ const NavBar = () => {
             <div className={classes.profile}>
               {!user?.result.role && (
                 <>
-                  <Button
-                    className={classes.btn2}
-                    variant="contained"
-                    component={Link}
-                    to="/cart/ordered"
-                  >
-                    Orders
-                  </Button>
                   <Button>
                     <ShoppingCartIcon
                       fontSize="large"
