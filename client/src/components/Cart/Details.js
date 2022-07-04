@@ -23,8 +23,6 @@ const Details = ({ method }) => {
       pit: "",
     },
     total: "",
-    cusCancelOrder: false,
-    resAcceptOrder: false,
     orderCompleted: false,
     createdAt: "",
   });
@@ -48,7 +46,7 @@ const Details = ({ method }) => {
     for (let i = 0; i < arr.length; i++) {
       arr[
         i
-      ] = `${item.restaurantName} ${item.title} ${item.price} ${item.quantity}`;
+      ] = `${item.restaurantName} ${item.title} ${item.price} ${item.quantity} false false false`;
     }
     final.push(arr[0]);
     filtered = final.filter(function (el) {
@@ -79,8 +77,9 @@ const Details = ({ method }) => {
       zipCode: cAddress?.zipCode,
       summary: filtered,
       total: total + deliveryCharge,
-      cusCancelOrder: false,
-      resAcceptOrder: false,
+      // cusCancelOrderItem: false,
+      // resAcceptOrderItem: false,
+      // resOrderCompleted: false,
       orderCompleted: false,
       createdAt: "",
     });

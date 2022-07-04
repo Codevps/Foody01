@@ -2,6 +2,7 @@ import { Grid, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrders } from "../../../actions/orders";
+import Show from "../Show";
 import Edit from "./Edit";
 
 const ResOrder = () => {
@@ -23,10 +24,26 @@ const ResOrder = () => {
         style={{ display: "flex", flexDirection: "row", margin: ".2rem" }}
         spacing={3}
       >
-        {orders.map((order) => (
+        {/* {orders.map((order) => (
           <Grid item xs={12} key={order._id}>
-            <Edit order={order} />
+            <Edit order={order} user={user?.result.name} />
           </Grid>
+        ))} */}
+        {orders.map((order) => (
+          <div>
+            {order.summary.map((item) => (
+              <div>
+                {/* <div style={{ display: "none" }}>{(arr = item.split(" "))}</div> */}
+                {item.split(" ")[0] === user?.result.name && (
+                  <div>
+                    <Grid item xs={12} key={order._id}>
+                      <Show order={order} arr={item.split(" ")} />
+                    </Grid>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         ))}
       </Grid>
     </div>
