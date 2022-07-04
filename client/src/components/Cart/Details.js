@@ -57,9 +57,6 @@ const Details = ({ method }) => {
     return filtered;
   };
   items.map((item) => user?.result.email === item?.creator && count++);
-  // if (count === 0) {
-  //   return <div>No items in Cart</div>;
-  // }
   let arr = Array(count);
   let final = Array(count);
   const resend = () => {
