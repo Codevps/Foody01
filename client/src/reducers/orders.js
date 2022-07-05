@@ -1,7 +1,8 @@
 import {
   CREATE_ORDER,
+  CUS_UPDATE_ORDER,
   FETCH_ORDERS,
-  UPDATE_ORDER,
+  RES_UPDATE_ORDER,
 } from "../constants/actionTypes";
 
 const orders = (state = { orders: [] }, action) => {
@@ -13,7 +14,14 @@ const orders = (state = { orders: [] }, action) => {
       };
     case CREATE_ORDER:
       return { ...state, orders: [...state.orders, action.payload] };
-    case UPDATE_ORDER:
+    case CUS_UPDATE_ORDER:
+      return {
+        ...state,
+        orders: state.orders.map((order) =>
+          order._id === action.payload._id ? action.payload : order
+        ),
+      };
+    case RES_UPDATE_ORDER:
       return {
         ...state,
         orders: state.orders.map((order) =>

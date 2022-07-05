@@ -24,5 +24,6 @@ export const CREATE_ADDRESS = "CREATE_ADDRESS";
 
 // order
 export const FETCH_ORDERS = "FETCH_ORDERS";
-export const UPDATE_ORDER = "UPDATE_ORDER";
 export const CREATE_ORDER = "CREATE_ORDER";
+export const CUS_UPDATE_ORDER = "CUS_UPDATE_ORDER";
+export const RES_UPDATE_ORDER = "RES_UPDATE_ORDER";

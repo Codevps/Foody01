@@ -2,7 +2,8 @@ import * as api from "../api";
 import {
   CREATE_ORDER,
   FETCH_ORDERS,
-  UPDATE_ORDER,
+  CUS_UPDATE_ORDER,
+  RES_UPDATE_ORDER,
 } from "../constants/actionTypes";
 export const getOrders = () => async (dispatch) => {
   try {
@@ -22,10 +23,19 @@ export const createOrder = (order, navigate) => async (dispatch) => {
     console.log(error);
   }
 };
-export const updateOrder = (id, order) => async (dispatch) => {
+export const cusUpdateOrder = (id, order) => async (dispatch) => {
   try {
-    const { data } = await api.updateOrder(id, order);
-    dispatch({ type: UPDATE_ORDER, payload: data });
+    const { data } = await api.cusUpdateOrder(id, order);
+    dispatch({ type: CUS_UPDATE_ORDER, payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const resUpdateOrder = (id, order) => async (dispatch) => {
+  try {
+    const { data } = await api.resUpdateOrder(id, order);
+    dispatch({ type: RES_UPDATE_ORDER, payload: data });
   } catch (error) {
     console.log(error);
   }

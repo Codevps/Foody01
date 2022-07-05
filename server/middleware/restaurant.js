@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { secret2 } from "../secret.js";
 
-const auth = async (req, res, next) => {
+const auth2 = async (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
     let decodedData;
@@ -15,4 +15,4 @@ const auth = async (req, res, next) => {
   }
 };
 
-export default auth;
+export default auth2;

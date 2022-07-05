@@ -25,12 +25,27 @@ export const createOrder = async (req, res) => {
     return res.status(409).json({ message: error.message });
   }
 };
-export const updateOrder = async (req, res) => {
+export const resUpdateOrder = async (req, res) => {
   const { id: _id } = req.params;
   const order = req.body;
   if (!mongoose.Types.ObjectId.isValid(_id))
     return res.status(404).send("No order available with this id,Invalid Id");
 
+  const updatedOrder = await OrderPageModel.findByIdAndUpdate(
+    _id,
+    { ...order, _id },
+    {
+      new: true,
+    }
+  );
+  res.json(updatedOrder);
+};
+
+export const cusUpdateOrder = async (req, res) => {
+  const { id: _id } = req.params;
+  const order = req.body;
+  if (!mongoose.Types.ObjectId.isValid(_id))
+    return res.status(404).send("No order available with this id,Invalid Id");
   const updatedOrder = await OrderPageModel.findByIdAndUpdate(
     _id,
     { ...order, _id },

@@ -45,5 +45,7 @@ export const saveAddress = (newOrder) =>
 //routes for crud of orders
 export const fetchOrders = () => API.get("/customer/orders");
 export const createOrder = (newOrder) => API.post("/customer/orders", newOrder);
-export const updateOrder = (id, updatedOrder) =>
-  API.patch(`/customer/orders/${id}/updateOrder`, updatedOrder);
+export const cusUpdateOrder = (id, updatedOrder) =>
+  API.patch(`/customer/orders/${id}/cusUpdateOrder`, updatedOrder);
+export const resUpdateOrder = (id, updatedOrder) =>
+  API.patch(`/customer/orders/${id}/resUpdateOrder`, updatedOrder);

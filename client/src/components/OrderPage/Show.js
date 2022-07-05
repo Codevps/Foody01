@@ -1,6 +1,42 @@
 import { Card, CardActions, CardContent, Typography } from "@mui/material";
-const Show = ({ order, arr }) => {
+import { useDispatch } from "react-redux";
+import { resUpdateOrder } from "../../actions/orders";
+const Show = ({ order, arr, count }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
+  const dispatch = useDispatch();
+  let tot = 0;
+
+  const updateCancelOrder = (arr) => {
+    let x = [];
+    order.summary.map((item) => (tot = tot + 1));
+    x = order.summary[count - tot + 1];
+
+    // console.log(order.summary[]);
+    // console.log(x.split(" ")[4]);
+
+    // dispatch(
+    //   resUpdateOrder(
+    //     order._id,
+    //     ...order.summary.map((item) => {
+    //       if (item.split(" ")[0] === arr[0]) {
+    //         arr[4] = "true";
+    //       }
+    //     })
+    //   )
+    // );
+    if (arr[4] === "false")
+      dispatch(
+        updateCancelOrder(order._id, {
+          ...order,
+          summary: {
+            0: true,
+          },
+        })
+      );
+
+    tot = 0;
+  };
+
   return (
     // ordercompleted: if all orders are accepted and all order completed a then order completed : true
     <div>
@@ -46,6 +82,7 @@ const Show = ({ order, arr }) => {
                       cusCancelOrder:
                       {/* update auth is a problem for customer put different auth and for restaurant put different */}
                       <button
+                        onClick={updateCancelOrder(arr)}
                         style={{ color: arr[4] === "true" ? "blue" : "red" }}
                       >
                         {arr[4]}
@@ -95,6 +132,7 @@ const Show = ({ order, arr }) => {
           {user?.result.role && (
             <div>
               Order Completed:
+              {/* not a string */}
               <p style={{ color: arr[5] === "true" ? "blue" : "red" }}>
                 {order.orderCompleted ? "true" : "false"}
               </p>

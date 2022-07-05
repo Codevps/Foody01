@@ -3,12 +3,11 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrders } from "../../../actions/orders";
 import Show from "../Show";
-import Edit from "./Edit";
 
 const ResOrder = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const { orders } = useSelector((state) => state.orders);
-  let arr;
+  let count = 0;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -33,16 +32,17 @@ const ResOrder = () => {
           <div>
             {order.summary.map((item) => (
               <div>
-                {/* <div style={{ display: "none" }}>{(arr = item.split(" "))}</div> */}
+                <div style={{ display: "none" }}>{(count = count + 1)}</div>
                 {item.split(" ")[0] === user?.result.name && (
                   <div>
                     <Grid item xs={12} key={order._id}>
-                      <Show order={order} arr={item.split(" ")} />
+                      <Show order={order} arr={item.split(" ")} count={count} />
                     </Grid>
                   </div>
                 )}
               </div>
             ))}
+            <div style={{ display: "none" }}>{(count = 0)}</div>
           </div>
         ))}
       </Grid>
