@@ -1,40 +1,107 @@
 import { Card, CardActions, CardContent, Typography } from "@mui/material";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { resUpdateOrder } from "../../actions/orders";
+import { cusUpdateOrder, resUpdateOrder } from "../../actions/orders";
 const Show = ({ order, arr, count }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const dispatch = useDispatch();
-  let tot = 0;
+  let tot = true;
 
   const updateCancelOrder = (arr) => {
-    let x = [];
-    order.summary.map((item) => (tot = tot + 1));
-    x = order.summary[count - tot + 1];
-
-    // console.log(order.summary[]);
-    // console.log(x.split(" ")[4]);
-
-    // dispatch(
-    //   resUpdateOrder(
-    //     order._id,
-    //     ...order.summary.map((item) => {
-    //       if (item.split(" ")[0] === arr[0]) {
-    //         arr[4] = "true";
-    //       }
-    //     })
-    //   )
-    // );
-    if (arr[4] === "false")
+    if (arr[5] === "true" && arr[6] === "true") {
+      window.alert(
+        `Order has been accepted by ${arr[0]} and cannot be cancelled`
+      );
+      return;
+    }
+    if (arr[4] === "true")
       dispatch(
-        updateCancelOrder(order._id, {
+        cusUpdateOrder(order._id, {
           ...order,
-          summary: {
-            0: true,
-          },
+          summary: order.summary.map(
+            (item) =>
+              item.split(" ")[0] === arr[0] &&
+              `${arr[0]} ${arr[1]} ${arr[2]} ${arr[3]} false ${arr[5]} ${arr[6]} `
+          ),
         })
       );
+    else
+      dispatch(
+        cusUpdateOrder(order._id, {
+          ...order,
+          summary: order.summary.map(
+            (item) =>
+              item.split(" ")[0] === arr[0] &&
+              `${arr[0]} ${arr[1]} ${arr[2]} ${arr[3]} true ${arr[5]} ${arr[6]} `
+          ),
+        })
+      );
+  };
 
-    tot = 0;
+  const resAcceptOrder = (arr) => {
+    if (arr[5] === "true")
+      dispatch(
+        resUpdateOrder(order._id, {
+          ...order,
+          summary: order.summary.map(
+            (item) =>
+              item.split(" ")[0] === arr[0] &&
+              `${arr[0]} ${arr[1]} ${arr[2]} ${arr[3]} ${arr[4]} false ${arr[6]} `
+          ),
+        })
+      );
+    else
+      dispatch(
+        resUpdateOrder(order._id, {
+          ...order,
+          summary: order.summary.map(
+            (item) =>
+              item.split(" ")[0] === arr[0] &&
+              `${arr[0]} ${arr[1]} ${arr[2]} ${arr[3]} ${arr[4]} true ${arr[6]} `
+          ),
+        })
+      );
+  };
+
+  const resOrderCompleted = (arr) => {
+    if (arr[6] === "true")
+      dispatch(
+        resUpdateOrder(order._id, {
+          ...order,
+          summary: order.summary.map(
+            (item) =>
+              item.split(" ")[0] === arr[0] &&
+              `${arr[0]} ${arr[1]} ${arr[2]} ${arr[3]} ${arr[4]} ${arr[5]} false `
+          ),
+        })
+      );
+    else
+      dispatch(
+        resUpdateOrder(order._id, {
+          ...order,
+          summary: order.summary.map(
+            (item) =>
+              item.split(" ")[0] === arr[0] &&
+              `${arr[0]} ${arr[1]} ${arr[2]} ${arr[3]} ${arr[4]} ${arr[5]} true `
+          ),
+        })
+      );
+  };
+  const sp = () => {
+    dispatch(
+      resUpdateOrder(order._id, {
+        ...order,
+        orderCompleted: true,
+      })
+    );
+  };
+  const sp2 = () => {
+    dispatch(
+      resUpdateOrder(order._id, {
+        ...order,
+        orderCompleted: false,
+      })
+    );
   };
 
   return (
@@ -78,19 +145,16 @@ const Show = ({ order, arr, count }) => {
                     <Typography> item: {arr[1]}</Typography>
                     <Typography> price:{arr[2]} </Typography>
                     <Typography> quantity:{arr[3]}</Typography>
-                    <Typography>
-                      cusCancelOrder:
-                      {/* update auth is a problem for customer put different auth and for restaurant put different */}
-                      <button
-                        onClick={updateCancelOrder(arr)}
-                        style={{ color: arr[4] === "true" ? "blue" : "red" }}
-                      >
-                        {arr[4]}
-                      </button>
-                    </Typography>
+                    <Typography>cusCancelOrder: {arr[4]}</Typography>
                     <Typography>
                       resAcceptOrder:
                       <button
+                        onClick={() => resAcceptOrder(arr)}
+                        disabled={
+                          arr[4] === "false" && arr[6] === "false"
+                            ? false
+                            : true
+                        }
                         style={{ color: arr[5] === "true" ? "blue" : "red" }}
                       >
                         {arr[5]}
@@ -99,6 +163,10 @@ const Show = ({ order, arr, count }) => {
                     <Typography>
                       resOrderCompleted:
                       <button
+                        onClick={() => resOrderCompleted(arr)}
+                        disabled={
+                          arr[5] === "true" && arr[4] === "false" ? false : true
+                        }
                         style={{ color: arr[6] === "true" ? "blue" : "red" }}
                       >
                         {arr[6]}
@@ -122,6 +190,16 @@ const Show = ({ order, arr, count }) => {
                   <Typography> item: {arr[1]}</Typography>
                   <Typography> price:{arr[2]} </Typography>
                   <Typography> quantity:{arr[3]}</Typography>
+                  <Typography>
+                    cusCancelOrder:
+                    <button
+                      onClick={() => updateCancelOrder(arr)}
+                      style={{ color: arr[4] === "true" ? "blue" : "red" }}
+                      disabled={arr[6] === "true" ? true : false}
+                    >
+                      {arr[4]}
+                    </button>
+                  </Typography>
                 </div>
               ))}
             </div>
@@ -129,16 +207,20 @@ const Show = ({ order, arr, count }) => {
           {!user?.result.role && <div> Grandtotal:{order.total}</div>}
         </CardContent>
         <CardActions>
-          {user?.result.role && (
-            <div>
-              Order Completed:
-              {/* not a string */}
-              <p style={{ color: arr[5] === "true" ? "blue" : "red" }}>
-                {order.orderCompleted ? "true" : "false"}
-              </p>
+          {/* {!user?.result.role && ( */}
+          <div>
+            Order Completed:
+            <div style={{ color: arr[6] === true ? "blue" : "red" }}>
+              {order.orderCompleted === true ? "started" : "stopped"}
+              <br />
+              <button onClick={() => (!order.orderCompleted ? sp() : sp2())}>
+                {!order.orderCompleted === true
+                  ? "Start delivery"
+                  : "End/Pause"}
+              </button>
             </div>
-          )}
-          <div>Cancel Order</div>
+          </div>
+          {/* )} */}
         </CardActions>
         <div>Created at:{order.createdAt}</div>
       </Card>
