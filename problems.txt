@@ -1,7 +1,9 @@
-auth when done wrong servers stops running=>{
-    so do error handling,
-    also there is no checking whether the password is there or not
-}
+WRITTEN OVER HERE ARE THINGS THAT CAN BE IMPROVED OR TO BE IMPROVED AND ALSO THINGS THAT SHOULD BE ADDED TO MAKE THIS APP WORK BETTER.
 
-
-use middleware for cart and if user puts item in cart then mark that item and store it in cart database and if user deletes so delete from database
+0:There always need to refresh browser to load the page correctly 
+1.Login page password error,log's in without right password
+2. Work on error :
+    SERVER ERROR: (eg if server gets error then handle it without refreshing the server)
+3.loading page and sign
+4.404 page not found
+5.Better Design
