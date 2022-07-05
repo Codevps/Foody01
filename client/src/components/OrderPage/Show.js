@@ -1,11 +1,9 @@
 import { Card, CardActions, CardContent, Typography } from "@mui/material";
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { cusUpdateOrder, resUpdateOrder } from "../../actions/orders";
 const Show = ({ order, arr, count }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const dispatch = useDispatch();
-  let tot = true;
 
   const updateCancelOrder = (arr) => {
     if (arr[5] === "true" && arr[6] === "true") {
