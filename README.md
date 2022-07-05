@@ -1,7 +1,9 @@
-# foody
+<<Foody: food for you>>
+creator:Pratham Sawant
 
-# Foody01
+2 folders: client && server.
 
-# Foody, is a Full Stack Web dev Project based on online food delivery topic.
+{{client}}: has react-redux store and all the main pages are stored in components folder.
 
-Features::
+{{server}}: divided in 3 controllers routes and models for localStorage.
+secret folder consists of client id,server-connection url and middleware secret-key.
