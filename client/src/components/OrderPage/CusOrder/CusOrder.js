@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAddresses } from "../../../actions/address";
 import { getOrders } from "../../../actions/orders";
 import Show from "../Show";
-
 const CusOrder = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const { orders } = useSelector((state) => state.orders);
@@ -16,32 +15,41 @@ const CusOrder = () => {
     dispatch(getAddresses());
     dispatch(getOrders());
   }, [dispatch]);
+
   return (
     <div style={{ margin: "1rem" }}>
       <div>
+        <Typography variant="h5" style={{ fontSize: "1.2rem" }}>
+          <b>Your Info:</b>
+        </Typography>
         {address.map(
           (add) =>
             user?.result.email === add.email && (
               <div>
-                <p> name: {add?.name}</p>
-                <p> email: {add?.email}</p>
+                <p> Name: {add?.name}</p>
+                <p> Email: {add?.email}</p>
                 <p>
-                  contactNo:
+                  Contact No:
                   {add?.contactNo}
                 </p>
+                <Typography variant="h5" style={{ fontSize: "1.2rem" }}>
+                  <b>Delivery Details:</b>
+                </Typography>
                 <p>
-                  apartmentName:
+                  Apartment Name:
                   {add?.apartmentName}
                 </p>
-                <p> locality: {add?.locality}</p>
-                <p>street: {add?.street}</p>
-                <p> zipCode: {add?.zipCode}</p>
+                <p> Locality: {add?.locality}</p>
+                <p>Street: {add?.street}</p>
+                <p> Zip Code: {add?.zipCode}</p>
               </div>
             )
         )}
       </div>
-      <Typography variant="h5">Order History</Typography>
       <br />
+      <Typography variant="h5" style={{ fontSize: "1.2rem" }}>
+        <b>Order History:</b>
+      </Typography>
       <Grid
         container
         alignItems="stretch"

@@ -6,7 +6,7 @@ const Show = ({ order, arr, count }) => {
   const dispatch = useDispatch();
 
   const updateCancelOrder = (arr) => {
-    if (arr[5] === "true" && arr[6] === "true") {
+    if (arr[5] === "true" || arr[6] === "true") {
       window.alert(
         `Order has been accepted by ${arr[0]} and cannot be cancelled`
       );
@@ -101,6 +101,8 @@ const Show = ({ order, arr, count }) => {
       })
     );
   };
+  let cancel = false;
+  let cnt = 0;
 
   return (
     // ordercompleted: if all orders are accepted and all order completed a then order completed : true
@@ -115,16 +117,18 @@ const Show = ({ order, arr, count }) => {
           )}
           {user?.result.role && (
             <div>
-              <br />
               <div>
-                <Typography> Customer Info: </Typography>
+                <Typography variant="h5" style={{ fontSize: "1.2rem" }}>
+                  <b>Customer Info:</b>
+                </Typography>{" "}
                 <Typography> Name:{order.name} </Typography>
                 <Typography> Email: {order.email}</Typography>
                 <Typography> Contact No.:{order.contactNo}</Typography>
               </div>
-              <br />
               <div>
-                <Typography> DeliveryDetails: </Typography>
+                <Typography variant="h5" style={{ fontSize: "1.2rem" }}>
+                  <b>Customer's Delivery Details:</b>
+                </Typography>
                 <Typography>apartmentName:{order.apartmentName}</Typography>
                 <Typography> locality: {order.locality}</Typography>
                 <Typography> street No.:{order.street}</Typography>
@@ -132,45 +136,60 @@ const Show = ({ order, arr, count }) => {
               </div>
             </div>
           )}
-          <br />
-
           {user?.result.role ? (
             <div>
-              <Typography> Summary: </Typography>
+              <Typography variant="h5" style={{ fontSize: "1.2rem" }}>
+                <b>Summary:</b>
+              </Typography>
               <div>
                 {arr[0] === user?.result.name && (
                   <div>
-                    <Typography> item: {arr[1]}</Typography>
-                    <Typography> price:{arr[2]} </Typography>
-                    <Typography> quantity:{arr[3]}</Typography>
-                    <Typography>cusCancelOrder: {arr[4]}</Typography>
-                    <Typography>
-                      resAcceptOrder:
-                      <button
-                        onClick={() => resAcceptOrder(arr)}
-                        disabled={
-                          arr[4] === "false" && arr[6] === "false"
-                            ? false
-                            : true
-                        }
-                        style={{ color: arr[5] === "true" ? "blue" : "red" }}
-                      >
-                        {arr[5]}
-                      </button>
-                    </Typography>
-                    <Typography>
-                      resOrderCompleted:
-                      <button
-                        onClick={() => resOrderCompleted(arr)}
-                        disabled={
-                          arr[5] === "true" && arr[4] === "false" ? false : true
-                        }
-                        style={{ color: arr[6] === "true" ? "blue" : "red" }}
-                      >
-                        {arr[6]}
-                      </button>
-                    </Typography>
-                    <div>GrandTotal: {arr[3] * arr[2]}</div>
+                    <Typography> Item: {arr[1]}</Typography>
+                    <Typography> Price:{arr[2]} </Typography>
+                    <Typography> Quantity:{arr[3]}</Typography>
+                    {arr[4] === "false" && arr[0] === user?.result.name ? (
+                      <div>
+                        <Typography>Cancel Order: {arr[4]}</Typography>
+                        <Typography>
+                          resAcceptOrder:
+                          <button
+                            onClick={() => resAcceptOrder(arr)}
+                            disabled={
+                              arr[4] === "false" && arr[6] === "false"
+                                ? false
+                                : true
+                            }
+                            style={{
+                              color: arr[5] === "true" ? "blue" : "red",
+                            }}
+                          >
+                            {arr[5]}
+                          </button>
+                        </Typography>
+                        <Typography>
+                          resOrderCompleted:
+                          <button
+                            onClick={() => resOrderCompleted(arr)}
+                            disabled={
+                              arr[5] === "true" && arr[4] === "false"
+                                ? false
+                                : true
+                            }
+                            style={{
+                              color: arr[6] === "true" ? "blue" : "red",
+                            }}
+                          >
+                            {arr[6]}
+                          </button>
+                        </Typography>
+                        <div>GrandTotal: {arr[3] * arr[2]}</div>
+                      </div>
+                    ) : (
+                      <Typography style={{ color: "red" }}>
+                        {(cancel = true)}
+                        <b>Customer Cancelled the order.</b>
+                      </Typography>
+                    )}
                   </div>
                 )}
               </div>
@@ -178,22 +197,28 @@ const Show = ({ order, arr, count }) => {
             </div>
           ) : (
             <div>
-              <Typography> Summary: </Typography>
+              <Typography variant="h5" style={{ fontSize: "1.2rem" }}>
+                <b>Summary:</b>
+              </Typography>
               {order.summary.map((item) => (
                 <div>
                   <div style={{ display: "none" }}>
                     {(arr = item.split(" "))}
+                    {(cnt = cnt + 1)}
                   </div>
-                  <Typography>restaurantName:{arr[0]}</Typography>
-                  <Typography> item: {arr[1]}</Typography>
-                  <Typography> price:{arr[2]} </Typography>
-                  <Typography> quantity:{arr[3]}</Typography>
                   <Typography>
-                    cusCancelOrder:
+                    <b>Item:{cnt} </b>
+                  </Typography>
+                  <Typography>Restaurant Name:{arr[0]}</Typography>
+                  <Typography> Item purchased: {arr[1]}</Typography>
+                  <Typography> Price:{arr[2]} </Typography>
+                  <Typography> Quantity:{arr[3]}</Typography>
+                  <Typography>
+                    Cancel Order:
                     <button
+                      disabled={arr[5] === "true" ? true : false}
                       onClick={() => updateCancelOrder(arr)}
                       style={{ color: arr[4] === "true" ? "blue" : "red" }}
-                      disabled={arr[6] === "true" ? true : false}
                     >
                       {arr[4]}
                     </button>
@@ -205,20 +230,29 @@ const Show = ({ order, arr, count }) => {
           {!user?.result.role && <div> Grandtotal:{order.total}</div>}
         </CardContent>
         <CardActions>
-          {/* {!user?.result.role && ( */}
-          <div>
-            Order Completed:
-            <div style={{ color: arr[6] === true ? "blue" : "red" }}>
-              {order.orderCompleted === true ? "started" : "stopped"}
-              <br />
-              <button onClick={() => (!order.orderCompleted ? sp() : sp2())}>
-                {!order.orderCompleted === true
-                  ? "Start delivery"
-                  : "End/Pause"}
-              </button>
+          {cancel === false && (
+            <div>
+              Order Completed:
+              <div style={{ color: arr[6] === true ? "blue" : "red" }}>
+                {order.orderCompleted === true ? "started" : "stopped"}
+                <br />
+                {user?.result.role && (
+                  <div>
+                    <button
+                      onClick={() => (!order.orderCompleted ? sp() : sp2())}
+                    >
+                      Operate
+                    </button>
+                    <div>
+                      {!order.orderCompleted === true
+                        ? "Start delivery"
+                        : "End/Pause"}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-          {/* )} */}
+          )}
         </CardActions>
         <div>Created at:{order.createdAt}</div>
       </Card>

@@ -15,8 +15,9 @@ const ResOrder = () => {
   }, [dispatch]);
   return (
     <div>
-      <Typography variant="h5">Orders for {user?.result.name}</Typography>
-      <br />
+      <Typography variant="h5" style={{ fontSize: "1.2rem" }}>
+        <b>Orders for {user?.result.name}:</b>
+      </Typography>
       <Grid
         container
         alignItems="stretch"

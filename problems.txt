@@ -7,3 +7,4 @@ WRITTEN OVER HERE ARE THINGS THAT CAN BE IMPROVED OR TO BE IMPROVED AND ALSO THI
 3.loading page and sign
 4.404 page not found
 5.Better Design
+conditions for form like contactNo should be 10 etc
