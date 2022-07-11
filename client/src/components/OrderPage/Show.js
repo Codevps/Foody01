@@ -1,9 +1,11 @@
 import { Card, CardActions, CardContent, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { cusUpdateOrder, resUpdateOrder } from "../../actions/orders";
+import useStyles from "./styles";
 const Show = ({ order, arr }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const dispatch = useDispatch();
+  const classes = useStyles();
 
   const updateCancelOrder = (arr) => {
     if (arr[5] === "true" || arr[6] === "true") {
@@ -97,7 +99,7 @@ const Show = ({ order, arr }) => {
   return (
     // ordercompleted: if all orders are accepted and all order completed a then order completed : true
     <div>
-      <Card>
+      <Card className={classes.card}>
         <CardContent>
           {!user?.result.role && (
             <Typography style={{ fontSize: "1rem" }} variant="body1">
@@ -139,12 +141,16 @@ const Show = ({ order, arr }) => {
                     <Typography> Quantity:{arr[4]}</Typography>
                     {!order.orderCancelled && arr[1] === user?.result.name ? (
                       <div>
-                        <Typography>
-                          Cancel Order:
-                          {order.orderCancelled ? "true" : "false"}
+                        <Typography
+                          style={{
+                            color: arr[5] === "true" ? "black" : "red",
+                          }}
+                        >
+                          Cancelled Order:
+                          {order.orderCancelled ? "Cancelled" : " No"}
                         </Typography>
                         <Typography>
-                          resAcceptOrder:
+                          Accept Order:
                           <button
                             onClick={() => resAcceptOrder(arr)}
                             disabled={
@@ -154,13 +160,14 @@ const Show = ({ order, arr }) => {
                             }
                             style={{
                               color: arr[5] === "true" ? "blue" : "red",
+                              padding: "0.1rem .3rem",
                             }}
                           >
-                            {arr[5]}
+                            {arr[5] === "true" ? "Yes" : "No"}
                           </button>
                         </Typography>
                         <Typography>
-                          resOrderCompleted:
+                          Completed Order:
                           <button
                             onClick={() => resOrderCompleted(arr)}
                             disabled={
@@ -170,12 +177,13 @@ const Show = ({ order, arr }) => {
                             }
                             style={{
                               color: arr[6] === "true" ? "blue" : "red",
+                              padding: "0.1rem .3rem",
                             }}
                           >
-                            {arr[6]}
+                            {arr[6] === "true" ? "Yes" : "No"}
                           </button>
                         </Typography>
-                        <div>GrandTotal: {arr[4] * arr[3]}</div>
+                        <Typography>Grand Total: {arr[4] * arr[3]}</Typography>
                       </div>
                     ) : (
                       <Typography style={{ color: "red" }}>
@@ -208,46 +216,54 @@ const Show = ({ order, arr }) => {
               ))}
             </div>
           )}
-          {!user?.result.role && <div> Grandtotal:{order.total}</div>}
-        </CardContent>
-        <CardActions>
+          {!user?.result.role && (
+            <Typography> Grand Total:Rs.{order.total}</Typography>
+          )}
           {!user?.result.role && (
             <Typography>
-              Cancel Order:
               <button
                 disabled={arr[5] === "true" ? true : false}
                 onClick={() => updateCancelOrder(arr)}
-                style={{ color: order.orderCancelled ? "blue" : "red" }}
+                style={{
+                  color: arr[5] === "true" ? "grey" : "red",
+                  padding: "0.2rem",
+                  fontSize: "1rem",
+                  fontWeight: 500,
+                }}
               >
-                {order.orderCancelled ? "true" : "false"}
+                Cancel Order
               </button>
             </Typography>
           )}
           {!order.orderCancelled && (
-            <div>
-              Order Completed:
+            <Typography>
+              Order Status:
               <div style={{ color: arr[6] === true ? "blue" : "red" }}>
-                {order.orderCompleted === true ? "started" : "stopped"}
-                <br />
+                {order.orderCompleted === true
+                  ? "Delivery Process Started"
+                  : "Delivery Process Paused/Stopped"}
                 {user?.result.role && (
                   <div>
                     <button
+                      style={{
+                        padding: "0.1rem .3rem",
+                        background: "transparent",
+                        border: "1px solid black",
+                        borderRadius: "4px",
+                      }}
                       onClick={() => (!order.orderCompleted ? sp() : sp2())}
                     >
-                      Operate
-                    </button>
-                    <div>
                       {!order.orderCompleted === true
-                        ? "Start delivery"
-                        : "End/Pause"}
-                    </div>
+                        ? "Delivery process has started"
+                        : "Process End/Paused "}
+                    </button>
                   </div>
                 )}
               </div>
-            </div>
+            </Typography>
           )}
-        </CardActions>
-        <div>Created at:{order.createdAt}</div>
+        </CardContent>
+        <Typography>Created at:{order.createdAt}</Typography>
       </Card>
     </div>
   );
