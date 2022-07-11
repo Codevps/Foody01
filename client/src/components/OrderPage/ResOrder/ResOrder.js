@@ -3,11 +3,13 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrders } from "../../../actions/orders";
 import Show from "../Show";
+import useStyles from "../styles";
 
 const ResOrder = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const { orders } = useSelector((state) => state.orders);
   let count = 0;
+  const classes = useStyles();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,6 +22,7 @@ const ResOrder = () => {
       </Typography>
       <Grid
         container
+        className={classes.container}
         alignItems="stretch"
         style={{ display: "flex", flexDirection: "row", margin: ".2rem" }}
         spacing={3}
@@ -36,14 +39,14 @@ const ResOrder = () => {
                 <div style={{ display: "none" }}>{(count = count + 1)}</div>
                 {item.split(" ")[1] === user?.result.name && (
                   <div>
-                    <Grid item xs={12} key={order._id}>
-                      <Show order={order} arr={item.split(" ")} count={count} />
-                    </Grid>
+                    <Show order={order} arr={item.split(" ")} count={count} />
                   </div>
                 )}
+                <br />
               </div>
             ))}
             <div style={{ display: "none" }}>{(count = 0)}</div>
+            <div style={{ margin: "1rem" }}></div>
           </div>
         ))}
       </Grid>

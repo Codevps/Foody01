@@ -59,7 +59,7 @@ const CusOrder = () => {
         {orders.map(
           (order) =>
             order?.email === user?.result.email && (
-              <Grid item xs={12} key={order._id}>
+              <Grid item xs={12} md={6} lg={3} key={order._id}>
                 <Show order={order} />
               </Grid>
             )
