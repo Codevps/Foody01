@@ -29,6 +29,7 @@ const orderPageSchema = mongoose.Schema({
   },
   total: { type: Number, required: true },
   orderCompleted: { type: Boolean, default: false, required: true },
+  orderCancelled: { type: Boolean, default: false, required: true },
   createdAt: {
     type: Date,
     default: new Date(),

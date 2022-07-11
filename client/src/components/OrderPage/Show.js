@@ -1,37 +1,28 @@
 import { Card, CardActions, CardContent, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { cusUpdateOrder, resUpdateOrder } from "../../actions/orders";
-const Show = ({ order, arr, count }) => {
+const Show = ({ order, arr }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const dispatch = useDispatch();
 
   const updateCancelOrder = (arr) => {
     if (arr[5] === "true" || arr[6] === "true") {
-      window.alert(
-        `Order has been accepted by ${arr[0]} and cannot be cancelled`
-      );
+      window.alert(`Order has been accepted by and cannot be cancelled`);
       return;
     }
-    if (arr[4] === "true")
+
+    if (order.orderCancelled)
       dispatch(
         cusUpdateOrder(order._id, {
           ...order,
-          summary: order.summary.map(
-            (item) =>
-              item.split(" ")[0] === arr[0] &&
-              `${arr[0]} ${arr[1]} ${arr[2]} ${arr[3]} false ${arr[5]} ${arr[6]} `
-          ),
+          orderCancelled: false,
         })
       );
     else
       dispatch(
         cusUpdateOrder(order._id, {
           ...order,
-          summary: order.summary.map(
-            (item) =>
-              item.split(" ")[0] === arr[0] &&
-              `${arr[0]} ${arr[1]} ${arr[2]} ${arr[3]} true ${arr[5]} ${arr[6]} `
-          ),
+          orderCancelled: true,
         })
       );
   };
@@ -44,7 +35,7 @@ const Show = ({ order, arr, count }) => {
           summary: order.summary.map(
             (item) =>
               item.split(" ")[0] === arr[0] &&
-              `${arr[0]} ${arr[1]} ${arr[2]} ${arr[3]} ${arr[4]} false ${arr[6]} `
+              `${arr[0]} ${arr[1]} ${arr[2]} ${arr[3]} ${arr[4]} false ${arr[6]}`
           ),
         })
       );
@@ -55,7 +46,7 @@ const Show = ({ order, arr, count }) => {
           summary: order.summary.map(
             (item) =>
               item.split(" ")[0] === arr[0] &&
-              `${arr[0]} ${arr[1]} ${arr[2]} ${arr[3]} ${arr[4]} true ${arr[6]} `
+              `${arr[0]} ${arr[1]} ${arr[2]} ${arr[3]} ${arr[4]} true ${arr[6]}`
           ),
         })
       );
@@ -69,7 +60,7 @@ const Show = ({ order, arr, count }) => {
           summary: order.summary.map(
             (item) =>
               item.split(" ")[0] === arr[0] &&
-              `${arr[0]} ${arr[1]} ${arr[2]} ${arr[3]} ${arr[4]} ${arr[5]} false `
+              `${arr[0]} ${arr[1]} ${arr[2]} ${arr[3]} ${arr[4]} ${arr[5]} false`
           ),
         })
       );
@@ -80,7 +71,7 @@ const Show = ({ order, arr, count }) => {
           summary: order.summary.map(
             (item) =>
               item.split(" ")[0] === arr[0] &&
-              `${arr[0]} ${arr[1]} ${arr[2]} ${arr[3]} ${arr[4]} ${arr[5]} true `
+              `${arr[0]} ${arr[1]} ${arr[2]} ${arr[3]} ${arr[4]} ${arr[5]} true`
           ),
         })
       );
@@ -101,7 +92,6 @@ const Show = ({ order, arr, count }) => {
       })
     );
   };
-  let cancel = false;
   let cnt = 0;
 
   return (
@@ -142,20 +132,23 @@ const Show = ({ order, arr, count }) => {
                 <b>Summary:</b>
               </Typography>
               <div>
-                {arr[0] === user?.result.name && (
+                {arr[1] === user?.result.name && (
                   <div>
-                    <Typography> Item: {arr[1]}</Typography>
-                    <Typography> Price:{arr[2]} </Typography>
-                    <Typography> Quantity:{arr[3]}</Typography>
-                    {arr[4] === "false" && arr[0] === user?.result.name ? (
+                    <Typography> Item: {arr[2]}</Typography>
+                    <Typography> Price:{arr[3]} </Typography>
+                    <Typography> Quantity:{arr[4]}</Typography>
+                    {!order.orderCancelled && arr[1] === user?.result.name ? (
                       <div>
-                        <Typography>Cancel Order: {arr[4]}</Typography>
+                        <Typography>
+                          Cancel Order:
+                          {order.orderCancelled ? "true" : "false"}
+                        </Typography>
                         <Typography>
                           resAcceptOrder:
                           <button
                             onClick={() => resAcceptOrder(arr)}
                             disabled={
-                              arr[4] === "false" && arr[6] === "false"
+                              !order.orderCancelled && arr[6] === "false"
                                 ? false
                                 : true
                             }
@@ -171,7 +164,7 @@ const Show = ({ order, arr, count }) => {
                           <button
                             onClick={() => resOrderCompleted(arr)}
                             disabled={
-                              arr[5] === "true" && arr[4] === "false"
+                              arr[5] === "true" && !order.orderCancelled
                                 ? false
                                 : true
                             }
@@ -182,18 +175,16 @@ const Show = ({ order, arr, count }) => {
                             {arr[6]}
                           </button>
                         </Typography>
-                        <div>GrandTotal: {arr[3] * arr[2]}</div>
+                        <div>GrandTotal: {arr[4] * arr[3]}</div>
                       </div>
                     ) : (
                       <Typography style={{ color: "red" }}>
-                        {(cancel = true)}
                         <b>Customer Cancelled the order.</b>
                       </Typography>
                     )}
                   </div>
                 )}
               </div>
-              {/*  ))} */}
             </div>
           ) : (
             <div>
@@ -213,16 +204,6 @@ const Show = ({ order, arr, count }) => {
                   <Typography> Item purchased: {arr[1]}</Typography>
                   <Typography> Price:{arr[2]} </Typography>
                   <Typography> Quantity:{arr[3]}</Typography>
-                  <Typography>
-                    Cancel Order:
-                    <button
-                      disabled={arr[5] === "true" ? true : false}
-                      onClick={() => updateCancelOrder(arr)}
-                      style={{ color: arr[4] === "true" ? "blue" : "red" }}
-                    >
-                      {arr[4]}
-                    </button>
-                  </Typography>
                 </div>
               ))}
             </div>
@@ -230,7 +211,19 @@ const Show = ({ order, arr, count }) => {
           {!user?.result.role && <div> Grandtotal:{order.total}</div>}
         </CardContent>
         <CardActions>
-          {cancel === false && (
+          {!user?.result.role && (
+            <Typography>
+              Cancel Order:
+              <button
+                disabled={arr[5] === "true" ? true : false}
+                onClick={() => updateCancelOrder(arr)}
+                style={{ color: order.orderCancelled ? "blue" : "red" }}
+              >
+                {order.orderCancelled ? "true" : "false"}
+              </button>
+            </Typography>
+          )}
+          {!order.orderCancelled && (
             <div>
               Order Completed:
               <div style={{ color: arr[6] === true ? "blue" : "red" }}>
@@ -256,9 +249,6 @@ const Show = ({ order, arr, count }) => {
         </CardActions>
         <div>Created at:{order.createdAt}</div>
       </Card>
-      <hr />
-      <hr />
-      <hr />
     </div>
   );
 };

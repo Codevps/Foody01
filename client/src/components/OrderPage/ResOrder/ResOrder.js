@@ -34,7 +34,7 @@ const ResOrder = () => {
             {order.summary.map((item) => (
               <div>
                 <div style={{ display: "none" }}>{(count = count + 1)}</div>
-                {item.split(" ")[0] === user?.result.name && (
+                {item.split(" ")[1] === user?.result.name && (
                   <div>
                     <Grid item xs={12} key={order._id}>
                       <Show order={order} arr={item.split(" ")} count={count} />
