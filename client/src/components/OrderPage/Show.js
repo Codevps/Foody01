@@ -1,8 +1,8 @@
-import { Card, CardActions, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, Typography } from "@mui/material";
+import moment from "moment";
 import { useDispatch } from "react-redux";
 import { cusUpdateOrder, resUpdateOrder } from "../../actions/orders";
 import useStyles from "./styles";
-import moment from "moment";
 
 const Show = ({ order, arr }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
