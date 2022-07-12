@@ -55,14 +55,19 @@ const CusOrder = () => {
         alignItems="stretch"
         style={{
           display: "flex",
-          margin: ".2rem",
+          flexDirection: "column-reverse",
         }}
         spacing={3}
       >
         {orders.map(
           (order) =>
             order?.email === user?.result.email && (
-              <Grid item xs={12} key={order._id}>
+              <Grid
+                item
+                xs={12}
+                key={order._id}
+                // className={classes.container}
+              >
                 <Show order={order} />
               </Grid>
             )

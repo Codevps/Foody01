@@ -123,10 +123,10 @@ const Show = ({ order, arr }) => {
                 <Typography variant="h5" style={{ fontSize: "1.2rem" }}>
                   <b>Customer's Delivery Details:</b>
                 </Typography>
-                <Typography>apartmentName:{order.apartmentName}</Typography>
-                <Typography> locality: {order.locality}</Typography>
-                <Typography> street No.:{order.street}</Typography>
-                <Typography> zipCode:{order.zipCode}</Typography>
+                <Typography>Apartment Name:{order.apartmentName}</Typography>
+                <Typography> Locality: {order.locality}</Typography>
+                <Typography> Street No.:{order.street}</Typography>
+                <Typography> Zip Code:{order.zipCode}</Typography>
               </div>
             </div>
           )}

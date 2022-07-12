@@ -22,23 +22,16 @@ const ResOrder = () => {
       </Typography>
       <Grid
         container
-        className={classes.container}
         alignItems="stretch"
-        style={{ display: "flex", flexDirection: "row", margin: ".2rem" }}
+        className={classes.container}
+        style={{
+          display: "flex",
+          flexDirection: "column-reverse",
+        }}
         spacing={3}
       >
-        {/* {orders.map((order) => (
-          <Grid item xs={12} key={order._id}>
-            <Edit order={order} user={user?.result.name} />
-          </Grid>
-        ))} */}
         {orders.map((order) => (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column-reverse",
-            }}
-          >
+          <div>
             {order.summary.map((item) => (
               <div>
                 <div style={{ display: "none" }}>{(count = count + 1)}</div>

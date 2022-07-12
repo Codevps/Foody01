@@ -17,5 +17,6 @@ export default makeStyles((theme) => ({
     flexDirection: "column-reverse",
     margin: ".2rem",
     position: "relative",
+    padding: "auto",
   },
 }));
