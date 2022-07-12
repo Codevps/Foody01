@@ -26,22 +26,22 @@ const CusOrder = () => {
           (add) =>
             user?.result.email === add.email && (
               <div>
-                <p> Name: {add?.name}</p>
-                <p> Email: {add?.email}</p>
-                <p>
+                <Typography> Name: {add?.name}</Typography>
+                <Typography> Email: {add?.email}</Typography>
+                <Typography>
                   Contact No:
                   {add?.contactNo}
-                </p>
+                </Typography>
                 <Typography variant="h5" style={{ fontSize: "1.2rem" }}>
                   <b>Delivery Details:</b>
                 </Typography>
-                <p>
+                <Typography>
                   Apartment Name:
                   {add?.apartmentName}
-                </p>
-                <p> Locality: {add?.locality}</p>
-                <p>Street: {add?.street}</p>
-                <p> Zip Code: {add?.zipCode}</p>
+                </Typography>
+                <Typography> Locality: {add?.locality}</Typography>
+                <Typography>Street: {add?.street}</Typography>
+                <Typography> Zip Code: {add?.zipCode}</Typography>
               </div>
             )
         )}
@@ -53,13 +53,16 @@ const CusOrder = () => {
       <Grid
         container
         alignItems="stretch"
-        style={{ display: "flex", flexDirection: "row", margin: ".2rem" }}
+        style={{
+          display: "flex",
+          margin: ".2rem",
+        }}
         spacing={3}
       >
         {orders.map(
           (order) =>
             order?.email === user?.result.email && (
-              <Grid item xs={12} md={6} lg={3} key={order._id}>
+              <Grid item xs={12} key={order._id}>
                 <Show order={order} />
               </Grid>
             )

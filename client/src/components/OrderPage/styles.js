@@ -14,7 +14,7 @@ export default makeStyles((theme) => ({
   },
   container: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column-reverse",
     margin: ".2rem",
     position: "relative",
   },

@@ -33,7 +33,12 @@ const ResOrder = () => {
           </Grid>
         ))} */}
         {orders.map((order) => (
-          <div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column-reverse",
+            }}
+          >
             {order.summary.map((item) => (
               <div>
                 <div style={{ display: "none" }}>{(count = count + 1)}</div>
@@ -46,7 +51,6 @@ const ResOrder = () => {
               </div>
             ))}
             <div style={{ display: "none" }}>{(count = 0)}</div>
-            <div style={{ margin: "1rem" }}></div>
           </div>
         ))}
       </Grid>

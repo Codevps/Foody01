@@ -2,6 +2,8 @@ import { Card, CardActions, CardContent, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { cusUpdateOrder, resUpdateOrder } from "../../actions/orders";
 import useStyles from "./styles";
+import moment from "moment";
+
 const Show = ({ order, arr }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const dispatch = useDispatch();
@@ -131,7 +133,7 @@ const Show = ({ order, arr }) => {
           {user?.result.role ? (
             <div>
               <Typography variant="h5" style={{ fontSize: "1.2rem" }}>
-                <b>Summary:</b>
+                <b>Order Summary:</b>
               </Typography>
               <div>
                 {arr[1] === user?.result.name && (
@@ -149,6 +151,9 @@ const Show = ({ order, arr }) => {
                           Cancelled Order:
                           {order.orderCancelled ? "Cancelled" : " No"}
                         </Typography>
+                        <Typography variant="h5" style={{ fontSize: "1.2rem" }}>
+                          <b>Order Status:</b>
+                        </Typography>
                         <Typography>
                           Accept Order:
                           <button
@@ -159,8 +164,14 @@ const Show = ({ order, arr }) => {
                                 : true
                             }
                             style={{
-                              color: arr[5] === "true" ? "blue" : "red",
+                              color: arr[5] === "true" ? "grey" : "red",
                               padding: "0.1rem .3rem",
+                              backgroundColor: "transparent",
+                              border: "1px solid black",
+                              borderColor: arr[6] === "true" ? "grey" : "black",
+                              fontSize: "1rem",
+                              borderRadius: "4px",
+                              marginBottom: "0.2rem",
                             }}
                           >
                             {arr[5] === "true" ? "Yes" : "No"}
@@ -171,13 +182,20 @@ const Show = ({ order, arr }) => {
                           <button
                             onClick={() => resOrderCompleted(arr)}
                             disabled={
-                              arr[5] === "true" && !order.orderCancelled
+                              arr[5] === "true" &&
+                              !order.orderCancelled &&
+                              !order.orderCompleted
                                 ? false
                                 : true
                             }
                             style={{
-                              color: arr[6] === "true" ? "blue" : "red",
+                              color: arr[6] === "true" ? "grey" : "red",
                               padding: "0.1rem .3rem",
+                              backgroundColor: "transparent",
+                              border: "1px solid black",
+                              borderColor: arr[6] === "true" ? "grey" : "black",
+                              fontSize: "1rem",
+                              borderRadius: "4px",
                             }}
                           >
                             {arr[6] === "true" ? "Yes" : "No"}
@@ -208,10 +226,10 @@ const Show = ({ order, arr }) => {
                   <Typography>
                     <b>Item:{cnt} </b>
                   </Typography>
-                  <Typography>Restaurant Name:{arr[0]}</Typography>
-                  <Typography> Item purchased: {arr[1]}</Typography>
-                  <Typography> Price:{arr[2]} </Typography>
-                  <Typography> Quantity:{arr[3]}</Typography>
+                  <Typography>Restaurant Name:{arr[1]}</Typography>
+                  <Typography> Item purchased: {arr[2]}</Typography>
+                  <Typography> Price:{arr[3]} </Typography>
+                  <Typography> Quantity:{arr[4]}</Typography>
                 </div>
               ))}
             </div>
@@ -222,24 +240,40 @@ const Show = ({ order, arr }) => {
           {!user?.result.role && (
             <Typography>
               <button
-                disabled={arr[5] === "true" ? true : false}
+                disabled={
+                  arr[5] === "true" || order.orderCancelled ? true : false
+                }
                 onClick={() => updateCancelOrder(arr)}
                 style={{
-                  color: arr[5] === "true" ? "grey" : "red",
+                  color:
+                    arr[5] === "true" || order.orderCancelled ? "grey" : "red",
+                  display: arr[6] === "true" && "none",
+                  borderColor: "black",
+                  borderRadius: "3px",
                   padding: "0.2rem",
                   fontSize: "1rem",
                   fontWeight: 500,
+                  backgroundColor: "transparent",
                 }}
               >
-                Cancel Order
+                {arr[5] === "false"
+                  ? order.orderCancelled
+                    ? "Order Cancelled"
+                    : "Cancel Order"
+                  : "Order Accepted"}
               </button>
             </Typography>
           )}
           {!order.orderCancelled && (
             <Typography>
-              Order Status:
-              <div style={{ color: arr[6] === true ? "blue" : "red" }}>
-                {order.orderCompleted === true
+              <div
+                style={{
+                  color:
+                    order.orderCompleted && arr[6] === "true" ? "green" : "red",
+                  display: order.orderCompleted && arr[6] === "false" && "none",
+                }}
+              >
+                {order.orderCompleted === true && arr[6] === "true"
                   ? "Delivery Process Started"
                   : "Delivery Process Paused/Stopped"}
                 {user?.result.role && (
@@ -262,8 +296,10 @@ const Show = ({ order, arr }) => {
               </div>
             </Typography>
           )}
+          <Typography variant="body1" style={{ color: "#696969" }}>
+            Ordered {moment(order.createdAt).fromNow()}
+          </Typography>
         </CardContent>
-        <Typography>Created at:{order.createdAt}</Typography>
       </Card>
     </div>
   );

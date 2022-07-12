@@ -15,7 +15,10 @@ export const getOrders = async (req, res) => {
 
 export const createOrder = async (req, res) => {
   const order = req.body;
-  const newOrder = new OrderPageModel(order);
+  const newOrder = new OrderPageModel({
+    ...order,
+    createdAt: new Date().toISOString(),
+  });
   try {
     await newOrder.save();
     console.log(newOrder);
