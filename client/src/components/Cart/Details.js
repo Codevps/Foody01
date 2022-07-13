@@ -113,6 +113,7 @@ const Details = ({ method }) => {
                 >
                   {(sum = item.price * item.quantity)}
                   {(tSum += sum)}
+                  {console.log(item)}
                 </div>
                 <div style={{ display: "none" }}> {(total = tSum)}</div>
                 <Typography variant="body1">

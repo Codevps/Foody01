@@ -1,10 +1,12 @@
-import { Button, Container, Grid, TextField, Typography } from "@mui/material";
-import React from "react";
-import useStyles from "./styles";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import GitHubIcon from "@mui/icons-material/GitHub";
 import Instagram from "@mui/icons-material/Instagram";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Twitter from "@mui/icons-material/Twitter";
+import { Button, Container, Grid, Typography } from "@mui/material";
+import React from "react";
 import { Link } from "react-router-dom";
+import useStyles from "./styles";
 
 export default function Footer() {
   const authenticated = null;
@@ -43,7 +45,7 @@ export default function Footer() {
           </Grid>
         ) : (
           <Grid item>
-            <Typography variant="h4" component="p" className={classes.heading}>
+            <Typography variant="h4" className={classes.heading}>
               Foody for Business
             </Typography>
             <Typography
@@ -65,16 +67,6 @@ export default function Footer() {
           </Grid>
         )}
       </Grid>
-      <Grid item xs={12} md={5}>
-        <Typography variant="h5" component="p" className={classes.heading}>
-          Foody NewsLetter
-        </Typography>
-        <Typography variant="body1" component="p" style={{ marginBottom: 20 }}>
-          Stay updated with new offers
-        </Typography>
-        <TextField label="Your Email address" variant="outlined" />
-        <Button className={classes.buttonStyleTwo}>SEND</Button>
-      </Grid>
       <Grid item xs={12} md={3} className={classes.resources}>
         <Typography variant="h5" component="p" className={classes.heading}>
           Follow Us
@@ -89,8 +81,27 @@ export default function Footer() {
           <Twitter /> Twitter
         </Typography>
       </Grid>
+      <Grid item xs={12} md={5}>
+        <Typography variant="h5" component="p" className={classes.heading}>
+          Contact Me(creator):
+        </Typography>
+        <Typography className={classes.logo}>
+          <GitHubIcon /> Github
+        </Typography>
+        <Typography className={classes.logo}>
+          <LinkedInIcon /> LinkedIn
+        </Typography>
+        <Typography className={classes.logo}>
+          <Instagram /> Instagram
+        </Typography>
+      </Grid>
+
       <Container className={classes.copy}>
         <Typography className={classes.footEnd}>
+          <i> Creator: Pratham Sawant</i>
+          <br />
+          <i> Email: codevps07@gmail.com</i>
+          <br />
           <i> Copyright &copy; www.foody.com. All rights reserved!</i>
         </Typography>
       </Container>

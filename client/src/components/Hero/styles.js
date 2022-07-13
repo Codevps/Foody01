@@ -2,7 +2,7 @@ import { makeStyles } from "@mui/styles";
 
 export default makeStyles((theme) => ({
   search: {
-    width: "500px",
+    width: "auto",
     backgroundColor: "white",
     borderRadius: "12px",
     color: "red",

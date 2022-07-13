@@ -39,7 +39,6 @@ const CartItem = ({ item, items }) => {
     dispatch(deleteItem(item._id));
     // window.alert(`${item.title} removed from cart`);
   };
-
   return (
     <Card className={classes.card} elevation={6}>
       <ButtonBase

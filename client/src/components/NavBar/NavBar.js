@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { LOGOUT } from "../../constants/actionTypes";
 import useStyles from "./styles";
+import "./style.css";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const NavBar = () => {
@@ -13,6 +14,7 @@ const NavBar = () => {
   const navigate = useNavigate();
   const classes = useStyles();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  let t = false;
 
   const logout = () => {
     dispatch({ type: LOGOUT });
@@ -78,24 +80,28 @@ const NavBar = () => {
                   </Button>
                 </>
               )}
-              <Avatar
-                className={classes.purple}
-                alt={user?.result.name}
-                src={user?.result.imageUrl}
-              >
-                {user?.result.name.charAt(0)}
-              </Avatar>
-              <Typography className={classes.userName} variant="h6">
-                {user?.result.name}
-              </Typography>{" "}
-              <Button
-                className={classes.btn}
-                variant="contained"
-                color="secondary"
-                onClick={logout}
-              >
-                Logout
-              </Button>
+              <div className="dropdown">
+                <Avatar
+                  className={classes.purple}
+                  alt={user?.result.name}
+                  src={user?.result.imageUrl}
+                >
+                  {user?.result.name.charAt(0)}
+                </Avatar>
+                <div className="dropdown-content">
+                  <p className={classes.userName} variant="h6">
+                    {user?.result.name}
+                  </p>
+                  <button
+                    className={classes.btn}
+                    variant="contained"
+                    color="secondary"
+                    onClick={logout}
+                  >
+                    Logout
+                  </button>
+                </div>
+              </div>
             </div>
           ) : (
             <div>

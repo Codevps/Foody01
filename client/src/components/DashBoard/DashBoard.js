@@ -24,10 +24,10 @@ const DashBoard = () => {
         spacing={5}
         className={classes.container}
       >
-        <Grid item xs={12} sm={6} md={6} lg={8}>
+        <Grid item xs={9} sm={6} md={6} lg={8}>
           <Posts setCurrentId={setCurrentId} />
         </Grid>
-        <Grid item xs={12} sm={6} md={6} lg={4}>
+        <Grid item xs={11} sm={6} md={6} lg={4}>
           <Form currentId={currentId} setCurrentId={setCurrentId} />
         </Grid>
       </Grid>

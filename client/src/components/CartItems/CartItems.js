@@ -19,7 +19,6 @@ const CartItems = ({ items, deletion, setDeletion }) => {
         No items in Cart yet,continue Shopping.
       </div>
     );
-
   return (
     <Grid
       container

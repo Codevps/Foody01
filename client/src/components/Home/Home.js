@@ -15,7 +15,7 @@ const Home = () => {
     dispatch(getOrders());
   }, [dispatch]);
   return (
-    <div>
+    <div style={{ width: "auto" }}>
       <Hero />
       {/* <Carousel1 slides={CarouselData} /> */}
       <Category />
