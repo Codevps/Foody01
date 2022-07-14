@@ -1,4 +1,13 @@
-import { Button, Paper, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  FormControlLabel,
+  Paper,
+  Radio,
+  RadioGroup,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import FileBase from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
@@ -89,20 +98,47 @@ const Form = ({ currentId, setCurrentId }) => {
           value={postData.price}
           onChange={(e) => setPostData({ ...postData, price: e.target.value })}
         />
-
-        <TextField
-          name="description"
-          variant="outlined"
-          label="Description:"
-          multiline
-          fullWidth
-          required
-          rows={3}
-          value={postData.description}
-          onChange={(e) =>
-            setPostData({ ...postData, description: e.target.value })
-          }
-        />
+        <Typography
+          variant="h5"
+          style={{
+            display: "block",
+            textAlign: "left",
+            fontSize: "1.2rem",
+            color: "grey",
+            marginTop: ".4rem",
+            paddingRight: "0.6rem",
+          }}
+        >
+          Category:
+        </Typography>
+        <FormControl>
+          <RadioGroup
+            style={{ display: "flex", flexDirection: "row" }}
+            name="description"
+            variant="outlined"
+            label="Description:"
+            value={postData.description}
+            onChange={(e) =>
+              setPostData({ ...postData, description: e.target.value })
+            }
+          >
+            <FormControlLabel
+              value="Breakfast"
+              control={<Radio style={{ color: "coral" }} />}
+              label="Breakfast"
+            />
+            <FormControlLabel
+              value="Lunch"
+              control={<Radio style={{ color: "coral" }} />}
+              label="Lunch"
+            />
+            <FormControlLabel
+              value="Dinner"
+              control={<Radio style={{ color: "coral" }} />}
+              label="Dinner"
+            />
+          </RadioGroup>
+        </FormControl>
         <div className={classes.fileInput}>
           <FileBase
             type="file"

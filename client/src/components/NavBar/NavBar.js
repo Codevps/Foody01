@@ -14,7 +14,6 @@ const NavBar = () => {
   const navigate = useNavigate();
   const classes = useStyles();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
-  let t = false;
 
   const logout = () => {
     dispatch({ type: LOGOUT });
@@ -85,11 +84,16 @@ const NavBar = () => {
                   className={classes.purple}
                   alt={user?.result.name}
                   src={user?.result.imageUrl}
+                  style={{ textTransform: "uppercase" }}
                 >
                   {user?.result.name.charAt(0)}
                 </Avatar>
                 <div className="dropdown-content">
-                  <p className={classes.userName} variant="h6">
+                  <p
+                    className={classes.userName}
+                    variant="h6"
+                    style={{ textTransform: "uppercase" }}
+                  >
                     {user?.result.name.split(" ")[0]}
                   </p>
                   <button
@@ -97,6 +101,7 @@ const NavBar = () => {
                     variant="contained"
                     color="secondary"
                     onClick={logout}
+                    style={{ margin: "0.5rem" }}
                   >
                     Logout
                   </button>

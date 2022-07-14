@@ -3,8 +3,12 @@ import {
   Avatar,
   Button,
   Container,
+  FormControl,
+  FormControlLabel,
   Grid,
   Paper,
+  Radio,
+  RadioGroup,
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
@@ -101,11 +105,11 @@ const CustomerAuth = () => {
                   type="email"
                   half
                 />
-                <Input
+                {/* <Input
                   name="tags"
                   label="Tags: Variety of food available"
                   handleChange={handleChange}
-                />
+                /> */}
                 <Typography
                   variant="h6"
                   component="p"
@@ -136,13 +140,63 @@ const CustomerAuth = () => {
                   handleChange={handleChange}
                   half
                 />
+                <FormControl
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    marginRight: "auto",
+                    marginLeft: "auto",
+                    alignItems: "center",
+                    // border: "1px solid lightgrey",
+                    // padding: "8px 14px",
+                    marginTop: "1rem",
+                    // borderRadius: "5px",
+                  }}
+                >
+                  <Typography
+                    variant="body1"
+                    style={{
+                      display: "block",
+                      fontSize: "1.1rem",
+                      color: "black",
+                    }}
+                  >
+                    Tags*
+                  </Typography>
+                  <RadioGroup
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      marginLeft: "1rem",
+                    }}
+                    name="tags"
+                    variant="outlined"
+                    label="Description:"
+                    onChange={handleChange}
+                  >
+                    <FormControlLabel
+                      value="Veg"
+                      control={<Radio style={{ color: "coral" }} />}
+                      label="Veg"
+                    />
+                    <FormControlLabel
+                      value="Non-Veg"
+                      control={<Radio style={{ color: "coral" }} />}
+                      label="Non-Veg"
+                    />
+                    <FormControlLabel
+                      value="Both"
+                      control={<Radio style={{ color: "coral" }} />}
+                      label="Both"
+                    />
+                  </RadioGroup>
+                </FormControl>
                 <Input
                   name="password"
                   label="Password"
                   handleChange={handleChange}
                   type={showPassword ? "text" : "password"}
                   handleShowPassword={handleShowPassword}
-                  half
                 />
                 <Input
                   name="confirmPassword"
@@ -150,7 +204,6 @@ const CustomerAuth = () => {
                   handleChange={handleChange}
                   type="password"
                   handleShowPassword={handleShowPassword}
-                  half
                 />
               </>
             ) : (
