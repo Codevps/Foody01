@@ -26,7 +26,7 @@ export default makeStyles((theme) => ({
     color: "white",
     "&:hover": {
       background: "coral",
-      color: "black",
+      color: "white",
     },
   },
   btn2: {

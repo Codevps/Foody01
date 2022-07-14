@@ -72,13 +72,22 @@ export default function Footer() {
           Follow Us
         </Typography>
         <Typography className={classes.logo}>
-          <FacebookIcon /> FaceBook
+          <FacebookIcon />
+          <a className={classes.a} href="https://facebook.com" target="blank">
+            FaceBook
+          </a>
         </Typography>
         <Typography className={classes.logo}>
-          <Instagram /> Instagram
+          <Instagram />{" "}
+          <a className={classes.a} href="https://instagram.com" target="blank">
+            Instagram
+          </a>
         </Typography>
         <Typography className={classes.logo}>
-          <Twitter /> Twitter
+          <Twitter />{" "}
+          <a className={classes.a} href="https://twitter.com" target="blank">
+            Twitter
+          </a>
         </Typography>
       </Grid>
       <Grid item xs={12} md={5}>
@@ -86,13 +95,34 @@ export default function Footer() {
           Contact Me(creator):
         </Typography>
         <Typography className={classes.logo}>
-          <GitHubIcon /> Github
+          <GitHubIcon />{" "}
+          <a
+            className={classes.a}
+            href="https://github.com/Codevps"
+            target="blank"
+          >
+            Github
+          </a>
         </Typography>
         <Typography className={classes.logo}>
-          <LinkedInIcon /> LinkedIn
+          <LinkedInIcon />{" "}
+          <a
+            className={classes.a}
+            href="https://github.com/Codevps"
+            target="blank"
+          >
+            LinkedIn
+          </a>
         </Typography>
         <Typography className={classes.logo}>
-          <Instagram /> Instagram
+          <Instagram />{" "}
+          <a
+            className={classes.a}
+            href="https://github.com/Codevps"
+            target="blank"
+          >
+            Instagram
+          </a>
         </Typography>
       </Grid>
 

@@ -1,16 +1,22 @@
 import { makeStyles } from "@mui/styles";
 
 export default makeStyles((theme) => ({
-  mainContainer: {},
+  mainContainer: {
+    width: "auto",
+  },
   container: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-    paddingLeft: ".8rem",
+    margin: "auto",
+    padding: "auto",
+    width: "auto",
   },
   [theme.breakpoints.down("sm")]: {
     mainContainer: {
       flexDirection: "column-reverse",
+      margin: "auto",
+      padding: "auto",
     },
     container: {
       flexDirection: "column-reverse",

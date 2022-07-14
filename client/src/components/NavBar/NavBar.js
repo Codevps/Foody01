@@ -90,7 +90,7 @@ const NavBar = () => {
                 </Avatar>
                 <div className="dropdown-content">
                   <p className={classes.userName} variant="h6">
-                    {user?.result.name}
+                    {user?.result.name.split(" ")[0]}
                   </p>
                   <button
                     className={classes.btn}

@@ -73,4 +73,8 @@ export default makeStyles((theme) => ({
   copy: {
     textAlign: "center",
   },
+  a: {
+    textDecoration: "none",
+    color: "black",
+  },
 }));

@@ -2,7 +2,7 @@ import { makeStyles } from "@mui/styles";
 
 export default makeStyles((theme) => ({
   container: {
-    padding: ".8rem",
+    display: "flex",
   },
   heading: {
     marginTop: "1.3rem",
@@ -15,7 +15,7 @@ export default makeStyles((theme) => ({
   mainContainer: {
     display: "flex",
     flexDirection: "row",
-    margin: ".2rem",
+    marginBottom: "1rem",
   },
   dashboard: {
     padding: ".5rem",

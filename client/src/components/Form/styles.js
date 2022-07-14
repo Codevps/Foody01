@@ -35,7 +35,7 @@ export default makeStyles((theme) => ({
     color: "black",
     "&:hover": {
       color: "red",
-      border: "1px solid coral",
+      border: "1px solid green",
       backgroundColor: "transparent",
     },
   },

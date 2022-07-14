@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
 import Post from "./Post/Post";
@@ -34,6 +34,17 @@ const Posts = ({ setCurrentId }) => {
     </div>
   ) : (
     <div>
+      <Typography
+        variant="body1"
+        style={{
+          fontSize: "2rem",
+          fontWeight: "bold",
+          color: "black",
+        }}
+      >
+        Your Items:
+      </Typography>
+      <br />
       <Grid
         container
         alignItems="stretch"
