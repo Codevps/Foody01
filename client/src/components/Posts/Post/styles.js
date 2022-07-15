@@ -25,16 +25,21 @@ export default makeStyles((theme) => ({
     borderRadius: "6px",
     height: "100%",
     position: "relative",
+    marginLeft: ".5rem",
+
+    // minWidth: "220px",
+    // width: "220px",
+    // maxWidth: "250px",
   },
   dashcard: {
-    minWidth: "250px",
-    maxWidth: "250px",
+    minWidth: "220px",
+    maxWidth: "220px",
     marginLeft: ".5rem",
     // overflow: "none",
   },
   [theme.breakpoints.down("sm")]: {
     dashcard: {
-      minWidth: "330px",
+      minWidth: "250px",
       maxWidth: "auto",
     },
   },

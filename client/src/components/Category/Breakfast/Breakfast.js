@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
 import Post from "../../Posts/Post/Post";
@@ -10,6 +10,9 @@ const Breakfast = () => {
   console.log(posts.length);
   return (
     <div>
+      <Typography className={classes.heading} style={{ marginBottom: "1rem" }}>
+        <b>Breakfast Meals:</b>
+      </Typography>
       <Grid
         container
         alignItems="stretch"
@@ -18,8 +21,8 @@ const Breakfast = () => {
       >
         {posts.length ? (
           posts.map((post) => (
-            <Grid className={classes.dashboard} item key={post._id}>
-              {post.description === "breakfast" && <Post post={post} />}
+            <Grid className={classes.dashboard} item key={post._id} spacing={3}>
+              {post.description === "Breakfast" && <Post post={post} />}
             </Grid>
           ))
         ) : (

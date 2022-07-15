@@ -24,7 +24,6 @@ export default makeStyles((theme) => ({
       border: "1px solid black",
     },
   },
-
   buttonStyleTwo: {
     color: "white",
     backgroundColor: "black",
@@ -76,5 +75,13 @@ export default makeStyles((theme) => ({
   a: {
     textDecoration: "none",
     color: "black",
+  },
+  shift: {
+    paddingLeft: "5rem",
+  },
+  [theme.breakpoints.down("md")]: {
+    shift: {
+      paddingLeft: "0",
+    },
   },
 }));

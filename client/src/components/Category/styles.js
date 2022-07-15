@@ -66,7 +66,6 @@ export default makeStyles((theme) => ({
     margin: ".2rem",
   },
   dashboard: {
-    padding: ".5rem",
     display: "flex",
     flexDirection: "row",
   },

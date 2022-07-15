@@ -15,6 +15,9 @@ const Posts = ({ setCurrentId }) => {
 
   return !user?.result.role ? (
     <div>
+      <Typography className={classes.heading} style={{ marginBottom: "1rem" }}>
+        <b>Items</b> to buy:
+      </Typography>
       <Grid
         container
         alignItems="stretch"
@@ -23,7 +26,7 @@ const Posts = ({ setCurrentId }) => {
       >
         {posts.length ? (
           posts.map((post) => (
-            <Grid item xs={6} sm={4} md={3} lg={3} xl={2} key={post._id}>
+            <Grid item xs={6} sm={4} md={3} lg={2} xl={2} key={post._id}>
               <Post post={post} />
             </Grid>
           ))

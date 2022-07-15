@@ -11,8 +11,9 @@ import useStyles from "./styles";
 export default function Footer() {
   const authenticated = null;
   const classes = useStyles();
+
   return (
-    <Grid container direction="row" className={classes.container}>
+    <Grid container direction="row" className={classes.container} spacing={2}>
       <Grid item xs={12} sm={4} className={classes.innerCont}>
         {authenticated ? (
           <Grid container direction="row">
@@ -67,28 +68,39 @@ export default function Footer() {
           </Grid>
         )}
       </Grid>
-      <Grid item xs={12} md={3} className={classes.resources}>
-        <Typography variant="h5" component="p" className={classes.heading}>
-          Follow Us
-        </Typography>
-        <Typography className={classes.logo}>
-          <FacebookIcon />
-          <a className={classes.a} href="https://facebook.com" target="blank">
-            FaceBook
-          </a>
-        </Typography>
-        <Typography className={classes.logo}>
-          <Instagram />{" "}
-          <a className={classes.a} href="https://instagram.com" target="blank">
-            Instagram
-          </a>
-        </Typography>
-        <Typography className={classes.logo}>
-          <Twitter />{" "}
-          <a className={classes.a} href="https://twitter.com" target="blank">
-            Twitter
-          </a>
-        </Typography>
+      <Grid
+        item
+        xs={12}
+        md={3}
+        // style={{ md ? paddingLeft: "5rem" : '0'}}
+      >
+        <Container className={classes.shift}>
+          <Typography variant="h5" component="p" className={classes.heading}>
+            Follow Us
+          </Typography>
+          <Typography className={classes.logo}>
+            <FacebookIcon />
+            <a className={classes.a} href="https://facebook.com" target="blank">
+              FaceBook
+            </a>
+          </Typography>
+          <Typography className={classes.logo}>
+            <Instagram />{" "}
+            <a
+              className={classes.a}
+              href="https://instagram.com"
+              target="blank"
+            >
+              Instagram
+            </a>
+          </Typography>
+          <Typography className={classes.logo}>
+            <Twitter />{" "}
+            <a className={classes.a} href="https://twitter.com" target="blank">
+              Twitter
+            </a>
+          </Typography>
+        </Container>
       </Grid>
       <Grid item xs={12} md={5}>
         <Typography variant="h5" component="p" className={classes.heading}>

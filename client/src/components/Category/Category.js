@@ -19,7 +19,7 @@ const Category = () => {
         spacing={3}
         className={classes.container}
       >
-        <Grid xs={12} sm={12} md={4} item>
+        <Grid xs={12} sm={4} md={4} item>
           <Card
             className={classes.card}
             elevation={3}
@@ -40,7 +40,7 @@ const Category = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid xs={12} sm={12} md={4} item>
+        <Grid xs={12} sm={4} md={4} item>
           <Card
             className={classes.card}
             elevation={3}
@@ -63,7 +63,7 @@ const Category = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid xs={12} sm={12} md={4} item>
+        <Grid xs={12} sm={4} md={4} item>
           <Card
             className={classes.card}
             elevation={3}
