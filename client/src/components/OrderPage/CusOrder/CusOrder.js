@@ -8,13 +8,19 @@ const CusOrder = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const { orders } = useSelector((state) => state.orders);
   const { address } = useSelector((state) => state.address);
-
+  let noOrder = false;
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAddresses());
     dispatch(getOrders());
   }, [dispatch]);
+
+  orders.map((order) => order.email === user?.result.email && (noOrder = true));
+  if (!noOrder) {
+    return "No orders yet, continue Shopping";
+  }
+  noOrder = false;
 
   return (
     <div style={{ margin: "1rem" }}>

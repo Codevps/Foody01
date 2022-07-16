@@ -1,11 +1,10 @@
 import { Button, Container, Paper, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { deleteItem } from "../../actions/cart";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import useStyles from "./styles";
+import { deleteItem } from "../../actions/cart";
 import { createOrder } from "../../actions/orders";
+import useStyles from "./styles";
 const Details = ({ method }) => {
   const { address } = useSelector((state) => state.address);
 
@@ -39,7 +38,6 @@ const Details = ({ method }) => {
   let deliveryCharge = 1;
   let count = 0;
   let cnt = 0;
-  let noItem = false;
 
   let cAddress;
 
@@ -95,12 +93,6 @@ const Details = ({ method }) => {
     dispatch(createOrder(orderData, navigate));
     items.map((item) => user?.result.email === item?.creator && deleted(item));
   };
-
-  items.map((item) => item.creator === user?.result.email && (noItem = true));
-  if (!noItem) {
-    return "No item in cart, continue Shopping";
-  }
-  noItem = false;
 
   return (
     <Container className={classes.container}>

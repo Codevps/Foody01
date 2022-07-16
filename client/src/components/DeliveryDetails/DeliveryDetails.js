@@ -112,19 +112,25 @@ const DeliveryDetails = () => {
               </form>
             ) : (
               <div>
-                <p> name: {newAddress.name}</p>
-                <p> email: {newAddress.email}</p>
-                <p>
-                  contactNo:
-                  {newAddress.contactNo}
-                </p>
-                <p>
-                  apartmentName:
-                  {newAddress.apartmentName}
-                </p>
-                <p> locality: {newAddress.locality}</p>
-                <p>street: {newAddress.street}</p>
-                <p> zipCode: {newAddress.zipCode}</p>
+                <Typography variant="h5" style={{ fontSize: "1.2rem" }}>
+                  <b>Your Info:</b>
+                </Typography>
+                <Typography> Name: {user?.result.name}</Typography>
+                <Typography> Email: {user?.result.email}</Typography>
+                <Typography>
+                  Contact No:
+                  {newAddress?.contactNo}
+                </Typography>
+                <Typography variant="h5" style={{ fontSize: "1.2rem" }}>
+                  <b>Delivery Details:</b>
+                </Typography>
+                <Typography>
+                  Apartment Name:
+                  {newAddress?.apartmentName}
+                </Typography>
+                <Typography> Locality: {newAddress?.locality}</Typography>
+                <Typography>Street: {newAddress?.street}</Typography>
+                <Typography> Zip Code: {newAddress?.zipCode}</Typography>
               </div>
             )}
             <div>

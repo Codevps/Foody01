@@ -1,19 +1,22 @@
 import { AppBar, Avatar, Button, Toolbar, Typography } from "@mui/material";
 import decode from "jwt-decode";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { LOGOUT } from "../../constants/actionTypes";
 import useStyles from "./styles";
 import "./style.css";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 
 const NavBar = () => {
+  const { items } = useSelector((state) => state.items);
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const classes = useStyles();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  let noItem = false;
 
   const logout = () => {
     dispatch({ type: LOGOUT });
@@ -21,6 +24,17 @@ const NavBar = () => {
     navigate("/");
   };
 
+  const pp = () => {
+    items.map((item) => item.creator === user?.result.email && (noItem = true));
+    if (!noItem) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+  const sp = () => {
+    window.alert("No items in cart yet, continue Shopping");
+  };
   useEffect(() => {
     const token = user?.token;
 
@@ -32,6 +46,7 @@ const NavBar = () => {
     }
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [location]);
+  noItem = false;
 
   return (
     <div>
@@ -70,13 +85,23 @@ const NavBar = () => {
             <div className={classes.profile}>
               {!user?.result.role && (
                 <>
-                  <Button>
-                    <ShoppingCartIcon
-                      fontSize="large"
-                      style={{ color: "green", paddingRight: ".1rem" }}
-                      onClick={() => navigate(`/cart`)}
-                    />
-                  </Button>
+                  {pp() ? (
+                    <Button disabled={!pp() ? true : false}>
+                      <ShoppingCartIcon
+                        fontSize="large"
+                        style={{ color: "green", paddingRight: ".1rem" }}
+                        onClick={() => navigate(`/cart`)}
+                      />
+                    </Button>
+                  ) : (
+                    <Button>
+                      <RemoveShoppingCartIcon
+                        fontSize="large"
+                        style={{ color: "grey", paddingRight: ".1rem" }}
+                        onClick={() => sp()}
+                      />
+                    </Button>
+                  )}
                 </>
               )}
               <div className="dropdown">
