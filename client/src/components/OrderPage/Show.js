@@ -235,7 +235,7 @@ const Show = ({ order, arr }) => {
             </div>
           )}
           {!user?.result.role && (
-            <Typography> Grand Total:Rs.{order.total}</Typography>
+            <Typography> Grand Total: Rs.{order.total}</Typography>
           )}
           {!user?.result.role && (
             <Typography>
@@ -273,9 +273,11 @@ const Show = ({ order, arr }) => {
                   display: order.orderCompleted && arr[6] === "false" && "none",
                 }}
               >
-                {order.orderCompleted === true && arr[6] === "true"
-                  ? "Delivery Process Started"
-                  : "Delivery Process Paused/Stopped"}
+                <b>
+                  {order.orderCompleted === true && arr[6] === "true"
+                    ? "Delivery Process Started"
+                    : "Delivery Process Paused/Stopped"}
+                </b>
                 {user?.result.role && (
                   <div>
                     <button
@@ -297,7 +299,7 @@ const Show = ({ order, arr }) => {
             </Typography>
           )}
           <Typography variant="body1" style={{ color: "#696969" }}>
-            Ordered {moment(order.createdAt).fromNow()}
+            Ordered- {moment(order.createdAt).fromNow()}
           </Typography>
         </CardContent>
       </Card>

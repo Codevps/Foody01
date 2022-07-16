@@ -1,5 +1,5 @@
 import { Button, Container, Paper, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { deleteItem } from "../../actions/cart";
 import { Link, useNavigate } from "react-router-dom";
@@ -39,6 +39,7 @@ const Details = ({ method }) => {
   let deliveryCharge = 1;
   let count = 0;
   let cnt = 0;
+  let noItem = false;
 
   let cAddress;
 
@@ -95,6 +96,12 @@ const Details = ({ method }) => {
     items.map((item) => user?.result.email === item?.creator && deleted(item));
   };
 
+  items.map((item) => item.creator === user?.result.email && (noItem = true));
+  if (!noItem) {
+    return "No item in cart, continue Shopping";
+  }
+  noItem = false;
+
   return (
     <Container className={classes.container}>
       <Paper className={classes.paper} elevation={6}>
@@ -113,7 +120,6 @@ const Details = ({ method }) => {
                 >
                   {(sum = item.price * item.quantity)}
                   {(tSum += sum)}
-                  {console.log(item)}
                 </div>
                 <div style={{ display: "none" }}> {(total = tSum)}</div>
                 <Typography variant="body1">
