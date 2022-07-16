@@ -33,9 +33,6 @@ const Post = ({ post, setCurrentId }) => {
     description: post.description,
     selectedFile: post.selectedFile,
   });
-  const openPost = () => {
-    navigate("/client");
-  };
 
   const isPresent = (post) => {
     const map = new Map(items.map((item) => [item.creator, item]));
@@ -79,12 +76,7 @@ const Post = ({ post, setCurrentId }) => {
       }
       elevation={6}
     >
-      <ButtonBase
-        component="span"
-        name="test"
-        className={classes.cardAction}
-        onClick={openPost}
-      >
+      <ButtonBase component="span" name="test" className={classes.cardAction}>
         <CardMedia className={classes.media} image={post.selectedFile || bg} />
       </ButtonBase>
       <CardContent>
