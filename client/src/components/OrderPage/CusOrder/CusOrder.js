@@ -68,12 +68,7 @@ const CusOrder = () => {
         {orders.map(
           (order) =>
             order?.email === user?.result.email && (
-              <Grid
-                item
-                xs={12}
-                key={order._id}
-                // className={classes.container}
-              >
+              <Grid item xs={12} key={order._id}>
                 <Show order={order} />
               </Grid>
             )
