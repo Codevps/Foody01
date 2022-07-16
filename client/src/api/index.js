@@ -20,6 +20,7 @@ export const restaurantSignIn = (restaurantAuthData) =>
   API.post("/restaurant/signin", restaurantAuthData);
 export const restaurantSignUp = (restaurantAuthData) =>
   API.post("/restaurant/signup", restaurantAuthData);
+export const fetchRes = () => API.get("/getRes");
 
 // routes for crud of posts
 export const fetchPosts = () => API.get("/restaurant/posts");

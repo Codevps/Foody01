@@ -2,7 +2,7 @@ import { Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getPosts } from "../../actions/posts";
-import ResProfile from "../../ResProfile/ResProfile";
+import ResProfile from "../ResProfile/ResProfile";
 import Form from "../Form/Form";
 import Posts from "../Posts/Posts";
 import useStyles from "./styles";
