@@ -28,3 +28,8 @@ export const FETCH_ORDERS = "FETCH_ORDERS";
 export const CREATE_ORDER = "CREATE_ORDER";
 export const CUS_UPDATE_ORDER = "CUS_UPDATE_ORDER";
 export const RES_UPDATE_ORDER = "RES_UPDATE_ORDER";
+
+// updating images of restaurant
+export const FETCH_IMAGES = "FETCH_IMAGES";
+export const DELETE_IMAGE = "DELETE_IMAGE";
+export const CREATE_IMAGE = "CREATE_IMAGE";

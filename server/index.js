@@ -8,6 +8,7 @@ import postRoutes from "./routes/posts.js";
 import cartRoutes from "./routes/cart.js";
 import addressRoutes from "./routes/customerAddress.js";
 import orderRoutes from "./routes/orders.js";
+import imageRoutes from "./routes/images.js";
 
 const app = express();
 app.use(cors());
@@ -17,6 +18,7 @@ app.use(express.urlencoded({ limitL: "30mb", extended: true }));
 app.use("/customer", customerRouter);
 app.use("/restaurant", restaurantRouter);
 app.use("/restaurant/posts", postRoutes);
+app.use("/restaurant/images", imageRoutes);
 app.use("/customer/cart", cartRoutes);
 app.use("/customer/checkout", addressRoutes);
 app.use("/customer/orders", orderRoutes);

@@ -50,3 +50,9 @@ export const cusUpdateOrder = (id, updatedOrder) =>
   API.patch(`/customer/orders/${id}/cusUpdateOrder`, updatedOrder);
 export const resUpdateOrder = (id, updatedOrder) =>
   API.patch(`/customer/orders/${id}/resUpdateOrder`, updatedOrder);
+
+// routes for crud of images of restaurant
+export const fetchImages = () => API.get("/restaurant/images");
+export const createImage = (newImage) =>
+  API.post("/restaurant/images", newImage);
+export const deleteImage = (id) => API.delete(`/restaurant/images/${id}`);
