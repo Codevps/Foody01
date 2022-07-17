@@ -6,6 +6,8 @@ import ResProfile from "../ResProfile/ResProfile";
 import Form from "../Form/Form";
 import Posts from "../Posts/Posts";
 import useStyles from "./styles";
+import Carousel1 from "../Carousel1/Carousel1";
+import { CarouselData } from "../Carousel1/CarouselData";
 
 const DashBoard = () => {
   const dispatch = useDispatch();
@@ -18,7 +20,20 @@ const DashBoard = () => {
 
   return (
     <div>
-      <ResProfile />
+      <Grid
+        container
+        justifyContent="space-between"
+        alignItems="stretch"
+        spacing={5}
+        className={classes.container}
+      >
+        <Grid item xs={12} sm={6} md={6} lg={8}>
+          <ResProfile />
+        </Grid>
+        <Grid className={classes.container2} item xs={12} sm={6} md={6} lg={4}>
+          <Carousel1 slides={CarouselData} />
+        </Grid>
+      </Grid>
       <Grid
         container
         justifyContent="space-between"

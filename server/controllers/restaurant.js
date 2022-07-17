@@ -69,8 +69,8 @@ export const restaurantSignUp = async (req, res) => {
 
 export const getRes = async (req, res) => {
   try {
-    const restaurants = await RestaurantAuth.find();
-    res.status(200).json({ data: restaurants });
+    const restaurant = await RestaurantAuth.find();
+    res.status(200).json({ data: restaurant });
   } catch (error) {
     console.log(error);
     res.status(404).json({ message: error.message });

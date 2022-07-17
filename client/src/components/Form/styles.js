@@ -8,6 +8,7 @@ export default makeStyles((theme) => ({
   },
   paper: {
     paddingTop: "1.2rem",
+    marginTop: "2rem",
     padding: "13px",
     marginRight: "1.2rem",
   },

@@ -9,7 +9,7 @@ const ResProfile = () => {
       <div
         style={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: "column",
         }}
       >
         <div

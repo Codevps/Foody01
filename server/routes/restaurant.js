@@ -6,8 +6,8 @@ import {
 import express from "express";
 const restaurantRouter = express.Router();
 
+restaurantRouter.get("/getRes", getRes);
 restaurantRouter.post("/signin", restaurantSignIn);
 restaurantRouter.post("/signup", restaurantSignUp);
-restaurantRouter.get("/getRes", getRes);
 
 export default restaurantRouter;

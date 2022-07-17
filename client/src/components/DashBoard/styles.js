@@ -25,5 +25,8 @@ export default makeStyles((theme) => ({
       margin: "auto",
       padding: "auto",
     },
+    container2: {
+      display: "none",
+    },
   },
 }));

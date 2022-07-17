@@ -1,6 +1,6 @@
 import { FETCH_RES, LOGOUT, RESTAURANT_AUTH } from "../constants/actionTypes";
 
-const restaurant = (state = { restaurantData: null }, action) => {
+const restaurant = (state = { restaurantData: [] }, action) => {
   switch (action.type) {
     case FETCH_RES:
       return {
