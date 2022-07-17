@@ -27,10 +27,9 @@ const Carousel1 = ({ slides }) => {
   };
 
   const handleSubmit = () => {
-    dispatch(createImage(images));
+    dispatch(createImage(newImage));
   };
 
-  let arr = [];
   useEffect(() => {
     dispatch(getImages());
   }, [dispatch]);
@@ -39,19 +38,15 @@ const Carousel1 = ({ slides }) => {
     return null;
   }
   let x = false;
-  function sp(images) {
-    arr.push(images);
+  function sp() {
     x = true;
   }
-  images.map(
-    (image) => user?.result._id === image?.creator && sp(image.images)
-  );
-  console.log(arr);
+  images.map((image) => user?.result._id === image?.creator && sp());
   return x ? (
     <div className="slider">
       <ChevronLeftIcon className="left-arrow" onClick={prevSlide} />
       <ChevronRightIcon className="right-arrow" onClick={nextSlide} />
-      {arr.map((slide, index) => {
+      {slides.map((slide, index) => {
         return (
           <div
             className={index === current ? "slide active" : "slide"}
@@ -59,7 +54,7 @@ const Carousel1 = ({ slides }) => {
             style={{ alignContent: "center", alignItems: "center" }}
           >
             {index === current && (
-              <img src={arr[index]} alt="travel image" className="image" />
+              <img src={slides[index]} alt="travel image" className="image" />
             )}
           </div>
         );

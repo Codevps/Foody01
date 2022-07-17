@@ -1,19 +1,27 @@
 import { Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../../actions/posts";
 import ResProfile from "../ResProfile/ResProfile";
 import Form from "../Form/Form";
 import Posts from "../Posts/Posts";
 import useStyles from "./styles";
 import Carousel1 from "../Carousel1/Carousel1";
-import { CarouselData } from "../Carousel1/CarouselData";
 
 const DashBoard = () => {
+  const user = JSON.parse(localStorage.getItem("profile"));
+  const { images } = useSelector((state) => state.images);
   const dispatch = useDispatch();
   const classes = useStyles();
   const [currentId, setCurrentId] = useState(null);
-
+  let arr = [];
+  function sp(images) {
+    arr.push(images);
+  }
+  images.map(
+    (image) => user?.result._id === image?.creator && sp(image.images)
+  );
+  console.log(arr);
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);
@@ -31,7 +39,7 @@ const DashBoard = () => {
           <ResProfile />
         </Grid>
         <Grid className={classes.container2} item xs={12} sm={6} md={6} lg={4}>
-          <Carousel1 slides={CarouselData} />
+          <Carousel1 slides={arr} />
         </Grid>
       </Grid>
       <Grid
