@@ -14,15 +14,10 @@ const Posts = ({ setCurrentId }) => {
   }
 
   return !user?.result.role ? (
-    <div>
-      {user?.result.name && (
-        <Typography
-          className={classes.heading}
-          style={{ marginBottom: "1rem" }}
-        >
-          <b>Items</b> to buy
-        </Typography>
-      )}
+    <div style={{ margin: "1rem" }}>
+      <Typography className={classes.heading} style={{ marginBottom: "1rem" }}>
+        <b>Shop</b> Items
+      </Typography>
       <Grid
         container
         alignItems="stretch"

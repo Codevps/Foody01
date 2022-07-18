@@ -35,7 +35,7 @@ const DashBoard = () => {
         spacing={5}
         className={classes.container}
       >
-        <Grid item xs={12} sm={6} md={6} lg={8}>
+        <Grid className={classes.container3} item xs={12} sm={6} md={6} lg={8}>
           <ResProfile />
         </Grid>
         <Grid className={classes.container2} item xs={12} sm={6} md={6} lg={4}>

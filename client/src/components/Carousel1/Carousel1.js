@@ -6,7 +6,6 @@ import React, { useEffect, useState } from "react";
 import FileBase from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
 import { createImage, getImages } from "../../actions/images";
-import { CarouselData } from "./CarouselData";
 import "./styles.css";
 const Carousel1 = ({ slides }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -43,22 +42,66 @@ const Carousel1 = ({ slides }) => {
   }
   images.map((image) => user?.result._id === image?.creator && sp());
   return x ? (
-    <div className="slider">
-      <ChevronLeftIcon className="left-arrow" onClick={prevSlide} />
-      <ChevronRightIcon className="right-arrow" onClick={nextSlide} />
-      {slides.map((slide, index) => {
-        return (
-          <div
-            className={index === current ? "slide active" : "slide"}
-            key={index}
-            style={{ alignContent: "center", alignItems: "center" }}
+    <div>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <div className="slider">
+          <Button
+            style={{
+              position: "relative",
+              color: "black",
+              fontWeight: "500",
+              fontSize: "2rem",
+            }}
+            onClick={prevSlide}
           >
-            {index === current && (
-              <img src={slides[index]} alt="travel image" className="image" />
-            )}
-          </div>
-        );
-      })}
+            <ChevronLeftIcon />
+          </Button>
+          {slides.map((slide, index) => {
+            return (
+              <div
+                className={index === current ? "slide active" : "slide"}
+                key={index}
+                style={{ alignContent: "center", alignItems: "center" }}
+              >
+                {index === current && (
+                  <img src={slide} alt="travel image" className="image" />
+                )}
+              </div>
+            );
+          })}
+          <Button
+            style={{
+              position: "relative",
+              color: "black",
+              fontWeight: "500",
+              fontSize: "2rem",
+            }}
+            onClick={nextSlide}
+          >
+            <ChevronRightIcon />
+          </Button>
+        </div>
+        <div style={{ marginTop: "5rem" }}>
+          <form autoComplete="off" noValidate onSubmit={handleSubmit}>
+            <FileBase
+              type="file"
+              multiple={false}
+              onDone={({ base64 }) =>
+                setNewImage({ ...newImage, images: base64 })
+              }
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              type="submit"
+              style={{ backgroundColor: "black" }}
+            >
+              Add image
+            </Button>
+          </form>
+        </div>
+      </div>
     </div>
   ) : (
     <Container>
@@ -80,6 +123,7 @@ const Carousel1 = ({ slides }) => {
               size="large"
               type="submit"
               fullWidth
+              style={{ backgroundColor: "black" }}
             >
               Add image
             </Button>
@@ -91,5 +135,3 @@ const Carousel1 = ({ slides }) => {
 };
 
 export default Carousel1;
-
-// import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';

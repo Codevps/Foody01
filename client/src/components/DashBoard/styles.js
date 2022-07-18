@@ -12,6 +12,9 @@ export default makeStyles((theme) => ({
     padding: "auto",
     width: "auto",
   },
+  container2: {
+    marginTop: "2rem",
+  },
   [theme.breakpoints.down("sm")]: {
     mainContainer: {
       flexDirection: "column-reverse",
@@ -25,8 +28,11 @@ export default makeStyles((theme) => ({
       margin: "auto",
       padding: "auto",
     },
+    container3: {
+      marginTop: "5rem",
+    },
     container2: {
-      display: "none",
+      marginRight: "1rem",
     },
   },
 }));
