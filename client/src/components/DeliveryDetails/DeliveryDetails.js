@@ -12,7 +12,8 @@ const DeliveryDetails = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { address } = useSelector((state) => state.address);
-
+  const [latitude, setLatitude] = useState(0);
+  const [longitude, setLongitude] = useState(0);
   const [cAddress, setCAddress] = useState({
     apartmentName: "",
     contactNo: "",
@@ -24,6 +25,14 @@ const DeliveryDetails = () => {
     setCAddress({ ...cAddress, [e.target.name]: e.target.value });
   };
 
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
+    });
+    dispatch(getAddresses());
+  }, [dispatch]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(
@@ -31,13 +40,12 @@ const DeliveryDetails = () => {
         ...cAddress,
         name: user?.result.name,
         email: user?.result.email,
+        latitude: latitude,
+        longitude: longitude,
       })
     );
   };
 
-  useEffect(() => {
-    dispatch(getAddresses());
-  }, [dispatch]);
   let truth = false;
   let newAddress;
   address.map((add) => user?.result.email === add?.email && (truth = true));

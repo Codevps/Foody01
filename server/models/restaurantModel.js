@@ -8,6 +8,8 @@ const restaurantAuthSchema = mongoose.Schema({
   tags: { type: String, required: true },
   apartmentName: { type: String, required: true },
   locality: { type: String, required: true },
+  latitude: { type: Number },
+  longitude: { type: Number },
   street: { type: String, required: true },
   zipCode: { type: Number, required: true },
   password: { type: String, required: true },

@@ -10,6 +10,8 @@ const addressSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  latitude: { type: Number },
+  longitude: { type: Number },
   street: {
     type: String,
     required: true,

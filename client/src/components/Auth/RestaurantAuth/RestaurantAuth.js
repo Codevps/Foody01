@@ -11,7 +11,7 @@ import {
   RadioGroup,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -27,6 +27,8 @@ const CustomerAuth = () => {
   const classes = useStyles();
   const [isSignUp, setIsSignUp] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [latitude, setLatitude] = useState(0);
+  const [longitude, setLongitude] = useState(0);
   const [restaurantAuthData, setRestaurantAuthData] = useState({
     name: "",
     number: "",
@@ -52,19 +54,34 @@ const CustomerAuth = () => {
     setRestaurantAuthData({
       ...restaurantAuthData,
       [e.target.name]: e.target.value,
+      latitude: latitude,
+      longitude: longitude,
     });
   };
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
+    });
+  }, [dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isSignUp) {
       dispatch(
-        restaurantSignUp({ ...restaurantAuthData, role: "SELLER" }, navigate)
+        restaurantSignUp(
+          {
+            ...restaurantAuthData,
+            role: "SELLER",
+            latitude: latitude,
+            longitude: longitude,
+          },
+          navigate
+        )
       );
     } else {
-      dispatch(
-        restaurantSignIn({ ...restaurantAuthData, role: "SELLER" }, navigate)
-      );
+      dispatch(restaurantSignIn(restaurantAuthData, navigate));
     }
   };
 
