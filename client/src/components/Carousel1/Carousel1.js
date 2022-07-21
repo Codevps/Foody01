@@ -81,8 +81,20 @@ const Carousel1 = ({ slides }) => {
             <ChevronRightIcon />
           </Button>
         </div>
-        <div style={{ marginTop: "5rem" }}>
-          <form autoComplete="off" noValidate onSubmit={handleSubmit}>
+        {/* 
+          style={{ display: "flex", flexDirection: "column" }}
+         */}
+        <div
+          style={{
+            marginTop: "5rem",
+          }}
+        >
+          <form
+            autoComplete="off"
+            noValidate
+            onSubmit={handleSubmit}
+            // style={{ display: "flex", flexDirection: "column" }}
+          >
             <FileBase
               type="file"
               multiple={false}
