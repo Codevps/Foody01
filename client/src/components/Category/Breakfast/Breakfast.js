@@ -14,6 +14,7 @@ const Breakfast = () => {
         <b>Breakfast Meals:</b>
       </Typography>
       <Grid
+        style={{ margin: "auto", padding: "auto" }}
         container
         alignItems="stretch"
         spacing={3}
@@ -21,9 +22,11 @@ const Breakfast = () => {
       >
         {posts.length ? (
           posts.map((post) => (
-            <Grid className={classes.dashboard} item key={post._id} spacing={3}>
-              {post.description === "Breakfast" && <Post post={post} />}
-            </Grid>
+            <div item key={post._id} spacing={3}>
+              {post.description === "Breakfast" && (
+                <Post post={post} padd={true} />
+              )}
+            </div>
           ))
         ) : (
           <div>No items to shop</div>

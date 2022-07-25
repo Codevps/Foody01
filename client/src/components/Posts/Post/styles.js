@@ -26,18 +26,23 @@ export default makeStyles((theme) => ({
     height: "100%",
     position: "relative",
     marginLeft: ".5rem",
-
-    // minWidth: "220px",
-    // width: "220px",
-    // maxWidth: "250px",
+    width: "auto",
+    minWidth: "210px",
+    maxWidth: "250px",
   },
   dashcard: {
-    minWidth: "220px",
-    maxWidth: "220px",
+    minWidth: "200px",
+    maxWidth: "auto",
     marginLeft: ".5rem",
     // overflow: "none",
   },
-  [theme.breakpoints.down("sm")]: {
+  padd: {
+    marginBottom: "0.9rem",
+    marginTop: "0.9rem",
+    marginRight: "0.2rem",
+    marginLeft: "1rem",
+  },
+  [theme.breakpoints.down("md")]: {
     dashcard: {
       minWidth: "250px",
       maxWidth: "auto",

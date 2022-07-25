@@ -63,10 +63,13 @@ export default makeStyles((theme) => ({
   mainContainer: {
     display: "flex",
     flexDirection: "row",
-    margin: ".2rem",
+    margin: "auto",
+    padding: "auto",
   },
   dashboard: {
     display: "flex",
     flexDirection: "row",
+    // margin: "auto",
+    // padding: "auto",
   },
 }));

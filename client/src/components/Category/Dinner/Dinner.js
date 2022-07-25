@@ -21,9 +21,11 @@ const Dinner = () => {
       >
         {posts.length ? (
           posts.map((post) => (
-            <Grid className={classes.dashboard} item key={post._id}>
-              {post.description === "Dinner" && <Post post={post} />}
-            </Grid>
+            <div className={classes.dashboard} item key={post._id}>
+              {post.description === "Dinner" && (
+                <Post post={post} padd={true} />
+              )}
+            </div>
           ))
         ) : (
           <div>No items to shop</div>

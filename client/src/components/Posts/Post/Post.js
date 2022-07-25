@@ -17,7 +17,7 @@ import { createItem } from "../../../actions/cart";
 import bg from "../../../images/bg.png";
 import useStyles from "./styles";
 
-const Post = ({ post, setCurrentId }) => {
+const Post = ({ post, setCurrentId, padd }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -68,62 +68,63 @@ const Post = ({ post, setCurrentId }) => {
     navigate("/customerAuth");
   };
   return (
-    <Card
-      className={
-        !user?.result.role
-          ? classes.card
-          : `${classes.card} ${classes.dashcard}`
-      }
-      elevation={6}
-    >
-      <ButtonBase component="span" name="test" className={classes.cardAction}>
-        <CardMedia className={classes.media} image={post.selectedFile || bg} />
-      </ButtonBase>
-      <CardContent>
-        <Typography className={classes.title} variant="h5">
-          {post.title}
-        </Typography>
-        <Typography variant="h6" style={{ color: "grey" }}>
-          {post.name}
-        </Typography>
-        <Typography variant="h6" color="green" component="p">
-          <b>Price: &#8377;{post.price}</b>
-        </Typography>
-        <Typography variant="body1" color="textSecondary" component="p">
-          <b>{post.description}</b>
-        </Typography>
-      </CardContent>
-      {user?.result._id === post?.creator && (
-        <CardActions className={classes.cardActions}>
-          <Button
-            style={{ color: "black" }}
-            size="small"
-            onClick={() => setCurrentId(post._id)}
-          >
-            <EditIcon />
-          </Button>
-          <Button
-            size="small"
-            style={{ color: "red" }}
-            onClick={() => dispatch(deletePost(post._id))}
-          >
-            <DeleteIcon fontSize="small" />
-          </Button>
-        </CardActions>
-      )}
-      {user?.result && !user?.result.role && (
-        <CardActions className={classes.cardActions}>
-          <Button
-            style={{ marginRight: "1rem" }}
-            className={classes.btn2}
-            variant="contained"
-            onClick={user?.result.email ? goCart : goAuth}
-          >
-            Add to Cart
-          </Button>
-        </CardActions>
-      )}
-    </Card>
+    <div className={padd ? classes.padd : classes.card}>
+      <Card
+        className={user?.result.role && ` ${classes.dashcard}`}
+        elevation={6}
+      >
+        <ButtonBase component="span" name="test" className={classes.cardAction}>
+          <CardMedia
+            className={classes.media}
+            image={post.selectedFile || bg}
+          />
+        </ButtonBase>
+        <CardContent>
+          <Typography className={classes.title} variant="h5">
+            {post.title}
+          </Typography>
+          <Typography variant="h6" style={{ color: "grey" }}>
+            {post.name}
+          </Typography>
+          <Typography variant="h6" color="green" component="p">
+            <b>Price: &#8377;{post.price}</b>
+          </Typography>
+          <Typography variant="body1" color="textSecondary" component="p">
+            <b>{post.description}</b>
+          </Typography>
+        </CardContent>
+        {user?.result._id === post?.creator && (
+          <CardActions className={classes.cardActions}>
+            <Button
+              style={{ color: "black" }}
+              size="small"
+              onClick={() => setCurrentId(post._id)}
+            >
+              <EditIcon />
+            </Button>
+            <Button
+              size="small"
+              style={{ color: "red" }}
+              onClick={() => dispatch(deletePost(post._id))}
+            >
+              <DeleteIcon fontSize="small" />
+            </Button>
+          </CardActions>
+        )}
+        {user?.result && !user?.result.role && (
+          <CardActions className={classes.cardActions}>
+            <Button
+              style={{ marginRight: "1rem" }}
+              className={classes.btn2}
+              variant="contained"
+              onClick={user?.result.email ? goCart : goAuth}
+            >
+              Add to Cart
+            </Button>
+          </CardActions>
+        )}
+      </Card>
+    </div>
   );
 };
 
