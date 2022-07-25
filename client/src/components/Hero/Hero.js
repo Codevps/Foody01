@@ -37,6 +37,7 @@ const Hero = () => {
     setAddress(value);
     setCoordinates(latLng);
   };
+  // first find latlng of place typed and find restaurants in 3-4km of the radius
   return (
     <div>
       <div className="hero">
