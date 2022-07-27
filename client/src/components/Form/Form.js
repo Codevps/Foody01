@@ -18,6 +18,7 @@ const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({
     title: "",
     description: "",
+    subDescription: "",
     price: "",
     selectedFile: "",
   });
@@ -39,6 +40,7 @@ const Form = ({ currentId, setCurrentId }) => {
     setPostData({
       title: "",
       description: "",
+      subDescription: "",
       price: "",
       selectedFile: "",
     });
@@ -88,7 +90,6 @@ const Form = ({ currentId, setCurrentId }) => {
           fullWidth
           required
         />
-
         <TextField
           name="price"
           variant="outlined"
@@ -136,6 +137,33 @@ const Form = ({ currentId, setCurrentId }) => {
               value="Dinner"
               control={<Radio style={{ color: "coral" }} />}
               label="Dinner"
+            />
+          </RadioGroup>
+        </FormControl>
+        <FormControl>
+          <RadioGroup
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-around",
+            }}
+            name="description"
+            variant="outlined"
+            label="Description:"
+            value={postData.subDescription}
+            onChange={(e) =>
+              setPostData({ ...postData, subDescription: e.target.value })
+            }
+          >
+            <FormControlLabel
+              value="Veg"
+              control={<Radio style={{ color: "green" }} />}
+              label="Veg"
+            />
+            <FormControlLabel
+              value="NonVeg"
+              control={<Radio style={{ color: "red" }} />}
+              label="NonVeg"
             />
           </RadioGroup>
         </FormControl>

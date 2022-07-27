@@ -15,6 +15,11 @@ const postSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  subDescription: {
+    type: String,
+    required: true,
+  },
+
   selectedFile: String,
 });
 

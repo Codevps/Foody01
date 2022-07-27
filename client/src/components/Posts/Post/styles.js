@@ -56,7 +56,6 @@ export default makeStyles((theme) => ({
     justifyContent: "space-between",
     margin: "5px",
   },
-  title: {},
   cardActions: {
     padding: "0 8px 10px 8px",
     display: "flex",

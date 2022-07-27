@@ -33,10 +33,11 @@ const CustomerAuth = () => {
     name: "",
     number: "",
     email: "",
-    tags: "",
     apartmentName: "",
     locality: "",
     street: "",
+    city: "",
+    town: "",
     zipCode: "",
     password: "",
     confirmPassword: "",
@@ -122,11 +123,6 @@ const CustomerAuth = () => {
                   type="email"
                   half
                 />
-                {/* <Input
-                  name="tags"
-                  label="Tags: Variety of food available"
-                  handleChange={handleChange}
-                /> */}
                 <Typography
                   variant="h6"
                   component="p"
@@ -148,6 +144,18 @@ const CustomerAuth = () => {
                 <Input
                   name="street"
                   label="Street"
+                  handleChange={handleChange}
+                  half
+                />{" "}
+                <Input
+                  name="city"
+                  label="City"
+                  handleChange={handleChange}
+                  half
+                />{" "}
+                <Input
+                  name="town"
+                  label="Town"
                   handleChange={handleChange}
                   half
                 />

@@ -11,7 +11,7 @@ const Category = () => {
   return (
     <div>
       <Typography className={classes.heading}>
-        <b>Select</b> your meal <b>Category</b>
+        <b>Select</b> your time's <b>Meal</b>
       </Typography>
       <Grid
         container

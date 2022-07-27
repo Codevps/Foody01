@@ -35,6 +35,8 @@ export const restaurantSignUp = async (req, res) => {
     latitude,
     longitude,
     street,
+    city,
+    town,
     zipCode,
     password,
     confirmPassword,
@@ -56,6 +58,8 @@ export const restaurantSignUp = async (req, res) => {
       latitude,
       longitude,
       street,
+      city,
+      town,
       zipCode,
       password: hashedPassword,
     });

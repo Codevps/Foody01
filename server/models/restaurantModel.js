@@ -11,6 +11,8 @@ const restaurantAuthSchema = mongoose.Schema({
   latitude: { type: Number },
   longitude: { type: Number },
   street: { type: String, required: true },
+  city: { type: String, required: true },
+  town: { type: String, required: true },
   zipCode: { type: Number, required: true },
   password: { type: String, required: true },
   id: { type: String },

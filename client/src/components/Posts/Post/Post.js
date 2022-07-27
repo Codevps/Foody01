@@ -80,9 +80,25 @@ const Post = ({ post, setCurrentId, padd }) => {
           />
         </ButtonBase>
         <CardContent>
-          <Typography className={classes.title} variant="h5">
-            {post.title}
-          </Typography>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <Typography variant="h5">{post.title}</Typography>
+            <Typography
+              variant="body2"
+              style={{
+                paddingTop: "0.3rem",
+                paddingRight: "1rem",
+                color: post.subDescription === "Veg" ? "green" : "red",
+              }}
+            >
+              {post.subDescription}
+            </Typography>
+          </div>
           <Typography variant="h6" style={{ color: "grey" }}>
             {post.name}
           </Typography>
