@@ -38,7 +38,7 @@ const Search = () => {
         className={classes.search}
         name="search"
         variant="outlined"
-        label={`Search Restaurant`}
+        label={`Search a dish...`}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         InputProps={{
@@ -59,15 +59,20 @@ const Search = () => {
         spacing={3}
         className={classes.container}
       >
-        {posts.map((post) => (
-          <div key={post._id}>
-            {(post.title.toLowerCase().split(" ")[0] ===
-              item.toLowerCase().split(" ")[0] ||
-              post.title.toLowerCase().split(" ")[1] === item.toLowerCase() ||
-              post.title.toLowerCase().split(" ")[0] ===
-                item.toLowerCase().split(" ")[1]) && <Post post={post} />}
-          </div>
-        ))}
+        {search !== "" ? (
+          posts.map((post) => (
+            <div key={post._id}>
+              {(post.title.toLowerCase().split(" ")[0] ===
+                item.toLowerCase().split(" ")[0] ||
+                post.title.toLowerCase().split(" ")[1] ===
+                  item.toLowerCase().split(" ")[0] ||
+                post.title.toLowerCase().split(" ")[0] ===
+                  item.toLowerCase().split(" ")[1]) && <Post post={post} />}
+            </div>
+          ))
+        ) : (
+          <div>Search something</div>
+        )}
       </Grid>
     </div>
   );
