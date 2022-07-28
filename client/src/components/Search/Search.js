@@ -19,14 +19,32 @@ const Search = () => {
   const [search, setSearch] = useState("");
   const [item, setItem] = useState(search);
   const classes = useStyles();
+  let x = "";
   const searchPost = (search) => {
     setItem(search);
+    console.log(x);
     if (search === "") return;
+    // posts.map(
+    //   (post) =>
+    //     (post.title.toLowerCase().split(" ")[0] ===
+    //       item.toLowerCase().split(" ")[0] ||
+    //       post.title.toLowerCase().split(" ")[1] ===
+    //         item.toLowerCase().split(" ")[0] ||
+    //       post.title.toLowerCase().split(" ")[0] ===
+    //         item.toLowerCase().split(" ")[1]) &&
+    //     x === ""
+    // );
+    if (x.split(" ").length - 1 === posts.length) {
+      return window.alert("No item found");
+    }
+    console.log(x.split(" ").length);
+    x = "";
   };
 
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);
+
   return (
     <div className={classes.container}>
       <Typography className={classes.heading}>
@@ -62,16 +80,25 @@ const Search = () => {
         {search !== "" ? (
           posts.map((post) => (
             <div key={post._id}>
-              {(post.title.toLowerCase().split(" ")[0] ===
+              {post.title.toLowerCase().split(" ")[0] ===
                 item.toLowerCase().split(" ")[0] ||
-                post.title.toLowerCase().split(" ")[1] ===
-                  item.toLowerCase().split(" ")[0] ||
-                post.title.toLowerCase().split(" ")[0] ===
-                  item.toLowerCase().split(" ")[1]) && <Post post={post} />}
+              post.title.toLowerCase().split(" ")[1] ===
+                item.toLowerCase().split(" ")[0] ||
+              post.title.toLowerCase().split(" ")[0] ===
+                item.toLowerCase().split(" ")[1] ? (
+                <div>
+                  {x === ""}
+                  <Post post={post} />
+                </div>
+              ) : (
+                <div style={{ display: "none" }}>{(x += "true ")}</div>
+              )}
             </div>
           ))
         ) : (
-          <div>Search something</div>
+          <div>
+            <div style={{ display: "none" }}>{(x = "")}</div>Search something
+          </div>
         )}
       </Grid>
     </div>
@@ -79,3 +106,4 @@ const Search = () => {
 };
 
 export default Search;
+// if x.length == posts.length that means item does not exist
