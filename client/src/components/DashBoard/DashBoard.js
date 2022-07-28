@@ -21,7 +21,6 @@ const DashBoard = () => {
   images.map(
     (image) => user?.result._id === image?.creator && sp(image.images)
   );
-  console.log(arr);
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);

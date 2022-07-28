@@ -1,8 +1,19 @@
-import { AppBar, Avatar, Button, Toolbar, Typography } from "@mui/material";
+import {
+  AppBar,
+  Avatar,
+  Button,
+  IconButton,
+  InputAdornment,
+  TextField,
+  Toolbar,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import decode from "jwt-decode";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import SearchIcon from "@mui/icons-material/Search";
 import { LOGOUT } from "../../constants/actionTypes";
 import useStyles from "./styles";
 import "./style.css";
@@ -152,6 +163,14 @@ const NavBar = () => {
                 Add a Restaurant
               </Button>
             </div>
+          )}
+
+          {!user?.result.role && user?.result && (
+            <Tooltip title="Search food Items">
+              <IconButton style={{ marginLeft: "1rem" }}>
+                <SearchIcon onClick={() => navigate("/search")} />
+              </IconButton>
+            </Tooltip>
           )}
         </Toolbar>
       </AppBar>

@@ -6,38 +6,31 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-// import React, { useState } from "react";
-// import PlacesAutocomplete, {
-//   geocodeByAddress,
-//   getLatLng,
-// } from "react-places-autocomplete";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { getPostsBySearch } from "../../actions/posts";
 import useStyles from "./styles";
 import "./styles.css";
-
+// function useQuery() {
+//   return new URLSearchParams(useLocation().search);
+// }
 const Hero = () => {
+  const [search, setSearch] = useState("");
+  // const query = useQuery();
+  const dispatch = useDispatch();
+  // const searchQuery = query.get("searchQuery");
+  const navigate = useNavigate();
+  const sp = () => {
+    window.alert("Geolocation coming soon...");
+  };
   const classes = useStyles();
-  // const [latitude, setLatitude] = useState(0);
-  // const [longitude, setLongitude] = useState(0);
-  // const sp = () => {
-  //   navigator.geolocation.getCurrentPosition((position) => {
-  //     setLatitude(position.coords.latitude);
-  //     setLongitude(position.coords.longitude);
-  //   });
-  //   console.log(latitude, longitude);
-  // };
-  // const [address, setAddress] = useState("");
-  // const [coordinates, setCoordinates] = useState({
-  //   lat: null,
-  //   lng: null,
-  // });
+  const searchPost = () => {
+    dispatch(getPostsBySearch({ search }));
+    // navigate(`/posts/search?searchQuery=${search}`);
+    navigate(`/posts/search`);
+  };
 
-  // const handleSelect = async (value) => {
-  //   const results = await geocodeByAddress(value);
-  //   const latLng = await getLatLng(results[0]);
-  //   setAddress(value);
-  //   setCoordinates(latLng);
-  // };
-  // first find latlng of place typed and find restaurants in 3-4km of the radius
   return (
     <div>
       <div className="hero">
@@ -47,55 +40,22 @@ const Hero = () => {
         <Typography variant="h5" className={classes.heading}>
           <i> safe & fast food delivery with great discounts</i>
         </Typography>
-        {/* <PlacesAutocomplete
-          value={address}
-          onChange={setAddress}
-          onSelect={handleSelect}
-        >
-          {({
-            getInputProps,
-            suggestions,
-            getSuggestionItemProps,
-            loading,
-          }) => (
-            <div>
-              <p>Latitude: {coordinates.lat}</p>
-              <p>Longitude: {coordinates.lng}</p>
-
-              <input {...getInputProps({ placeholder: "Type address" })} />
-
-              <div>
-                {loading ? <div>...loading</div> : null}
-                {suggestions.map((suggestion) => {
-                  const style = {
-                    backgroundColor: suggestion.active ? "#41b6e6" : "#fff",
-                  };
-                  return (
-                    <div {...getSuggestionItemProps(suggestion, { style })}>
-                      {suggestion.description}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-        </PlacesAutocomplete> */}
         <TextField
           className={classes.search}
           name="search"
           variant="outlined"
-          label={`Geolocation coming soon`}
-          disabled="true"
+          label={`Search Restaurant`}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton>
-                  <SearchIcon disabled="true" />
+                  <SearchIcon onClick={() => searchPost()} />
                 </IconButton>
                 <IconButton>
                   <MyLocationIcon
-                    disabled="true"
-                    // onClick={() => sp()}
+                    onClick={() => sp()}
                     style={{ color: "coral" }}
                   />
                 </IconButton>

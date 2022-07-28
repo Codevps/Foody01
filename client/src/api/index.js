@@ -23,6 +23,9 @@ export const restaurantSignUp = (restaurantAuthData) =>
 export const fetchRes = () => API.get("/restaurant/getRes");
 
 // routes for crud of posts
+export const fetchPostsBySearch = (search) =>
+  // API.get(`/restaurant/posts/searchQuery=${searchQuery.search}`);
+  API.get(`/restaurant/posts/search`);
 export const fetchPosts = () => API.get("/restaurant/posts");
 export const createPost = (newPost) => API.post("/restaurant/posts", newPost);
 export const deletePost = (id) => API.delete(`/restaurant/posts/${id}`);
