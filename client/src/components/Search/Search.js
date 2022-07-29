@@ -22,23 +22,13 @@ const Search = () => {
   let x = "";
   const searchPost = (search) => {
     setItem(search);
+    if (item !== search) x = "";
     console.log(x);
     if (search === "") return;
-    // posts.map(
-    //   (post) =>
-    //     (post.title.toLowerCase().split(" ")[0] ===
-    //       item.toLowerCase().split(" ")[0] ||
-    //       post.title.toLowerCase().split(" ")[1] ===
-    //         item.toLowerCase().split(" ")[0] ||
-    //       post.title.toLowerCase().split(" ")[0] ===
-    //         item.toLowerCase().split(" ")[1]) &&
-    //     x === ""
-    // );
     if (x.split(" ").length - 1 === posts.length) {
       return window.alert("No item found");
     }
     console.log(x.split(" ").length);
-    x = "";
   };
 
   useEffect(() => {
@@ -106,4 +96,3 @@ const Search = () => {
 };
 
 export default Search;
-// if x.length == posts.length that means item does not exist

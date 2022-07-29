@@ -17,7 +17,7 @@ import { createItem } from "../../../actions/cart";
 import bg from "../../../images/bg.png";
 import useStyles from "./styles";
 
-const Post = ({ post, setCurrentId, padd }) => {
+const Post = ({ post, setCurrentId, padd, x }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -67,6 +67,7 @@ const Post = ({ post, setCurrentId, padd }) => {
   const goAuth = () => {
     navigate("/customerAuth");
   };
+
   return (
     <div className={padd ? classes.padd : classes.card}>
       <Card

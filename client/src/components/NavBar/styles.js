@@ -70,4 +70,20 @@ export default makeStyles((theme) => ({
     boxShadow: "0px 8px 16px 0px rgba(0,0,0,0.2)",
     zIndex: "1",
   },
+  [theme.breakpoints.down("sm")]: {
+    headline: {
+      fontFamily: "Comforter , cursive",
+      color: "coral",
+      textDecoration: "none",
+      fontWeight: "800",
+      fontSize: "2rem",
+    },
+    btn: {
+      fontSize: "0.6rem",
+    },
+    btn2: {
+      fontSize: "0.6rem",
+      marginLeft: "20px",
+    },
+  },
 }));
