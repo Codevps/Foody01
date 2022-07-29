@@ -26,6 +26,9 @@ const Search = () => {
     console.log(x);
     if (search === "") return;
     if (x.split(" ").length - 1 === posts.length) {
+      setSearch("");
+      setItem("");
+      x = "";
       return window.alert("No item found");
     }
     console.log(x.split(" ").length);
