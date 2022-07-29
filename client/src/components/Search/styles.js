@@ -10,9 +10,11 @@ export default makeStyles((theme) => ({
     fontSize: "30px",
   },
   container: {
-    alignItems: "center",
-    justifyContent: "center",
-    display: "flex",
-    flexDirection: "column",
+    margin: "1rem",
+    width: "90vw",
+    // alignItems: "center",
+    // justifyContent: "center",
+    // display: "flex",
+    // flexDirection: "column",
   },
 }));

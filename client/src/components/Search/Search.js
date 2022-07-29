@@ -11,6 +11,7 @@ import useStyles from "./styles";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Post from "../Posts/Post/Post";
+import Posts from "../Posts/Posts";
 import { getPosts } from "../../actions/posts";
 
 const Search = () => {
@@ -20,6 +21,7 @@ const Search = () => {
   const [item, setItem] = useState(search);
   const classes = useStyles();
   let x = "";
+  let y = "";
   const searchPost = (search) => {
     setItem(search);
     if (item !== search) x = "";
@@ -44,7 +46,8 @@ const Search = () => {
         <b>Search</b> food Items
       </Typography>
       <TextField
-        style={{ marginBottom: "3rem" }}
+        fullWidth
+        style={{ margin: "1rem", marginBottom: "3rem" }}
         autoFocus
         className={classes.search}
         name="search"
@@ -89,9 +92,10 @@ const Search = () => {
             </div>
           ))
         ) : (
-          <div>
-            <div style={{ display: "none" }}>{(x = "")}</div>Search something
-          </div>
+          <Grid item xs={12} sm={12} md={12}>
+            <div style={{ display: "none" }}>{(x = "")}</div>
+            <Posts y={true} />
+          </Grid>
         )}
       </Grid>
     </div>

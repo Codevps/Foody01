@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Post from "./Post/Post";
 import useStyles from "./styles";
 
-const Posts = ({ setCurrentId }) => {
+const Posts = ({ setCurrentId, y }) => {
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem("profile"));
   const { posts } = useSelector((state) => state.posts);
@@ -12,12 +12,17 @@ const Posts = ({ setCurrentId }) => {
   if (!posts.creator === user?.result._id) {
     return <div>No items yet, Add Items</div>;
   }
-
+  console.log(y);
   return !user?.result.role ? (
-    <div style={{ margin: "1rem" }}>
-      <Typography className={classes.heading} style={{ marginBottom: "1rem" }}>
-        <b>Shop</b> Items
-      </Typography>
+    <div style={{ margin: !y && "1rem" }}>
+      {!y && (
+        <Typography
+          className={classes.heading}
+          style={{ marginBottom: !y && "1rem" }}
+        >
+          <b>Shop</b> Items
+        </Typography>
+      )}
       <Grid
         container
         alignItems="stretch"

@@ -7,6 +7,7 @@ import Category from "../Category/Category";
 import Footer from "../Footer/Footer";
 import Hero from "../Hero/Hero";
 import Posts from "../Posts/Posts";
+import ResCard from "../ResCard/ResCards";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const Home = () => {
     <div style={{ width: "auto" }}>
       <Hero />
       <Category />
+      <ResCard />
       <Posts />
       <Add />
       <Footer />

@@ -6,7 +6,7 @@ import {
 import express from "express";
 const restaurantRouter = express.Router();
 
-restaurantRouter.get("/getRes", getRes);
+restaurantRouter.get("/", getRes);
 restaurantRouter.post("/signin", restaurantSignIn);
 restaurantRouter.post("/signup", restaurantSignUp);
 
