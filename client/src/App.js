@@ -55,7 +55,7 @@ const App = () => {
           <Route path={`/lunchCategory`} exact element={<Lunch />} />
           <Route path={`/dinnerCategory`} exact element={<Dinner />} />
           <Route path={`/cart/ordered`} exact element={<CusOrder />} />
-          <Route path="/restaurant/:id" exact element={<PostDetails />} />
+          <Route path={"/restaurant/:id"} exact element={<PostDetails />} />
           <Route path={`/orders`} exact element={<ResOrder />} />
           <Route path={`/search`} exact element={<Search />} />
         </Routes>

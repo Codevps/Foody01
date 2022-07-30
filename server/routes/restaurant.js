@@ -8,8 +8,8 @@ import express from "express";
 const restaurantRouter = express.Router();
 
 restaurantRouter.get("/", getRes);
-restaurantRouter.get("/:id", getResById);
 restaurantRouter.post("/signin", restaurantSignIn);
 restaurantRouter.post("/signup", restaurantSignUp);
+restaurantRouter.get("/post/:id", getResById);
 
 export default restaurantRouter;

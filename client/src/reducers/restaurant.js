@@ -13,8 +13,7 @@ const restaurant = (state = { restaurant: [] }, action) => {
         restaurant: action.payload.data,
       };
     case FETCH_RES_BY_ID:
-      return { ...state, res: action.payload };
-
+      return { ...state, rest: action.payload };
     case RESTAURANT_AUTH:
       localStorage.setItem("profile", JSON.stringify({ ...action?.data }));
       return { ...state, restaurant: action?.data };

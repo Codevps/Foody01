@@ -12,7 +12,6 @@ const Posts = ({ setCurrentId, y }) => {
   if (!posts.creator === user?.result._id) {
     return <div>No items yet, Add Items</div>;
   }
-  console.log(y);
   return !user?.result.role ? (
     <div style={{ margin: !y && "1rem" }}>
       {!y && (

@@ -1,22 +1,24 @@
-// import React, { useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate, useParams } from "react-router-dom";
-// import { getRes, getResById } from "../../actions/restaurant";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { getResById } from "../../actions/restaurant";
 
-// const PostDetails = () => {
-//   const { res } = useSelector((state) => state.restaurant);
-//   const { posts } = useSelector((state) => state.posts);
-//   const dispatch = useDispatch();
-//   // const classes = useStyles();
-//   const { id } = useParams();
+const PostDetails = () => {
+  const { rest } = useSelector((state) => state.restaurant);
+  //   const { posts } = useSelector((state) => state.posts);
+  const dispatch = useDispatch();
+  // const classes = useStyles();
+  const { id } = useParams();
+  let x = id.substr(0, id.length - 2);
+  console.log(x);
+  useEffect(() => {
+    dispatch(getResById(x));
+  }, [id]);
+  console.log(rest);
 
-//   useEffect(() => {
-//     dispatch(getResById(id));
-//   }, [id]);
+  if (!rest) return null;
 
-//   if (!res) return null;
+  return <div>{rest.name}</div>;
+};
 
-//   return <div>PostDetails</div>;
-// };
-
-// export default PostDetails;
+export default PostDetails;

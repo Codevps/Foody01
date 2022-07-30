@@ -2,6 +2,8 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import RestaurantAuth from "../models/restaurantModel.js";
 import { secret2 } from "../secret.js";
+import express from "express";
+import mongoose from "mongoose";
 
 export const restaurantSignIn = async (req, res) => {
   const { email, password } = req.body;
@@ -86,12 +88,12 @@ export const getRes = async (req, res) => {
 };
 
 export const getResById = async (req, res) => {
+  const { id } = req.params;
   try {
-    const { id } = req.params;
-    const restaurant = await RestaurantAuth.findById(id);
-    res.status(200).json({ data: restaurant });
+    const rest = await RestaurantAuth.findById(id);
+    res.status(200).json(rest);
   } catch (error) {
     console.log(error);
-    res.status(404).json({ message: error.message });
+    res.status(404).json({ message: error.message, id });
   }
 };

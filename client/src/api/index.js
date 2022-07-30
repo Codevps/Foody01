@@ -21,11 +21,10 @@ export const restaurantSignIn = (restaurantAuthData) =>
 export const restaurantSignUp = (restaurantAuthData) =>
   API.post("/restaurant/signup", restaurantAuthData);
 export const fetchRes = () => API.get("/restaurant/");
-export const fetchResById = (id) => API.get(`/restaurant/${id}`);
+export const fetchResById = (id) => API.get(`/restaurant/post/${id}`);
 
 // routes for crud of posts
 export const fetchPostsBySearch = (search) =>
-  // API.get(`/restaurant/posts/searchQuery=${searchQuery.search}`);
   API.get(`/restaurant/posts/search`);
 export const fetchPosts = () => API.get("/restaurant/posts");
 export const createPost = (newPost) => API.post("/restaurant/posts", newPost);
