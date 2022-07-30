@@ -5,30 +5,46 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { getImages } from "../../actions/images";
+import Carousel1 from "../Carousel1/Carousel1";
+import useStyles from "./styles";
 
 const ResCard = ({ item }) => {
+  const { images } = useSelector((state) => state.images);
+  const classes = useStyles();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  // SHOW THEM THE DASHBOARD OF HOTEL BY ADDING CERTAIN CONDITIONS.
+  // USE OPEN POST OF MEMORIES FOR OPENING RESTAURANT CARD AND SHOWING RESTAURANT DETAILS
+  let arr = [];
+  function sp(images) {
+    arr.push(images);
+  }
+  images.map((image) => item._id === image?.creator && sp(image.images));
+  useEffect(() => {
+    dispatch(getImages());
+  }, [dispatch]);
   return (
     <div>
       <div>
         <Card
           style={{ margin: "1rem", paddingRight: "1rem" }}
           elevation={6}
-          onClick={() => navigate(`/restaurant/${item.name}`)}
+          onClick={() => navigate(`/restaurant/${item._id})}`)}
         >
-          {/* <ButtonBase
+          <ButtonBase
             component="span"
             name="test"
-            1className={classes.cardAction}
+            // className={classes.cardAction}
           >
             <CardMedia
-            1  className={classes.media}
-            1  image={item.selectedFile || bg}
+              className={classes.media}
+              image={<Carousel1 slides={arr} />}
             />
-          </ButtonBase> */}
+          </ButtonBase>
+          <div>{/* <Carousel1 slides={arr} /> */}</div>
           <CardContent>
             <div
               style={{

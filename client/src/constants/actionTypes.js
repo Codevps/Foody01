@@ -2,6 +2,7 @@ export const CUSTOMER_AUTH = "CUSTOMER_AUTH";
 export const RESTAURANT_AUTH = "RESTAURANT_AUTH";
 export const LOGOUT = "LOGOUT";
 export const FETCH_RES = "FETCH_RES";
+export const FETCH_RES_BY_ID = "FETCH_RES_BY_ID";
 
 export const START_LOADING = "START_LOADING";
 export const END_LOADING = "END_LOADING";

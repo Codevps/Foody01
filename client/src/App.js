@@ -14,6 +14,7 @@ import Home from "./components/Home/Home";
 import NavBar from "./components/NavBar/NavBar";
 import CusOrder from "./components/OrderPage/CusOrder/CusOrder";
 import ResOrder from "./components/OrderPage/ResOrder/ResOrder";
+import PostDetails from "./components/ResCard/PostDetails";
 import Search from "./components/Search/Search";
 
 const App = () => {
@@ -54,6 +55,7 @@ const App = () => {
           <Route path={`/lunchCategory`} exact element={<Lunch />} />
           <Route path={`/dinnerCategory`} exact element={<Dinner />} />
           <Route path={`/cart/ordered`} exact element={<CusOrder />} />
+          <Route path="/restaurant/:id" exact element={<PostDetails />} />
           <Route path={`/orders`} exact element={<ResOrder />} />
           <Route path={`/search`} exact element={<Search />} />
         </Routes>

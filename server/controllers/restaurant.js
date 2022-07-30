@@ -84,3 +84,14 @@ export const getRes = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const getResById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const restaurant = await RestaurantAuth.findById(id);
+    res.status(200).json({ data: restaurant });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
+  }
+};

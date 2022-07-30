@@ -21,7 +21,7 @@ export default makeStyles((theme) => ({
     fontSize: "2.6rem",
   },
   btn: {
-    fontSize: "0.7rem",
+    fontSize: "0.8rem",
     backgroundColor: "black",
     color: "white",
     "&:hover": {
@@ -30,7 +30,7 @@ export default makeStyles((theme) => ({
     },
   },
   btn2: {
-    fontSize: "0.7rem",
+    fontSize: "0.8rem",
     marginLeft: "20px",
     backgroundColor: "white",
     color: "black",
