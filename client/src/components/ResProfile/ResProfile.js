@@ -1,11 +1,11 @@
 import { Typography } from "@mui/material";
 import React from "react";
 
-const ResProfile = () => {
+const ResProfile = ({ rest }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
   // Restaurant Address is changed manually cause it requires manual inspection.
   return (
-    user && (
+    (user || rest) && (
       <div
         style={{
           display: "flex",
@@ -23,19 +23,23 @@ const ResProfile = () => {
             <b>Restaurant Info:</b>
           </Typography>
           <Typography>
-            <b style={{ color: "grey" }}>User Id: {user?.result._id}</b>
+            <b style={{ color: "grey" }}>
+              User Id: {!rest ? user?.result._id : rest._id}
+            </b>
           </Typography>
           <Typography>
             <b>Name: </b>
-            <b style={{ color: "green" }}>{user?.result.name}</b>
+            <b style={{ color: "green" }}>
+              {!rest ? user?.result.name : rest.name}
+            </b>
           </Typography>
           <Typography>
             <b>Email: </b>
-            {user?.result.email}
+            {!rest ? user?.result.email : rest.email}
           </Typography>
           <Typography>
             <b>Contact No: </b>
-            {user?.result.number}
+            {!rest ? user?.result.number : rest.number}
           </Typography>
         </div>
         <br />
@@ -50,16 +54,16 @@ const ResProfile = () => {
           </Typography>
           <Typography>
             <b> Apartment Name:</b>
-            {user?.result?.apartmentName}
+            {!rest ? user?.result?.apartmentName : rest.apartmentName}
           </Typography>
           <Typography>
-            <b>Locality:</b> {user?.result?.locality}
+            <b>Locality:</b> {!rest ? user?.result?.locality : rest.locality}
           </Typography>
           <Typography>
-            <b>Street:</b> {user?.result?.street}
+            <b>Street:</b> {!rest ? user?.result?.street : rest.street}
           </Typography>
           <Typography>
-            <b>Zip Code:</b> {user?.result?.zipCode}
+            <b>Zip Code:</b> {!rest ? user?.result?.zipCode : rest.zipCode}
           </Typography>
         </div>
       </div>

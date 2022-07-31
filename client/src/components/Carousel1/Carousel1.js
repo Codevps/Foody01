@@ -7,7 +7,7 @@ import FileBase from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
 import { createImage, getImages } from "../../actions/images";
 import "./styles.css";
-const Carousel1 = ({ slides }) => {
+const Carousel1 = ({ slides, rest }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const { images } = useSelector((state) => state.images);
   const [current, setCurrent] = useState(0);
@@ -40,7 +40,11 @@ const Carousel1 = ({ slides }) => {
   function sp() {
     x = true;
   }
-  images.map((image) => user?.result._id === image?.creator && sp());
+  images.map(
+    (image) =>
+      (user?.result._id === image?.creator || rest._id === image?.creator) &&
+      sp()
+  );
   return x ? (
     <div>
       <div style={{ display: "flex", flexDirection: "column" }}>
