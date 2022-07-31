@@ -35,7 +35,7 @@ const Category = () => {
                 color="textSecondary"
                 className={classes.link}
               >
-                <b>Breakfast</b>
+                <b>Snacks</b>
               </Typography>
             </CardContent>
           </Card>

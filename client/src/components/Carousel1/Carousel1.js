@@ -65,10 +65,13 @@ const Carousel1 = ({ slides, rest }) => {
               <div
                 className={index === current ? "slide active" : "slide"}
                 key={index}
-                style={{ alignContent: "center", alignItems: "center" }}
+                style={{
+                  alignContent: "center",
+                  alignItems: "center",
+                }}
               >
                 {index === current && (
-                  <img src={slide} alt="travel image" className="image" />
+                  <img src={slide} alt="image" className="image" />
                 )}
               </div>
             );
@@ -85,38 +88,37 @@ const Carousel1 = ({ slides, rest }) => {
             <ChevronRightIcon />
           </Button>
         </div>
-        {/* 
-          style={{ display: "flex", flexDirection: "column" }}
-         */}
-        <div
-          style={{
-            marginTop: "5rem",
-          }}
-        >
-          <form
-            autoComplete="off"
-            noValidate
-            onSubmit={handleSubmit}
-            // style={{ display: "flex", flexDirection: "column" }}
+        {user?.result.role && (
+          <div
+            style={{
+              marginTop: "5rem",
+            }}
           >
-            <FileBase
-              type="file"
-              multiple={false}
-              onDone={({ base64 }) =>
-                setNewImage({ ...newImage, images: base64 })
-              }
-            />
-            <Button
-              variant="contained"
-              color="primary"
-              size="large"
-              type="submit"
-              style={{ backgroundColor: "black" }}
+            <form
+              autoComplete="off"
+              noValidate
+              onSubmit={handleSubmit}
+              // style={{ display: "flex", flexDirection: "column" }}
             >
-              Add image
-            </Button>
-          </form>
-        </div>
+              <FileBase
+                type="file"
+                multiple={false}
+                onDone={({ base64 }) =>
+                  setNewImage({ ...newImage, images: base64 })
+                }
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                size="large"
+                type="submit"
+                style={{ backgroundColor: "black" }}
+              >
+                Add image
+              </Button>
+            </form>
+          </div>
+        )}
       </div>
     </div>
   ) : (

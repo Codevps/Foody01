@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { getImages } from "../../actions/images";
 import Carousel1 from "../Carousel1/Carousel1";
 import useStyles from "./styles";
+import bg from "../../images/bg.png";
 
 const ResCard = ({ item }) => {
   const { images } = useSelector((state) => state.images);
@@ -26,37 +27,40 @@ const ResCard = ({ item }) => {
   useEffect(() => {
     dispatch(getImages());
   }, [dispatch]);
+  console.log(arr);
   return (
     <div>
       <div>
-        <Card
-          style={{ margin: "1rem", paddingRight: "1rem" }}
-          elevation={6}
-          onClick={() => navigate(`/restaurant/${item._id})}`)}
-        >
+        <Card elevation={6} className={classes.card}>
           <ButtonBase
             component="span"
+            onClick={() => navigate(`/restaurant/${item._id})}`)}
             name="test"
-            // className={classes.cardAction}
+            className={classes.cardAction}
           >
-            <CardMedia
-              className={classes.media}
-              image={<Carousel1 slides={arr} />}
-            />
+            <CardMedia className={classes.media} image={arr[0] || bg} />
           </ButtonBase>
-          <div>{/* <Carousel1 slides={arr} /> */}</div>
           <CardContent>
             <div
               style={{
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
+                margin: "0.1rem",
+                marginLeft: "0.1rem",
               }}
             >
-              <Typography variant="h5">{item.name}</Typography>
-              <Typography variant="h5">{item.email}</Typography>
-              <Typography variant="h5">
-                {item.town}, {item.city}
+              <Typography variant="h6" style={{ fontSize: "1rem" }}>
+                Name: <b>{item.name} </b>
+              </Typography>
+              <Typography variant="h6" style={{ fontSize: "1rem" }}>
+                Email: <b>{item.email}</b>
+              </Typography>
+              <Typography variant="h6" style={{ fontSize: "1rem" }}>
+                Location:{" "}
+                <b>
+                  {item.town}, {item.city}
+                </b>
               </Typography>
             </div>
           </CardContent>

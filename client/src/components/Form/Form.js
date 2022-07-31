@@ -124,9 +124,9 @@ const Form = ({ currentId, setCurrentId }) => {
             }
           >
             <FormControlLabel
-              value="Breakfast"
+              value="Snacks"
               control={<Radio style={{ color: "coral" }} />}
-              label="Breakfast"
+              label="Snacks"
             />
             <FormControlLabel
               value="Lunch"

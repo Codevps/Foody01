@@ -19,8 +19,15 @@ const ResProfile = ({ rest }) => {
             paddingRight: "2rem",
           }}
         >
-          <Typography variant="h5" style={{ fontSize: "1.2rem" }}>
-            <b>Restaurant Info:</b>
+          <Typography
+            variant="h5"
+            style={{
+              fontSize: "2rem",
+              color: "black",
+              marginTop: "1rem",
+            }}
+          >
+            <b>{rest ? rest.name : user?.result.name} Info:</b>
           </Typography>
           <Typography>
             <b style={{ color: "grey" }}>

@@ -71,7 +71,7 @@ const Post = ({ post, setCurrentId, padd, x }) => {
   return (
     <div className={padd ? classes.padd : classes.card}>
       <Card
-        className={user?.result.role && ` ${classes.dashcard}`}
+        className={(user?.result.role || padd) && classes.dashcard}
         elevation={6}
       >
         <ButtonBase component="span" name="test" className={classes.cardAction}>

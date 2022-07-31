@@ -19,7 +19,16 @@ const ResCards = () => {
         <b>Restaurants</b> for <b>You</b>
       </Typography>
       {restaurant.map((item) => (
-        <Grid item xs={6} sm={4} md={3} lg={2} xl={2} key={item.id}>
+        <Grid
+          style={{ margin: "1rem" }}
+          item
+          xs={6}
+          sm={4}
+          md={3}
+          lg={2}
+          xl={2}
+          key={item.id}
+        >
           <ResCard item={item} />
         </Grid>
       ))}

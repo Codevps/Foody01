@@ -2,8 +2,10 @@ import { makeStyles } from "@mui/styles";
 
 export default makeStyles((theme) => ({
   media: {
-    height: "100px",
-    width: "100px",
+    minHeight: "150px",
+    minWidth: "242px",
+    width: "280px",
+    height: "auto",
   },
   border: {
     border: "solid",
@@ -39,6 +41,12 @@ export default makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
   },
+  cardAction: {
+    display: "block",
+    textAlign: "center",
+    margin: "none",
+    padding: "none",
+  },
   postDetails: {
     position: "absolute",
     bottom: "100px",
@@ -66,6 +74,43 @@ export default makeStyles((theme) => ({
     margin: ".2rem",
   },
   dashboard: {
+    display: "flex",
+    flexDirection: "row",
+  },
+  contain2: {
+    marginTop: "5rem",
+    marginBottom: "5rem",
+  },
+  contain3: {
+    marginLeft: "2rem",
+  },
+  contain: {
+    display: "flex",
+    flexDirection: "row",
+    margin: "auto",
+    padding: "auto",
+  },
+  [theme.breakpoints.down("sm")]: {
+    contain: {
+      flexDirection: "column-reverse",
+      justifyContent: "center",
+      alignItems: "center",
+      margin: "auto",
+      padding: "auto",
+    },
+    contain2: {
+      marginRight: "1rem",
+      marginTop: "none",
+      marginBottom: "none",
+    },
+  },
+  mainContain: {
+    display: "flex",
+    flexDirection: "row",
+    margin: "1rem",
+  },
+  dash: {
+    padding: ".5rem",
     display: "flex",
     flexDirection: "row",
   },

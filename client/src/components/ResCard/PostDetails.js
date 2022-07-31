@@ -7,13 +7,14 @@ import { getResById } from "../../actions/restaurant";
 import Carousel1 from "../Carousel1/Carousel1";
 import Post from "../Posts/Post/Post";
 import ResProfile from "../ResProfile/ResProfile";
+import useStyles from "./styles";
 
 const PostDetails = () => {
   const { rest } = useSelector((state) => state.restaurant);
   const { posts } = useSelector((state) => state.posts);
   const { images } = useSelector((state) => state.images);
   const dispatch = useDispatch();
-  // const classes = useStyles();
+  const classes = useStyles();
   const { id } = useParams();
   let x = id.substr(0, id.length - 2);
   let arr = [];
@@ -28,32 +29,18 @@ const PostDetails = () => {
 
   if (!rest) return null;
   return (
-    <div>
+    <div style={{ width: "88vw" }}>
       <Grid
         container
         justifyContent="space-between"
         alignItems="stretch"
-        spacing={5}
-        // className={classes.container}
+        spacing={2}
+        className={classes.contain}
       >
-        <Grid
-          //  className={classes.container3}
-          item
-          xs={12}
-          sm={6}
-          md={6}
-          lg={8}
-        >
+        <Grid className={classes.contain3} item xs={12} sm={4} md={4}>
           <ResProfile rest={rest} />
         </Grid>
-        <Grid
-          // className={classes.container2}
-          item
-          xs={12}
-          sm={6}
-          md={6}
-          lg={4}
-        >
+        <Grid className={classes.contain2} item xs={12} sm={5} md={6}>
           <Carousel1 slides={arr} rest={rest} />
         </Grid>
       </Grid>
@@ -63,7 +50,7 @@ const PostDetails = () => {
           style={{
             fontSize: "2rem",
             color: "black",
-            marginBottom: "1rem",
+            marginLeft: "2rem",
             marginTop: "1rem",
           }}
         >
@@ -74,13 +61,10 @@ const PostDetails = () => {
           container
           alignItems="stretch"
           spacing={3}
-          // className={classes.mainContainer}
+          className={classes.mainContain}
         >
           {posts.map((post) => (
-            <div
-              // className={classes.dashboard}
-              key={post._id}
-            >
+            <div className={classes.dash} key={post._id}>
               {rest._id === post.creator && <Post post={post} />}
             </div>
           ))}
