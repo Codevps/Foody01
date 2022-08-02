@@ -56,7 +56,7 @@ const Search = () => {
   return (
     <div className={classes.container}>
       <Typography className={classes.heading}>
-        Search food <b>Items</b> or <b>Restaurants</b>
+        Search food <b>Items</b>
       </Typography>
       <TextField
         fullWidth
