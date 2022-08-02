@@ -107,11 +107,9 @@ export default makeStyles((theme) => ({
   mainContain: {
     display: "flex",
     flexDirection: "row",
-    margin: "1rem",
+    margin: "0.8rem",
   },
   dash: {
-    padding: ".5rem",
-    display: "flex",
-    flexDirection: "row",
+    padding: "0.3rem",
   },
 }));

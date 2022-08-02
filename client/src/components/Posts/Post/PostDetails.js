@@ -76,19 +76,6 @@ const PostDetails = () => {
       <Typography className={classes.heading} style={{ marginBottom: "1rem" }}>
         Similar <b>Items:</b>
       </Typography>
-      {/* <Grid
-        container
-        alignItems="stretch"
-        spacing={3}
-        // className={classes.container}
-      > */}
-      {/* <div style={{ display: "flex", flexDirection: "row" }}>
-        {posts.map((item) => (
-          <Grid item xs={6} sm={4} md={3} lg={2} xl={2} key={item._id}>
-            {item.description === post.description && <Post post={item} />}
-          </Grid>
-        ))}
-      </div> */}
       <Grid
         container
         alignItems="stretch"
@@ -98,7 +85,7 @@ const PostDetails = () => {
       >
         {posts.map((item) => (
           <div className={classes.dash} key={item._id}>
-            {item.description === post.description && (
+            {item.description === post.description && item._id !== post._id && (
               <div onClick={() => navigate(`/customer/${item._id}`)}>
                 <Post post={item} />
               </div>
@@ -106,7 +93,6 @@ const PostDetails = () => {
           </div>
         ))}
       </Grid>
-      {/* </Grid>y */}
     </div>
   );
 };

@@ -67,6 +67,10 @@ const Post = ({ post, setCurrentId, padd, x }) => {
   const goAuth = () => {
     navigate("/customerAuth");
   };
+  const openPost = (id) => {
+    navigate(`/customer/${id}`);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  };
 
   return (
     <div className={padd ? classes.padd : classes.card}>
@@ -77,7 +81,7 @@ const Post = ({ post, setCurrentId, padd, x }) => {
         <ButtonBase
           component="span"
           name="test"
-          onClick={() => navigate(`/customer/${post._id}`)}
+          onClick={() => openPost(post._id)}
           className={classes.cardAction}
         >
           <CardMedia
@@ -105,8 +109,14 @@ const Post = ({ post, setCurrentId, padd, x }) => {
               {post.subDescription}
             </Typography>
           </div>
-          <Typography variant="h6" style={{ color: "grey" }}>
-            {post.name}
+          <Typography
+            variant="h6"
+            style={{
+              color: "grey",
+            }}
+            onClick={() => navigate(`/restaurant/${post.creator}`)}
+          >
+            <b>{post.restaurantName}</b>
           </Typography>
           <Typography variant="h6" color="green" component="p">
             <b>Price: &#8377;{post.price}</b>

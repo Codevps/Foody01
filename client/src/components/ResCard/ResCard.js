@@ -19,11 +19,16 @@ const ResCard = ({ item }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // USE OPEN POST OF MEMORIES FOR OPENING RESTAURANT CARD AND SHOWING RESTAURANT DETAILS
+
   let arr = [];
   function sp(images) {
     arr.push(images);
   }
   images.map((image) => item._id === image?.creator && sp(image.images));
+  const openPost = (id) => {
+    navigate(`/restaurant/${id}`);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  };
   useEffect(() => {
     dispatch(getImages());
   }, [dispatch]);
@@ -33,7 +38,7 @@ const ResCard = ({ item }) => {
         <Card elevation={6} className={classes.card}>
           <ButtonBase
             component="span"
-            onClick={() => navigate(`/restaurant/${item._id}`)}
+            onClick={() => openPost(item._id)}
             name="test"
             className={classes.cardAction}
           >

@@ -59,9 +59,12 @@ export default makeStyles((theme) => ({
     fontFamily: "Helvetica, Sans Serif ",
     fontSize: "30px",
   },
-  dash: {
-    padding: ".5rem",
+  mainContain: {
     display: "flex",
     flexDirection: "row",
+    margin: "0.8rem",
+  },
+  dash: {
+    padding: "0.3rem",
   },
 }));

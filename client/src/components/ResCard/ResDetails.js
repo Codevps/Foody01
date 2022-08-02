@@ -55,7 +55,6 @@ const PostDetails = () => {
         >
           Shop Items from <b>{rest.name}</b>:
         </Typography>
-        <br />
         <Grid
           container
           alignItems="stretch"
