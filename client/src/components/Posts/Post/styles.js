@@ -82,4 +82,12 @@ export default makeStyles((theme) => ({
       backgroundColor: "transparent",
     },
   },
+
+  hovering: {
+    color: "grey",
+    "&:hover": {
+      color: "coral",
+      textDecoration: "underline",
+    },
+  },
 }));

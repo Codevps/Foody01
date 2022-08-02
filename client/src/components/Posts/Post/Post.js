@@ -111,9 +111,11 @@ const Post = ({ post, setCurrentId, padd, x }) => {
           </div>
           <Typography
             variant="h6"
-            style={{
-              color: "grey",
-            }}
+            // style={{
+            // color: "grey",
+            // "&hover": { color: "white" },
+            // }}
+            className={classes.hovering}
             onClick={() => navigate(`/restaurant/${post.creator}`)}
           >
             <b>{post.restaurantName}</b>
