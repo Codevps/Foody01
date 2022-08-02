@@ -16,14 +16,13 @@ const PostDetails = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const { id } = useParams();
-  let x = id.substr(0, id.length - 2);
   let arr = [];
   function sp(images) {
     arr.push(images);
   }
   images.map((image) => rest?._id === image?.creator && sp(image.images));
   useEffect(() => {
-    dispatch(getResById(x));
+    dispatch(getResById(id));
     dispatch(getPosts());
   }, [id]);
 

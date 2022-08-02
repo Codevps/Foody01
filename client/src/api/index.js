@@ -59,3 +59,6 @@ export const fetchImages = () => API.get("/restaurant/images");
 export const createImage = (newImage) =>
   API.post("/restaurant/images", newImage);
 export const deleteImage = (id) => API.delete(`/restaurant/images/${id}`);
+
+// openpost
+export const fetchPost = (id) => API.get(`/restaurant/posts/post/${id}`);

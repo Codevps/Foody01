@@ -27,14 +27,13 @@ const ResCard = ({ item }) => {
   useEffect(() => {
     dispatch(getImages());
   }, [dispatch]);
-  console.log(arr);
   return (
     <div>
       <div>
         <Card elevation={6} className={classes.card}>
           <ButtonBase
             component="span"
-            onClick={() => navigate(`/restaurant/${item._id})}`)}
+            onClick={() => navigate(`/restaurant/${item._id}`)}
             name="test"
             className={classes.cardAction}
           >
@@ -51,14 +50,16 @@ const ResCard = ({ item }) => {
               }}
             >
               <Typography variant="h6" style={{ fontSize: "1rem" }}>
-                Name: <b>{item.name} </b>
+                Name:{" "}
+                <b style={{ fontSize: "1rem", color: "green" }}>{item.name} </b>
               </Typography>
               <Typography variant="h6" style={{ fontSize: "1rem" }}>
-                Email: <b>{item.email}</b>
+                Email:{" "}
+                <b style={{ fontSize: "1rem", color: "coral" }}>{item.email}</b>
               </Typography>
               <Typography variant="h6" style={{ fontSize: "1rem" }}>
                 Location:{" "}
-                <b>
+                <b style={{ fontSize: "1rem", color: "black" }}>
                   {item.town}, {item.city}
                 </b>
               </Typography>

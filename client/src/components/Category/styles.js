@@ -50,7 +50,7 @@ export default makeStyles((theme) => ({
     padding: ".8rem",
   },
   heading: {
-    marginTop: "3rem",
+    marginTop: "2rem",
     paddingLeft: "1rem",
     paddingBottom: "0",
     color: "black",
@@ -69,7 +69,5 @@ export default makeStyles((theme) => ({
   dashboard: {
     display: "flex",
     flexDirection: "row",
-    // margin: "auto",
-    // padding: "auto",
   },
 }));

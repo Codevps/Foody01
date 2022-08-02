@@ -10,7 +10,7 @@ export default makeStyles((theme) => ({
     boxShadow: "none",
     paddingLeft: "1rem",
     paddingRight: "1rem",
-    paddingBottom: ".3rem",
+    // paddingBottom: ".3rem",
     paddingTop: ".3rem",
   },
   headline: {

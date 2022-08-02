@@ -74,7 +74,12 @@ const Post = ({ post, setCurrentId, padd, x }) => {
         className={(user?.result.role || padd) && classes.dashcard}
         elevation={6}
       >
-        <ButtonBase component="span" name="test" className={classes.cardAction}>
+        <ButtonBase
+          component="span"
+          name="test"
+          onClick={() => navigate(`/customer/${post._id}`)}
+          className={classes.cardAction}
+        >
           <CardMedia
             className={classes.media}
             image={post.selectedFile || bg}
@@ -93,7 +98,7 @@ const Post = ({ post, setCurrentId, padd, x }) => {
               variant="body2"
               style={{
                 paddingTop: "0.3rem",
-                paddingRight: "1rem",
+                paddingRight: "0.2rem",
                 color: post.subDescription === "Veg" ? "green" : "red",
               }}
             >

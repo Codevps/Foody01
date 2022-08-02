@@ -12,7 +12,6 @@ const ResCards = () => {
   useEffect(() => {
     dispatch(getRes());
   }, [dispatch]);
-  console.log(restaurant);
   return (
     <div>
       <Typography className={classes.heading}>

@@ -161,9 +161,9 @@ const Form = ({ currentId, setCurrentId }) => {
               label="Veg"
             />
             <FormControlLabel
-              value="NonVeg"
+              value="NVeg"
               control={<Radio style={{ color: "red" }} />}
-              label="NonVeg"
+              label="Non-Veg"
             />
           </RadioGroup>
         </FormControl>

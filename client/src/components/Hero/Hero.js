@@ -12,14 +12,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { getPostsBySearch } from "../../actions/posts";
 import useStyles from "./styles";
 import "./styles.css";
-// function useQuery() {
-//   return new URLSearchParams(useLocation().search);
-// }
+
 const Hero = () => {
   const [search, setSearch] = useState("");
-  // const query = useQuery();
   const dispatch = useDispatch();
-  // const searchQuery = query.get("searchQuery");
   const navigate = useNavigate();
   const sp = () => {
     window.alert("Geolocation coming soon...");
@@ -27,7 +23,6 @@ const Hero = () => {
   const classes = useStyles();
   const searchPost = () => {
     dispatch(getPostsBySearch({ search }));
-    // navigate(`/posts/search?searchQuery=${search}`);
     navigate(`/posts/search`);
   };
 

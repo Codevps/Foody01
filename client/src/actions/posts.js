@@ -4,8 +4,18 @@ import {
   DELETE,
   FETCH_ALL,
   FETCH_BY_SEARCH,
+  FETCH_POST,
   UPDATE,
 } from "../constants/actionTypes";
+
+export const getPost = (id) => async (dispatch) => {
+  try {
+    const { data } = await api.fetchPost(id);
+    dispatch({ type: FETCH_POST, payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const getPosts = () => async (dispatch) => {
   try {
