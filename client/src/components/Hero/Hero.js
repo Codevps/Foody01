@@ -39,7 +39,7 @@ const Hero = () => {
           className={classes.search}
           name="search"
           variant="outlined"
-          label={`Search Restaurant`}
+          label={`GeoLocation coming soon...`}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           InputProps={{

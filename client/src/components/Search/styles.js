@@ -10,7 +10,7 @@ export default makeStyles((theme) => ({
     fontSize: "30px",
   },
   container: {
-    margin: "1rem",
+    marginLeft: "1px",
     width: "90vw",
     // alignItems: "center",
     // justifyContent: "center",

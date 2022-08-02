@@ -33,7 +33,20 @@ const Search = () => {
       x = "";
       return window.alert("No item found");
     }
-    console.log(x.split(" ").length);
+  };
+  const searchPost2 = (search, e) => {
+    if (e.key === "Enter") {
+      setItem(search);
+      if (item !== search) x = "";
+      console.log(x);
+      if (search === "") return;
+      if (x.split(" ").length - 1 === posts.length) {
+        setSearch("");
+        setItem("");
+        x = "";
+        return window.alert("No item found");
+      }
+    }
   };
 
   useEffect(() => {
@@ -43,7 +56,7 @@ const Search = () => {
   return (
     <div className={classes.container}>
       <Typography className={classes.heading}>
-        <b>Search</b> food Items
+        Search food <b>Items</b> or <b>Restaurants</b>
       </Typography>
       <TextField
         fullWidth
@@ -66,6 +79,7 @@ const Search = () => {
             </InputAdornment>
           ),
         }}
+        onKeyPress={(e) => searchPost2(search, e)}
       />
       <Grid
         container

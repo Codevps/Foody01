@@ -112,4 +112,12 @@ export default makeStyles((theme) => ({
   dash: {
     padding: "0.3rem",
   },
+  contain4: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column",
+    },
+  },
 }));
