@@ -38,7 +38,7 @@ const ResCards = () => {
         </Typography>
         <TextField
           fullWidth
-          style={{ margin: "1rem", marginBottom: "3rem" }}
+          style={{ marginLeft: "0.5rem", marginBottom: "1rem" }}
           autoFocus
           className={classes.search}
           name="search"
