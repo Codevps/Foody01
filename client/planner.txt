@@ -1,0 +1,4 @@
+work on search restaurant with town or city
+open post for similar items
+search items and restaurant :
+then and their use search button and onClick display search bar and filter the posts and restaurant accordingly  
