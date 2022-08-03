@@ -14,7 +14,8 @@ import Post from "../Posts/Post/Post";
 import Posts from "../Posts/Posts";
 import { getPosts } from "../../actions/posts";
 
-const Search = () => {
+const Search2 = () => {
+  // Turn to restaurant Search
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.posts);
   const [search, setSearch] = useState("");
@@ -55,9 +56,6 @@ const Search = () => {
 
   return (
     <div className={classes.container}>
-      <Typography className={classes.heading}>
-        Search food <b>Items</b>
-      </Typography>
       <TextField
         fullWidth
         style={{ margin: "1rem", marginBottom: "3rem" }}
@@ -65,7 +63,7 @@ const Search = () => {
         className={classes.search}
         name="search"
         variant="outlined"
-        label={`Search a dish...`}
+        label={`Search a restaurant`}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         InputProps={{
@@ -116,4 +114,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default Search2;

@@ -1,5 +1,3 @@
-THIS IS ONE TASK ALL BY ITSELF:
-{
-    work on search restaurant with town or city
-then and their use search button and onClick display search bar and filter the posts and restaurant accordingly
- } 
+search restaurant with town or city
+add card to the openedPost
+

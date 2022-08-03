@@ -16,7 +16,10 @@ import CusOrder from "./components/OrderPage/CusOrder/CusOrder";
 import ResOrder from "./components/OrderPage/ResOrder/ResOrder";
 import PostDetails from "./components/Posts/Post/PostDetails";
 import ResDetails from "./components/ResCard/ResDetails";
-import Search from "./components/Search/Search";
+import MainSearch from "./components/Search/MainSearch";
+import Search1 from "./components/Search/Search1";
+import Search2 from "./components/Search/Search2";
+import Search from "./components/Search/Search2";
 
 const App = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -59,7 +62,13 @@ const App = () => {
           <Route path={"/restaurant/:id"} exact element={<ResDetails />} />
           <Route path={"/customer/:id"} exact element={<PostDetails />} />
           <Route path={`/orders`} exact element={<ResOrder />} />
-          <Route path={`/search`} exact element={<Search />} />
+          <Route path={`/search`} exact element={<MainSearch />} />
+          <Route path={`/search/foodSearch`} exact element={<Search1 />} />
+          <Route
+            path={`/search/restaurantSearch`}
+            exact
+            element={<Search2 />}
+          />
         </Routes>
       </BrowserRouter>
     </div>
