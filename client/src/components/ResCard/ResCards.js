@@ -29,7 +29,6 @@ const ResCards = ({ y }) => {
           </Typography>
           <TextField
             fullWidth
-            autoFocus
             className={classes.search}
             name="search"
             placeholder="eg.Pangat || McDonalds"

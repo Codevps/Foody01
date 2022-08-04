@@ -167,8 +167,11 @@ const NavBar = () => {
 
           {!user?.result.role && user?.result && (
             <Tooltip title="Search food Items">
-              <IconButton style={{ marginLeft: "1rem" }}>
-                <SearchIcon onClick={() => navigate("/search")} />
+              <IconButton
+                onClick={() => navigate("/search")}
+                style={{ marginLeft: "0.5rem" }}
+              >
+                <SearchIcon />
               </IconButton>
             </Tooltip>
           )}

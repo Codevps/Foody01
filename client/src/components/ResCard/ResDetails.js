@@ -28,21 +28,23 @@ const PostDetails = () => {
 
   if (!rest) return null;
   return (
-    <div style={{ width: "88vw" }}>
-      <Grid
-        container
-        justifyContent="space-between"
-        alignItems="stretch"
-        spacing={2}
-        className={classes.contain}
-      >
-        <Grid className={classes.contain3} item xs={12} sm={4} md={4}>
-          <ResProfile rest={rest} />
+    <div style={{ overflow: "hidden" }}>
+      <div className={classes.design}>
+        <Grid
+          container
+          justifyContent="space-between"
+          alignItems="stretch"
+          spacing={2}
+          className={classes.contain}
+        >
+          <Grid className={classes.contain3} item xs={12} sm={6} md={4}>
+            <ResProfile rest={rest} />
+          </Grid>
+          <Grid className={classes.contain2} item xs={12} sm={6} md={6}>
+            <Carousel1 slides={arr} rest={rest} />
+          </Grid>
         </Grid>
-        <Grid className={classes.contain2} item xs={12} sm={5} md={6}>
-          <Carousel1 slides={arr} rest={rest} />
-        </Grid>
-      </Grid>
+      </div>
       <div>
         <Typography
           variant="body1"

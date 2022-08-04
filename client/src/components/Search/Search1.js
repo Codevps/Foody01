@@ -65,6 +65,7 @@ const Search1 = () => {
         label={`Search a dish...`}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
+        placeholder="French Fries , Crispy"
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">

@@ -22,6 +22,7 @@ export default makeStyles((theme) => ({
     position: "relative",
     alignItems: "center",
     textDecoration: "none",
+    width: "250px",
   },
   grid: {
     display: "flex",
@@ -93,8 +94,6 @@ export default makeStyles((theme) => ({
   contain: {
     display: "flex",
     flexDirection: "row",
-    margin: "auto",
-    padding: "auto",
   },
   [theme.breakpoints.down("sm")]: {
     contain: {
@@ -153,5 +152,8 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       width: "auto",
     },
+  },
+  design: {
+    [theme.breakpoints.down("sm")]: {},
   },
 }));

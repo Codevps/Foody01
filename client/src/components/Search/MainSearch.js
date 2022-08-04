@@ -10,24 +10,28 @@ const MainSearch = () => {
   const [value, setValue] = useState(false);
   return (
     <div>
-      <Typography
-        className={classes.heading}
-        onClick={() => setValue((prevValue) => !prevValue)}
-      >
-        <b>Search:</b>
-      </Typography>
       <div className={classes.rowing}>
         <Typography
           className={`${classes.designHeading}`}
-          onClick={() => setValue((prevValue) => !prevValue)}
-          style={{ color: value ? "green" : "black" }}
+          onClick={() => setValue(true)}
+          style={{
+            borderRadius: "3px",
+            color: value ? "green" : "black",
+            borderBottom: value ? "0.2rem solid coral" : "0.2rem solid grey",
+            cursor: "pointer",
+          }}
         >
           <b>Dish</b>
         </Typography>
         <Typography
           className={`${classes.designHeading}`}
-          onClick={() => setValue((prevValue) => !prevValue)}
-          style={{ color: !value ? "green" : "black" }}
+          onClick={() => setValue(false)}
+          style={{
+            borderRadius: "3px",
+            color: !value ? "green" : "black",
+            borderBottom: !value ? "0.2rem solid coral" : "0.2rem solid grey",
+            cursor: "pointer",
+          }}
         >
           <b>Restaurants</b>
         </Typography>

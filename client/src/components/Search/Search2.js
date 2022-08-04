@@ -64,6 +64,7 @@ const Search2 = () => {
         name="search"
         variant="outlined"
         label={`Search a restaurant`}
+        placeholder="Pangat, VegTreat"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         InputProps={{
@@ -88,15 +89,18 @@ const Search2 = () => {
         {search !== "" ? (
           restaurant.map((res) => (
             <div key={res._id}>
-              {res.title.toLowerCase().split(" ")[0] ===
+              {res.name.toLowerCase().split(" ")[0] ===
                 item.toLowerCase().split(" ")[0] ||
-              res.title.toLowerCase().split(" ")[1] ===
+              res.name.toLowerCase().split(" ")[1] ===
                 item.toLowerCase().split(" ")[0] ||
-              res.title.toLowerCase().split(" ")[0] ===
+              res.name.toLowerCase().split(" ")[0] ===
                 item.toLowerCase().split(" ")[1] ? (
-                <div>
+                <div
+                  key={res._id}
+                  style={{ marginLeft: "1rem", marginBottom: "0.3rem" }}
+                >
                   {x === ""}
-                  <ResCard res={res} />
+                  <ResCard item={res} />
                 </div>
               ) : (
                 <div style={{ display: "none" }}>{(x += "true ")}</div>

@@ -42,8 +42,12 @@ const PostDetails = () => {
             <Typography gutterBottom variant="body1" component="p">
               {post.message}
             </Typography>
-            <Typography variant="h6">
-              Created by: <b>{post.restaurantName}</b>
+            <Typography
+              variant="h6"
+              onClick={() => navigate(`/restaurant/${post.creator}`)}
+            >
+              Created by:{" "}
+              <b style={{ color: "coral" }}>{post.restaurantName}</b>
             </Typography>
             <Typography variant="h6">
               Title: <b>{post.title}</b>
