@@ -94,6 +94,18 @@ const Search2 = () => {
               res.name.toLowerCase().split(" ")[1] ===
                 item.toLowerCase().split(" ")[0] ||
               res.name.toLowerCase().split(" ")[0] ===
+                item.toLowerCase().split(" ")[1] ||
+              res.city.toLowerCase().split(" ")[0] ===
+                item.toLowerCase().split(" ")[0] ||
+              res.city.toLowerCase().split(" ")[1] ===
+                item.toLowerCase().split(" ")[0] ||
+              res.city.toLowerCase().split(" ")[0] ===
+                item.toLowerCase().split(" ")[1] ||
+              res.town.toLowerCase().split(" ")[0] ===
+                item.toLowerCase().split(" ")[0] ||
+              res.town.toLowerCase().split(" ")[1] ===
+                item.toLowerCase().split(" ")[0] ||
+              res.town.toLowerCase().split(" ")[0] ===
                 item.toLowerCase().split(" ")[1] ? (
                 <div
                   key={res._id}
