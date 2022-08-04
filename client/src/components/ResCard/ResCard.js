@@ -9,9 +9,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getImages } from "../../actions/images";
-import Carousel1 from "../Carousel1/Carousel1";
-import useStyles from "./styles";
 import bg from "../../images/bg.png";
+import useStyles from "./styles";
 
 const ResCard = ({ item }) => {
   const { images } = useSelector((state) => state.images);

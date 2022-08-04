@@ -10,14 +10,14 @@ import SearchIcon from "@mui/icons-material/Search";
 import useStyles from "./styles";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Post from "../Posts/Post/Post";
-import Posts from "../Posts/Posts";
+import ResCard from "../ResCard/ResCard";
+import ResCards from "../ResCard/ResCards";
 import { getPosts } from "../../actions/posts";
 
 const Search2 = () => {
   // Turn to restaurant Search
   const dispatch = useDispatch();
-  const { posts } = useSelector((state) => state.posts);
+  const { restaurant } = useSelector((state) => state.restaurant);
   const [search, setSearch] = useState("");
   const [item, setItem] = useState(search);
   const classes = useStyles();
@@ -28,7 +28,7 @@ const Search2 = () => {
     if (item !== search) x = "";
     console.log(x);
     if (search === "") return;
-    if (x.split(" ").length - 1 === posts.length) {
+    if (x.split(" ").length - 1 === restaurant.length) {
       setSearch("");
       setItem("");
       x = "";
@@ -41,7 +41,7 @@ const Search2 = () => {
       if (item !== search) x = "";
       console.log(x);
       if (search === "") return;
-      if (x.split(" ").length - 1 === posts.length) {
+      if (x.split(" ").length - 1 === restaurant.length) {
         setSearch("");
         setItem("");
         x = "";
@@ -86,17 +86,17 @@ const Search2 = () => {
         className={classes.container}
       >
         {search !== "" ? (
-          posts.map((post) => (
-            <div key={post._id}>
-              {post.title.toLowerCase().split(" ")[0] ===
+          restaurant.map((res) => (
+            <div key={res._id}>
+              {res.title.toLowerCase().split(" ")[0] ===
                 item.toLowerCase().split(" ")[0] ||
-              post.title.toLowerCase().split(" ")[1] ===
+              res.title.toLowerCase().split(" ")[1] ===
                 item.toLowerCase().split(" ")[0] ||
-              post.title.toLowerCase().split(" ")[0] ===
+              res.title.toLowerCase().split(" ")[0] ===
                 item.toLowerCase().split(" ")[1] ? (
                 <div>
                   {x === ""}
-                  <Post post={post} />
+                  <ResCard res={res} />
                 </div>
               ) : (
                 <div style={{ display: "none" }}>{(x += "true ")}</div>
@@ -106,7 +106,7 @@ const Search2 = () => {
         ) : (
           <Grid item xs={12} sm={12} md={12}>
             <div style={{ display: "none" }}>{(x = "")}</div>
-            <Posts y={true} />
+            <ResCards y={true} />
           </Grid>
         )}
       </Grid>

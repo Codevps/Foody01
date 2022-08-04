@@ -17,4 +17,17 @@ export default makeStyles((theme) => ({
     // display: "flex",
     // flexDirection: "column",
   },
+  rowing: {
+    display: "flex",
+    flexDirection: "row",
+  },
+  designHeading: {
+    color: "black",
+    fontFamily: "Helvetica, Sans Serif ",
+    fontSize: "30px",
+    marginLeft: "1rem",
+    textDecoration: "underline",
+    "&:hover": { color: "green" },
+    "&:active": { color: "green" },
+  },
 }));

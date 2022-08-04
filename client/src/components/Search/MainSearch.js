@@ -1,26 +1,49 @@
 import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Search1 from "./Search1";
+import Search2 from "./Search2";
 import useStyles from "./styles";
 
 const MainSearch = () => {
   const classes = useStyles();
+  const [value, setValue] = useState(false);
   return (
     <div>
       <Typography
         className={classes.heading}
-        component={Link}
-        to="/search/foodSearch"
+        onClick={() => setValue((prevValue) => !prevValue)}
       >
-        Search food <b>Items</b>
+        <b>Search:</b>
       </Typography>
-      <Typography
-        className={classes.heading}
-        component={Link}
-        to="/search/restaurantSearch"
-      >
-        Search food <b>Restaurants</b>
-      </Typography>
+      <div className={classes.rowing}>
+        <Typography
+          className={`${classes.designHeading}`}
+          onClick={() => setValue((prevValue) => !prevValue)}
+          style={{ color: value ? "green" : "black" }}
+        >
+          <b>Dish</b>
+        </Typography>
+        <Typography
+          className={`${classes.designHeading}`}
+          onClick={() => setValue((prevValue) => !prevValue)}
+          style={{ color: !value ? "green" : "black" }}
+        >
+          <b>Restaurants</b>
+        </Typography>
+      </div>
+      <div>
+        {value ? (
+          <div>
+            <Search1 />
+          </div>
+        ) : (
+          <div>
+            <Search2 />
+          </div>
+        )}
+      </div>
+
       {/*<Typography className={classes.heading}>
         <b>Select</b> your time's <b>Meal</b>
       </Typography>

@@ -5,7 +5,7 @@ import { getRes } from "../../actions/restaurant";
 import ResCard from "./ResCard";
 import useStyles from "./styles";
 
-const ResCards = () => {
+const ResCards = ({ y }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { restaurant } = useSelector((state) => state.restaurant);
@@ -22,36 +22,38 @@ const ResCards = () => {
   }, [dispatch]);
   return (
     <div style={{ width: "90vw" }}>
-      <div className={classes.sizing}>
-        <Typography className={classes.heading2}>
-          <b>Restaurants</b> for <b>You</b>
-        </Typography>
-        <TextField
-          fullWidth
-          autoFocus
-          className={classes.search}
-          name="search"
-          placeholder="eg.Pangat || McDonalds"
-          variant="outlined"
-          label={`Search Restaurant`}
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          // InputProps={{
-          //   endAdornment: (
-          //     <InputAdornment position="end">
-          //       <IconButton
-          //       // onClick={() => searchPost(search)}
-          //       >
-          //         <Tooltip title="Search food Items">
-          //           <SearchIcon />
-          //         </Tooltip>
-          //       </IconButton>
-          //     </InputAdornment>
-          //   ),
-          // }}
-          // onKeyPress={(e) => searchPost(search, e)}
-        />
-      </div>
+      {!y && (
+        <div className={classes.sizing}>
+          <Typography className={classes.heading2}>
+            <b>Restaurants</b> for <b>You</b>
+          </Typography>
+          <TextField
+            fullWidth
+            autoFocus
+            className={classes.search}
+            name="search"
+            placeholder="eg.Pangat || McDonalds"
+            variant="outlined"
+            label={`Search Restaurant`}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            // InputProps={{
+            //   endAdornment: (
+            //     <InputAdornment position="end">
+            //       <IconButton
+            //       // onClick={() => searchPost(search)}
+            //       >
+            //         <Tooltip title="Search food Items">
+            //           <SearchIcon />
+            //         </Tooltip>
+            //       </IconButton>
+            //     </InputAdornment>
+            //   ),
+            // }}
+            // onKeyPress={(e) => searchPost(search, e)}
+          />
+        </div>
+      )}
       <Grid
         container
         alignItems="stretch"

@@ -113,7 +113,7 @@ const Post = ({ post, setCurrentId, padd, x }) => {
             variant="h6"
             // style={{
             // color: "grey",
-            // "&hover": { color: "white" },
+            // "&:hover": { color: "white" },
             // }}
             className={classes.hovering}
             onClick={() => navigate(`/restaurant/${post.creator}`)}
