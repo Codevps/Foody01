@@ -95,7 +95,7 @@ export default makeStyles((theme) => ({
     display: "flex",
     flexDirection: "row",
   },
-  [theme.breakpoints.down("sm")]: {
+  [theme.breakpoints.down("md")]: {
     contain: {
       flexDirection: "column-reverse",
       justifyContent: "center",

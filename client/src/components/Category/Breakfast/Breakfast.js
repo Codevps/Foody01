@@ -14,6 +14,9 @@ const Breakfast = () => {
   }, [dispatch]);
   return (
     <div>
+      <Typography className={classes.heading} style={{ marginBottom: "1rem" }}>
+        <b>Breakfast Meals:</b>
+      </Typography>
       <Grid
         style={{ margin: "auto", padding: "auto" }}
         container

@@ -60,4 +60,5 @@ export default makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
+  inputError: {},
 }));

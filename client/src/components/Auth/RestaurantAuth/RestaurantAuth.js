@@ -6,9 +6,12 @@ import {
   FormControl,
   FormControlLabel,
   Grid,
+  IconButton,
+  InputAdornment,
   Paper,
   Radio,
   RadioGroup,
+  TextField,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -19,13 +22,18 @@ import {
   restaurantSignUp,
 } from "../../../actions/restaurant.js";
 import Input from "./Input";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import useStyles from "./styles";
+import { useFormik } from "formik";
 
-const CustomerAuth = () => {
+import { basicSchema } from "./Input";
+const RestaurantAuth = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const classes = useStyles();
   const [isSignUp, setIsSignUp] = useState(false);
+  const [val, setVal] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
@@ -51,42 +59,68 @@ const CustomerAuth = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
-  const handleChange = (e) => {
-    setRestaurantAuthData({
-      ...restaurantAuthData,
-      [e.target.name]: e.target.value,
-      latitude: latitude,
-      longitude: longitude,
-    });
-  };
+  // const handleChange = (e) => {
+  //   setRestaurantAuthData({
+  //     ...restaurantAuthData,
+  //     [e.target.name]: e.target.value,
+  //     latitude: latitude,
+  //     longitude: longitude,
+  //   });
+  // };
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      setLatitude(position.coords.latitude);
-      setLongitude(position.coords.longitude);
-    });
-  }, [dispatch]);
+  // useEffect(() => {
+  //   navigator.geolocation.getCurrentPosition((position) => {
+  //     setLatitude(position.coords.latitude);
+  //     setLongitude(position.coords.longitude);
+  //   });
+  // }, [dispatch]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (isSignUp) {
-      dispatch(
-        restaurantSignUp(
-          {
-            ...restaurantAuthData,
-            role: "SELLER",
-            latitude: latitude,
-            longitude: longitude,
-          },
-          navigate
-        )
-      );
-    } else {
-      dispatch(restaurantSignIn(restaurantAuthData, navigate));
-    }
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (isSignUp) {
+  //     dispatch(
+  //       restaurantSignUp(
+  //         {
+  //           ...restaurantAuthData,
+  //           role: "SELLER",
+  //           latitude: latitude,
+  //           longitude: longitude,
+  //         },
+  //         navigate
+  //       )
+  //     );
+  //   } else {
+  //     dispatch(restaurantSignIn(restaurantAuthData, navigate));
+  //   }
+  // };
+  const onSubmit = async (values, actions) => {
+    console.log("submitted");
+    console.log(values);
+    // await new Promise((resolve) => setTimeout(resolve, 000));
+    // actions.resetForm();
   };
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      number: "",
+      email: "",
+      apartmentName: "",
+      locality: "",
+      street: "",
+      city: "",
+      town: "",
+      zipCode: "",
+      password: "",
+      confirmPassword: "",
+      tags: "",
+    },
+    validationSchema: basicSchema,
+    onSubmit,
+  });
+  console.log(formik.values);
 
   // --------------------------------------------
+  // <<<<<ZIP-CODE AUTH REMAINING>>>>>>
   return (
     <Container
       component="main"
@@ -100,29 +134,103 @@ const CustomerAuth = () => {
         <Typography variant="h5">
           {isSignUp ? "Add your Restaurant" : "Restaurant Sign In"}
         </Typography>
-        <form className={classes.form} onSubmit={handleSubmit}>
+        <form
+          className={classes.form}
+          autoComplete="off"
+          onSubmit={formik.handleSubmit}
+          // onSubmit={handleSubmit}
+        >
           <Grid container spacing={2}>
             {isSignUp ? (
               <>
-                <Input
-                  name="name"
-                  label="Restaurant Name (Don't give spaces, eg: VegTreat)"
-                  handleChange={handleChange}
-                  autoFocus
-                />
-                <Input
-                  name="number"
-                  label="Restaurant Phone Number"
-                  handleChange={handleChange}
-                  half
-                />
-                <Input
-                  name="email"
-                  label="Email"
-                  handleChange={handleChange}
-                  type="email"
-                  half
-                />
+                <Grid item xs={12} sm={12}>
+                  <TextField
+                    sx={{
+                      "& .MuiInputLabel-root": {
+                        color:
+                          formik.errors.name && formik.touched.name && "red",
+                      },
+                    }}
+                    name="name"
+                    label="Restaurant Name (Don't give spaces, eg: VegTreat)"
+                    // handleChange={handleChange}
+                    value={formik.values.name}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className={
+                      formik.errors.name &&
+                      formik.touched.name &&
+                      classes.inputError
+                    }
+                    autoFocus
+                    fullWidth
+                    required
+                  />
+                  {formik.errors.name && formik.touched.name && (
+                    <Typography variant="body2" style={{ color: "red" }}>
+                      {formik.errors.name}
+                    </Typography>
+                  )}
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    name="number"
+                    label="Restaurant Phone Number"
+                    // handleChange={handleChange}
+                    sx={{
+                      "& .MuiInputLabel-root": {
+                        color:
+                          formik.errors.number &&
+                          formik.touched.number &&
+                          "red",
+                      },
+                    }}
+                    value={formik.values.number}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className={
+                      formik.errors.number &&
+                      formik.touched.number &&
+                      classes.inputError
+                    }
+                    fullWidth
+                    required
+                  />
+                  {formik.errors.number && formik.touched.number && (
+                    <Typography variant="body2" style={{ color: "red" }}>
+                      {formik.errors.number}
+                    </Typography>
+                  )}
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    name="email"
+                    label="Email"
+                    // handleChange={handleChange}
+                    sx={{
+                      "& .MuiInputLabel-root": {
+                        color:
+                          formik.errors.email && formik.touched.email && "red",
+                      },
+                    }}
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className={
+                      formik.errors.email &&
+                      formik.touched.email &&
+                      classes.inputError
+                    }
+                    type="email"
+                    fullWidth
+                    required
+                  />
+                  {formik.errors.email && formik.touched.email && (
+                    <Typography variant="body2" style={{ color: "red" }}>
+                      {formik.errors.email}
+                    </Typography>
+                  )}
+                </Grid>
                 <Typography
                   variant="h6"
                   component="p"
@@ -130,41 +238,183 @@ const CustomerAuth = () => {
                 >
                   Address:
                 </Typography>
-                <Input
-                  name="apartmentName"
-                  label="Apartment Name"
-                  handleChange={handleChange}
-                />
-                <Input
-                  name="locality"
-                  label="Locality"
-                  extend
-                  handleChange={handleChange}
-                />
-                <Input
-                  name="street"
-                  label="Street"
-                  handleChange={handleChange}
-                  half
-                />{" "}
-                <Input
-                  name="city"
-                  label="City"
-                  handleChange={handleChange}
-                  half
-                />{" "}
-                <Input
-                  name="town"
-                  label="Town"
-                  handleChange={handleChange}
-                  half
-                />
-                <Input
-                  name="zipCode"
-                  label="Zip Code"
-                  handleChange={handleChange}
-                  half
-                />
+                <Grid item xs={12} sm={12}>
+                  <TextField
+                    name="apartmentName"
+                    label="Apartment Name"
+                    // handleChange={handleChange}
+                    sx={{
+                      "& .MuiInputLabel-root": {
+                        color:
+                          formik.errors.apartmentName &&
+                          formik.touched.apartmentName &&
+                          "red",
+                      },
+                    }}
+                    value={formik.values.apartmentName}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className={
+                      formik.errors.apartmentName &&
+                      formik.touched.apartmentName &&
+                      classes.inputError
+                    }
+                    fullWidth
+                    required
+                  />
+                  {formik.errors.apartmentName && formik.touched.apartmentName && (
+                    <Typography variant="body2" style={{ color: "red" }}>
+                      {formik.errors.apartmentName}
+                    </Typography>
+                  )}
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    name="locality"
+                    label="Locality"
+                    extend
+                    // handleChange={handleChange}
+                    sx={{
+                      "& .MuiInputLabel-root": {
+                        color:
+                          formik.errors.locality &&
+                          formik.touched.locality &&
+                          "red",
+                      },
+                    }}
+                    value={formik.values.locality}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className={
+                      formik.errors.locality &&
+                      formik.touched.locality &&
+                      classes.inputError
+                    }
+                    fullWidth
+                    required
+                  />
+                  {formik.errors.locality && formik.touched.locality && (
+                    <Typography variant="body2" style={{ color: "red" }}>
+                      {formik.errors.locality}
+                    </Typography>
+                  )}
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    name="street"
+                    label="Street"
+                    // handleChange={handleChange}
+                    sx={{
+                      "& .MuiInputLabel-root": {
+                        color:
+                          formik.errors.street &&
+                          formik.touched.street &&
+                          "red",
+                      },
+                    }}
+                    value={formik.values.street}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className={
+                      formik.errors.street &&
+                      formik.touched.street &&
+                      classes.inputError
+                    }
+                    fullWidth
+                    required
+                  />
+                  {formik.errors.street && formik.touched.street && (
+                    <Typography variant="body2" style={{ color: "red" }}>
+                      {formik.errors.street}
+                    </Typography>
+                  )}
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    name="city"
+                    label="City"
+                    // handleChange={handleChange}
+                    sx={{
+                      "& .MuiInputLabel-root": {
+                        color:
+                          formik.errors.city && formik.touched.city && "red",
+                      },
+                    }}
+                    value={formik.values.city}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className={
+                      formik.errors.city &&
+                      formik.touched.city &&
+                      classes.inputError
+                    }
+                    fullWidth
+                    required
+                  />
+                  {formik.errors.city && formik.touched.city && (
+                    <Typography variant="body2" style={{ color: "red" }}>
+                      {formik.errors.city}
+                    </Typography>
+                  )}
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    name="town"
+                    label="Town"
+                    // handleChange={handleChange}
+                    sx={{
+                      "& .MuiInputLabel-root": {
+                        color:
+                          formik.errors.town && formik.touched.town && "red",
+                      },
+                    }}
+                    value={formik.values.town}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className={
+                      formik.errors.town &&
+                      formik.touched.town &&
+                      classes.inputError
+                    }
+                    fullWidth
+                    required
+                  />
+                  {formik.errors.town && formik.touched.town && (
+                    <Typography variant="body2" style={{ color: "red" }}>
+                      {formik.errors.town}
+                    </Typography>
+                  )}
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    name="zipCode"
+                    label="Zip Code"
+                    // handleChange={handleChange}
+                    sx={{
+                      "& .MuiInputLabel-root": {
+                        color:
+                          formik.errors.zipCode &&
+                          formik.touched.zipCode &&
+                          "red",
+                      },
+                    }}
+                    value={formik.values.zipCode}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className={
+                      formik.errors.zipCode &&
+                      formik.touched.zipCode &&
+                      classes.inputError
+                    }
+                    fullWidth
+                    required
+                  />
+                  {formik.errors.zipCode && formik.touched.zipCode && (
+                    <Typography variant="body2" style={{ color: "red" }}>
+                      {formik.errors.zipCode}
+                    </Typography>
+                  )}
+                </Grid>
                 <FormControl
                   style={{
                     display: "flex",
@@ -172,10 +422,7 @@ const CustomerAuth = () => {
                     marginRight: "auto",
                     marginLeft: "auto",
                     alignItems: "center",
-                    // border: "1px solid lightgrey",
-                    // padding: "8px 14px",
                     marginTop: "1rem",
-                    // borderRadius: "5px",
                   }}
                 >
                   <Typography
@@ -194,10 +441,10 @@ const CustomerAuth = () => {
                       flexDirection: "row",
                       marginLeft: "1rem",
                     }}
-                    name="tags"
                     variant="outlined"
+                    name="tags"
                     label="Description:"
-                    onChange={handleChange}
+                    onChange={(e) => (formik.values.tags = e.target.value)}
                   >
                     <FormControlLabel
                       value="Veg"
@@ -216,36 +463,163 @@ const CustomerAuth = () => {
                     />
                   </RadioGroup>
                 </FormControl>
-                <Input
-                  name="password"
-                  label="Password"
-                  handleChange={handleChange}
-                  type={showPassword ? "text" : "password"}
-                  handleShowPassword={handleShowPassword}
-                />
-                <Input
-                  name="confirmPassword"
-                  label="  Confirm Password"
-                  handleChange={handleChange}
-                  type="password"
-                  handleShowPassword={handleShowPassword}
-                />
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    name="password"
+                    label="Password"
+                    // handleChange={handleChange}
+                    sx={{
+                      "& .MuiInputLabel-root": {
+                        color:
+                          formik.errors.password &&
+                          formik.touched.password &&
+                          "red",
+                      },
+                    }}
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className={
+                      formik.errors.password &&
+                      formik.touched.password &&
+                      classes.inputError
+                    }
+                    type={showPassword ? "text" : "password"}
+                    fullWidth
+                    required
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton onClick={handleShowPassword}>
+                            {!showPassword ? (
+                              <Visibility style={{ color: "coral" }} />
+                            ) : (
+                              <VisibilityOff style={{ color: "coral" }} />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                  {formik.errors.password && formik.touched.password && (
+                    <Typography variant="body2" style={{ color: "red" }}>
+                      {formik.errors.password}
+                    </Typography>
+                  )}
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    name="confirmPassword"
+                    label="  Confirm Password"
+                    // handleChange={handleChange}
+                    sx={{
+                      "& .MuiInputLabel-root": {
+                        color:
+                          formik.errors.confirmPassword &&
+                          formik.touched.confirmPassword &&
+                          "red",
+                      },
+                    }}
+                    value={formik.values.confirmPassword}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className={
+                      formik.errors.confirmPassword &&
+                      formik.touched.confirmPassword &&
+                      classes.inputError
+                    }
+                    type="password"
+                    handleShowPassword={handleShowPassword}
+                    fullWidth
+                    required
+                  />
+                  {formik.errors.confirmPassword &&
+                    formik.touched.confirmPassword && (
+                      <Typography variant="body2" style={{ color: "red" }}>
+                        {formik.errors.confirmPassword}
+                      </Typography>
+                    )}
+                </Grid>
               </>
             ) : (
               <>
-                <Input
-                  name="email"
-                  label="Email"
-                  handleChange={handleChange}
-                  type="email"
-                />
-                <Input
-                  name="password"
-                  label="Password"
-                  handleChange={handleChange}
-                  type={showPassword ? "text" : "password"}
-                  handleShowPassword={handleShowPassword}
-                />
+                <Grid container spacing={2} style={{ paddingLeft: "1rem" }}>
+                  <Grid item xs={12} sm={12}>
+                    <TextField
+                      name="email"
+                      label="Email"
+                      // handleChange={handleChange}
+                      sx={{
+                        "& .MuiInputLabel-root": {
+                          color:
+                            formik.errors.email &&
+                            formik.touched.email &&
+                            "red",
+                        },
+                      }}
+                      value={formik.values.email}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      className={
+                        formik.errors.email &&
+                        formik.touched.email &&
+                        classes.inputError
+                      }
+                      type="email"
+                      fullWidth
+                      required
+                    />
+                    {formik.errors.email && formik.touched.email && (
+                      <Typography variant="body2" style={{ color: "red" }}>
+                        {formik.errors.email}
+                      </Typography>
+                    )}
+                  </Grid>
+                  <Grid item xs={12} sm={12}>
+                    <TextField
+                      name="password"
+                      label="Password"
+                      // handleChange={handleChange}
+                      sx={{
+                        "& .MuiInputLabel-root": {
+                          color:
+                            formik.errors.password &&
+                            formik.touched.password &&
+                            "red",
+                        },
+                      }}
+                      value={formik.values.password}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      className={
+                        formik.errors.password &&
+                        formik.touched.password &&
+                        classes.inputError
+                      }
+                      type={showPassword ? "text" : "password"}
+                      fullWidth
+                      required
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton onClick={handleShowPassword}>
+                              {!showPassword ? (
+                                <Visibility style={{ color: "coral" }} />
+                              ) : (
+                                <VisibilityOff style={{ color: "coral" }} />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                    {formik.errors.password && formik.touched.password && (
+                      <Typography variant="body2" style={{ color: "red" }}>
+                        {formik.errors.password}
+                      </Typography>
+                    )}
+                  </Grid>
+                </Grid>
               </>
             )}
           </Grid>
@@ -253,8 +627,8 @@ const CustomerAuth = () => {
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
             className={classes.submit}
+            disabled={formik.isSubmitting}
           >
             {isSignUp ? "Sign Up" : "Sign In"}
           </Button>
@@ -274,4 +648,176 @@ const CustomerAuth = () => {
   );
 };
 
-export default CustomerAuth;
+export default RestaurantAuth;
+
+// import { Button, TextField, Typography } from "@mui/material";
+// import { useFormik } from "formik";
+// import React from "react";
+// import { basicSchema } from "./Input";
+// import useStyles from "./styles";
+
+// const onSubmit = async (values, actions) => {
+//   console.log("submitted");
+//   console.log(values);
+//   await new Promise((resolve) => setTimeout(resolve, 000));
+//   // actions.resetForm();
+// };
+// const RestaurantAuth = () => {
+//   const classes = useStyles();
+
+//   const formik = useFormik({
+//     initialValues: {
+//       name: "",
+//       number: "",
+//       email: "",
+//       apartmentName: "",
+//       locality: "",
+//       street: "",
+//       city: "",
+//       town: "",
+//       zipCode: "",
+//       password: "",
+//       confirmPassword: "",
+//     },
+//     validationSchema: basicSchema,
+//     onSubmit,
+//   });
+
+//   return (
+//     <div>
+//       {/* <Form> */}
+//       <form autoComplete="off" onSubmit={formik.handleSubmit}>
+//         <TextField
+// sx={{
+//   "& .MuiInputLabel-root": {
+//     color: formik.errors.name && formik.touched.name && "red",
+//   },
+// }}
+//           value={formik.values.name}
+//           onChange={formik.handleChange}
+//           onBlur={formik.handleBlur}
+//           className={
+//             formik.errors.name && formik.touched.name && classes.inputError
+//           }
+//           name="name"
+//           fullWidth
+//           variant="outlined"
+//           label="Name"
+//           placeholder="eg.Pratham"
+//           autoFocus
+//         />
+// {formik.errors.name && formik.touched.name && (
+//   <Typography variant="body2" style={{ color: "red" }}>
+//     {formik.errors.name}
+//   </Typography>
+// )}
+//         <TextField
+//           sx={{
+//             "& .MuiInputLabel-root": {
+//               color: formik.errors.email && formik.touched.email && "red",
+//             },
+//           }}
+//           value={formik.values.email}
+//           onChange={formik.handleChange}
+//           onBlur={formik.handleBlur}
+//           className={
+//             formik.errors.email && formik.touched.email && classes.inputError
+//           }
+//           name="email"
+//           fullWidth
+//           variant="outlined"
+//           label="Email"
+//         />
+//         {formik.errors.email && formik.touched.email && (
+//           <Typography variant="body2" style={{ color: "red" }}>
+//             {formik.errors.email}
+//           </Typography>
+//         )}
+//         <TextField
+//           sx={{
+//             "& .MuiInputLabel-root": {
+//               color: formik.errors.number && formik.touched.number && "red",
+//             },
+//           }}
+//           value={formik.values.number}
+//           onChange={formik.handleChange}
+//           onBlur={formik.handleBlur}
+//           className={
+//             formik.errors.number && formik.touched.number && classes.inputError
+//           }
+//           name="number"
+//           fullWidth
+//           variant="outlined"
+//           label="Number"
+//         />
+//         {formik.errors.number && formik.touched.number && (
+//           <Typography variant="body2" style={{ color: "red" }}>
+//             {formik.errors.number}
+//           </Typography>
+//         )}
+//         <TextField
+//           sx={{
+//             "& .MuiInputLabel-root": {
+//               color: formik.errors.password && formik.touched.password && "red",
+//             },
+//           }}
+//           value={formik.values.password}
+//           onChange={formik.handleChange}
+//           onBlur={formik.handleBlur}
+//           className={
+//             formik.errors.password &&
+//             formik.touched.password &&
+//             classes.inputError
+//           }
+//           name="password"
+//           fullWidth
+//           variant="outlined"
+//           label="Password"
+//         />
+//         {formik.errors.password && formik.touched.password && (
+//           <Typography variant="body2" style={{ color: "red" }}>
+//             {formik.errors.password}
+//           </Typography>
+//         )}
+//         <TextField
+//           sx={{
+//             "& .MuiInputLabel-root": {
+//               color:
+//                 formik.errors.confirmPassword &&
+//                 formik.touched.confirmPassword &&
+//                 "red",
+//             },
+//           }}
+//           value={formik.values.confirmPassword}
+//           onChange={formik.handleChange}
+//           onBlur={formik.handleBlur}
+//           className={
+//             formik.errors.confirmPassword &&
+//             formik.touched.confirmPassword &&
+//             classes.inputError
+//           }
+//           name="confirmPassword"
+//           fullWidth
+//           variant="outlined"
+//           label="ConfirmPassword"
+//         />
+//         {formik.errors.confirmPassword && formik.touched.confirmPassword && (
+//           <Typography variant="body2" style={{ color: "red" }}>
+//             {formik.errors.confirmPassword}
+//           </Typography>
+//         )}
+//         <Button
+//           disabled={formik.isSubmitting}
+//           type="submit"
+//           variant="contained"
+//           color="primary"
+//         >
+//           Submit
+//         </Button>
+//       </form>
+//       {/* </Form> */}
+//     </div>
+//   );
+// };
+
+// export default RestaurantAuth;

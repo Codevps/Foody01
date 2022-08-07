@@ -1,6 +1,4 @@
-error handling,
-snackbar,
+error handling::
+form validate,
 loading,
-passwordAuth,
-constraints of phoneNumber 
-also phone, email cannot be same
+snackbar.
