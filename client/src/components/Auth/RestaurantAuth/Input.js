@@ -86,6 +86,12 @@ export const basicSchema = yup.object().shape({
     .string()
     .oneOf([yup.ref("password"), null], "Passwords must match")
     .required("Required"),
+  zipCode: yup
+    .string()
+    .required("Required")
+    .matches(/^[0-9]+$/, "Must be only digits")
+    .min(6, "Must be exactly 10 digits")
+    .max(6, "Must be exactly 10 digits"),
 });
 
 export const advancedSchema = yup.object().shape({

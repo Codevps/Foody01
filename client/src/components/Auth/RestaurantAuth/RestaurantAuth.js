@@ -15,9 +15,10 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
+  getRes,
   restaurantSignIn,
   restaurantSignUp,
 } from "../../../actions/restaurant.js";
@@ -31,8 +32,10 @@ import { basicSchema } from "./Input";
 const RestaurantAuth = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { restaurant } = useSelector((state) => state.restaurant);
   const classes = useStyles();
   const [isSignUp, setIsSignUp] = useState(false);
+  const [mail, setMail] = useState(false);
   const [val, setVal] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [latitude, setLatitude] = useState(0);
@@ -58,46 +61,53 @@ const RestaurantAuth = () => {
   const handleShowPassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
+    });
+  }, [dispatch]);
 
-  // const handleChange = (e) => {
-  //   setRestaurantAuthData({
-  //     ...restaurantAuthData,
-  //     [e.target.name]: e.target.value,
-  //     latitude: latitude,
-  //     longitude: longitude,
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   navigator.geolocation.getCurrentPosition((position) => {
-  //     setLatitude(position.coords.latitude);
-  //     setLongitude(position.coords.longitude);
-  //   });
-  // }, [dispatch]);
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (isSignUp) {
-  //     dispatch(
-  //       restaurantSignUp(
-  //         {
-  //           ...restaurantAuthData,
-  //           role: "SELLER",
-  //           latitude: latitude,
-  //           longitude: longitude,
-  //         },
-  //         navigate
-  //       )
-  //     );
-  //   } else {
-  //     dispatch(restaurantSignIn(restaurantAuthData, navigate));
-  //   }
-  // };
+  const handleSubmit = (e) => {
+    if (isSignUp) {
+      dispatch(
+        restaurantSignUp(
+          {
+            ...restaurantAuthData,
+            role: "SELLER",
+            latitude: latitude,
+            longitude: longitude,
+          },
+          navigate
+        )
+      );
+    } else {
+      dispatch(restaurantSignIn(restaurantAuthData, navigate));
+    }
+  };
   const onSubmit = async (values, actions) => {
+    // if (mail) return;
+    setRestaurantAuthData({
+      name: values.name,
+      number: values.number,
+      email: values.email,
+      apartmentName: values.apartmentName,
+      locality: values.locality,
+      street: values.street,
+      city: values.city,
+      town: values.town,
+      zipCode: values.zipCode,
+      password: values.password,
+      confirmPassword: values.confirmPassword,
+      tags: values.tags,
+      latitude: latitude,
+      longitude: longitude,
+    });
+
+    console.log(restaurantAuthData);
+    handleSubmit();
     console.log("submitted");
     console.log(values);
-    // await new Promise((resolve) => setTimeout(resolve, 000));
-    // actions.resetForm();
   };
   const formik = useFormik({
     initialValues: {
@@ -117,10 +127,15 @@ const RestaurantAuth = () => {
     validationSchema: basicSchema,
     onSubmit,
   });
-  console.log(formik.values);
-
+  const mailValidation = () => {
+    setMail(false);
+    restaurant.map(
+      (item) => formik.values.email === item.email && setMail(true)
+    );
+    if (formik.values.email === "") setMail(false);
+  };
   // --------------------------------------------
-  // <<<<<ZIP-CODE AUTH REMAINING>>>>>>
+  // <<<<<During sign up check if email  is already taken,during signin also check if email is taken or not and also check if password is equal a stored password>>>>>>
   return (
     <Container
       component="main"
@@ -206,7 +221,6 @@ const RestaurantAuth = () => {
                   <TextField
                     name="email"
                     label="Email"
-                    // handleChange={handleChange}
                     sx={{
                       "& .MuiInputLabel-root": {
                         color:
@@ -221,6 +235,7 @@ const RestaurantAuth = () => {
                       formik.touched.email &&
                       classes.inputError
                     }
+                    onClick={() => mailValidation()}
                     type="email"
                     fullWidth
                     required
@@ -228,6 +243,11 @@ const RestaurantAuth = () => {
                   {formik.errors.email && formik.touched.email && (
                     <Typography variant="body2" style={{ color: "red" }}>
                       {formik.errors.email}
+                    </Typography>
+                  )}
+                  {mail && (
+                    <Typography variant="body2" style={{ color: "red" }}>
+                      Email is already taken
                     </Typography>
                   )}
                 </Grid>
@@ -579,23 +599,9 @@ const RestaurantAuth = () => {
                     <TextField
                       name="password"
                       label="Password"
-                      // handleChange={handleChange}
-                      sx={{
-                        "& .MuiInputLabel-root": {
-                          color:
-                            formik.errors.password &&
-                            formik.touched.password &&
-                            "red",
-                        },
-                      }}
                       value={formik.values.password}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
-                      className={
-                        formik.errors.password &&
-                        formik.touched.password &&
-                        classes.inputError
-                      }
                       type={showPassword ? "text" : "password"}
                       fullWidth
                       required
@@ -613,11 +619,6 @@ const RestaurantAuth = () => {
                         ),
                       }}
                     />
-                    {formik.errors.password && formik.touched.password && (
-                      <Typography variant="body2" style={{ color: "red" }}>
-                        {formik.errors.password}
-                      </Typography>
-                    )}
                   </Grid>
                 </Grid>
               </>
