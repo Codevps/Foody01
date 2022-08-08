@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useState } from "react";
 const API = axios.create({ baseURL: "http://localhost:5000" });
 
 API.interceptors.request.use((req) => {
@@ -9,6 +10,7 @@ API.interceptors.request.use((req) => {
   }
   return req;
 });
+export let error;
 // auth for customer
 export const customerSignIn = (customerAuthData) =>
   API.post("/customer/signin", customerAuthData);
@@ -17,7 +19,9 @@ export const customerSignUp = (customerAuthData) =>
 
 // auth for seller
 export const restaurantSignIn = (restaurantAuthData) =>
-  API.post("/restaurant/signin", restaurantAuthData);
+  API.post("/restaurant/signin", restaurantAuthData).catch((e) =>
+    console.log(e.response.data)
+  );
 export const restaurantSignUp = (restaurantAuthData) =>
   API.post("/restaurant/signup", restaurantAuthData);
 export const fetchRes = () => API.get("/restaurant/");

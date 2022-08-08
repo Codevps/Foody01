@@ -56,12 +56,6 @@ const RestaurantAuth = () => {
   }, [dispatch]);
 
   const handleSubmit = (values) => {
-    console.log({
-      ...values,
-      role: "SELLER",
-      latitude: latitude,
-      longitude: longitude,
-    });
     if (isSignUp) {
       if (mail) return;
       dispatch(
@@ -76,7 +70,7 @@ const RestaurantAuth = () => {
         )
       );
     } else {
-      if (!mail1) return;
+      if (mail1) return;
       dispatch(restaurantSignIn(values));
     }
   };

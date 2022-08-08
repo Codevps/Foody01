@@ -8,7 +8,10 @@ export const customerSignIn = async (req, res) => {
   try {
     const existingUser = await CustomerAuth.findOne({ email });
     if (!existingUser) res.status(404).json({ message: "User doesn't exist!" });
-    const isPasswordCorrect = bcrypt.compare(password, existingUser.password);
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      existingUser.password
+    );
     if (!isPasswordCorrect)
       res.status(400).json({ message: "Invalid credentials" });
 
