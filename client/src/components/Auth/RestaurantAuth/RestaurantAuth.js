@@ -63,6 +63,7 @@ const RestaurantAuth = () => {
       longitude: longitude,
     });
     if (isSignUp) {
+      if (mail) return;
       dispatch(
         restaurantSignUp(
           {
@@ -75,7 +76,8 @@ const RestaurantAuth = () => {
         )
       );
     } else {
-      dispatch(restaurantSignIn(values, navigate));
+      if (!mail1) return;
+      dispatch(restaurantSignIn(values));
     }
   };
   const onSubmit = async (values, actions) => {
