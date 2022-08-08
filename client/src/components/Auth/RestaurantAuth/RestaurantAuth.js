@@ -106,15 +106,6 @@ const RestaurantAuth = () => {
     console.log(isSignUp);
     handleSubmit();
   };
-  // const onSubmit2 = async (values, actions) => {
-  //   console.log(values);
-  //   setRestaurantAuthData({
-  //     email: values.email,
-  //     password: values.password,
-  //   });
-  //   console.log(restaurantAuthData);
-  //   handleSubmit();
-  // };
   const formik = useFormik({
     initialValues: {
       name: "",
