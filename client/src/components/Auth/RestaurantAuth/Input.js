@@ -90,8 +90,8 @@ export const basicSchema = yup.object().shape({
     .string()
     .required("Required")
     .matches(/^[0-9]+$/, "Must be only digits")
-    .min(6, "Must be exactly 10 digits")
-    .max(6, "Must be exactly 10 digits"),
+    .min(6, "Must be exactly 6 digits")
+    .max(6, "Must be exactly 6 digits"),
 });
 
 export const advancedSchema = yup.object().shape({

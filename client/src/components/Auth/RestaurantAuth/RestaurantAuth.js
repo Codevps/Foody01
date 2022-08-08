@@ -39,19 +39,6 @@ const RestaurantAuth = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
-  const [restaurantAuthData, setRestaurantAuthData] = useState({
-    name: "",
-    number: "",
-    email: "",
-    apartmentName: "",
-    locality: "",
-    street: "",
-    city: "",
-    town: "",
-    zipCode: "",
-    password: "",
-    confirmPassword: "",
-  });
 
   const switchMode = () => {
     setIsSignUp((prevIsSignUp) => !prevIsSignUp);
@@ -68,12 +55,18 @@ const RestaurantAuth = () => {
     });
   }, [dispatch]);
 
-  const handleSubmit = () => {
+  const handleSubmit = (values) => {
+    console.log({
+      ...values,
+      role: "SELLER",
+      latitude: latitude,
+      longitude: longitude,
+    });
     if (isSignUp) {
       dispatch(
         restaurantSignUp(
           {
-            ...restaurantAuthData,
+            ...values,
             role: "SELLER",
             latitude: latitude,
             longitude: longitude,
@@ -82,29 +75,11 @@ const RestaurantAuth = () => {
         )
       );
     } else {
-      dispatch(restaurantSignIn(restaurantAuthData, navigate));
+      dispatch(restaurantSignIn(values, navigate));
     }
   };
   const onSubmit = async (values, actions) => {
-    setRestaurantAuthData({
-      name: values.name,
-      number: values.number,
-      email: values.email,
-      apartmentName: values.apartmentName,
-      locality: values.locality,
-      street: values.street,
-      city: values.city,
-      town: values.town,
-      zipCode: values.zipCode,
-      password: values.password,
-      confirmPassword: values.confirmPassword,
-      tags: values.tags,
-      latitude: latitude,
-      longitude: longitude,
-    });
-    console.log(restaurantAuthData);
-    console.log(isSignUp);
-    handleSubmit();
+    handleSubmit(values);
   };
   const formik = useFormik({
     initialValues: {
