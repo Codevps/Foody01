@@ -25,6 +25,7 @@ const Search1 = () => {
   const { posts } = useSelector((state) => state.posts);
   const [search, setSearch] = useState("");
   const [open, setOpen] = useState(false);
+  const [present, setPresent] = useState(true);
   const [item, setItem] = useState(search);
   const classes = useStyles();
   let x = "";
@@ -32,9 +33,13 @@ const Search1 = () => {
   const searchPost = (search) => {
     setItem(search);
     if (item !== search) x = "";
-    if (search === "") return;
+    if (search === "") {
+      setPresent(true);
+      return;
+    }
     if (x.split(" ").length - 1 === posts.length) {
       setOpen(true);
+      setPresent(false);
       setSearch("");
       setItem("");
       x = "";
@@ -45,9 +50,13 @@ const Search1 = () => {
     if (e.key === "Enter") {
       setItem(search);
       if (item !== search) x = "";
-      if (search === "") return;
+      if (search === "") {
+        setPresent(true);
+        return;
+      }
       if (x.split(" ").length - 1 === posts.length) {
         setOpen(true);
+        setPresent(false);
         setSearch("");
         setItem("");
         x = "";
@@ -60,6 +69,9 @@ const Search1 = () => {
       return;
     }
     setOpen(false);
+    setPresent(true);
+    setSearch("");
+    setItem("");
   };
 
   useEffect(() => {
@@ -102,7 +114,7 @@ const Search1 = () => {
         }}
         onKeyPress={(e) => searchPost2(search, e)}
       />
-      {item ? (
+      {present ? (
         <Grid
           container
           alignItems="stretch"

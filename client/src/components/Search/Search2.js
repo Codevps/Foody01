@@ -23,6 +23,7 @@ const Search2 = () => {
   // Turn to restaurant Search
   const dispatch = useDispatch();
   const { restaurant } = useSelector((state) => state.restaurant);
+  const [present, setPresent] = useState(true);
   const [search, setSearch] = useState("");
   const [open, setOpen] = useState(false);
   const [item, setItem] = useState(search);
@@ -33,9 +34,13 @@ const Search2 = () => {
     setItem(search);
     if (item !== search) x = "";
     console.log(x);
-    if (search === "") return;
+    if (search === "") {
+      setPresent(true);
+      return;
+    }
     if (x.split(" ").length - 1 === restaurant.length) {
       setOpen(true);
+      setPresent(false);
       setSearch("");
       setItem("");
       x = "";
@@ -48,9 +53,13 @@ const Search2 = () => {
       setItem(search);
       if (item !== search) x = "";
       console.log(x);
-      if (search === "") return;
+      if (search === "") {
+        setPresent(true);
+        return;
+      }
       if (x.split(" ").length - 1 === restaurant.length) {
         setOpen(true);
+        setPresent(false);
         setSearch("");
         setItem("");
         x = "";
@@ -63,6 +72,9 @@ const Search2 = () => {
       return;
     }
     setOpen(false);
+    setPresent(true);
+    setSearch("");
+    setItem("");
   };
   useEffect(() => {
     dispatch(getPosts());
@@ -104,7 +116,7 @@ const Search2 = () => {
         }}
         onKeyPress={(e) => searchPost2(search, e)}
       />
-      {item ? (
+      {present ? (
         <Grid
           container
           alignItems="stretch"
