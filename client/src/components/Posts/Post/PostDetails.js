@@ -1,4 +1,4 @@
-import { Grid, Paper, Typography } from "@mui/material";
+import { CircularProgress, Grid, Paper, Typography } from "@mui/material";
 import moment from "moment";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,7 +10,7 @@ import useStyles from "./styles2";
 
 const PostDetails = () => {
   const { post } = useSelector((state) => state.posts);
-  const { posts } = useSelector((state) => state.posts);
+  const { posts, isLoading } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const classes = useStyles();
@@ -20,11 +20,30 @@ const PostDetails = () => {
     dispatch(getPosts());
   }, [id]);
 
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "20px",
+        }}
+      >
+        <CircularProgress size="2em" />
+      </div>
+    );
+  }
   if (!post) return null;
   return (
-    <div>
+    <div style={{ overflow: "none" }}>
       <Paper
-        style={{ padding: "20px", borderRadius: "15px", marginTop: "0.6rem" }}
+        style={{
+          borderRadius: "15px",
+          marginTop: "0.6rem",
+          margin: "1rem",
+          padding: "1rem",
+        }}
         elevation={6}
       >
         <div className={classes.card}>
@@ -46,7 +65,7 @@ const PostDetails = () => {
               variant="h6"
               onClick={() => navigate(`/restaurant/${post.creator}`)}
             >
-              Created by:{" "}
+              Created by:
               <b style={{ color: "coral" }}>{post.restaurantName}</b>
             </Typography>
             <Typography variant="h6">
@@ -85,7 +104,12 @@ const PostDetails = () => {
         alignItems="stretch"
         spacing={3}
         className={classes.mainContain}
-        style={{ marginLeft: "0.5rem", marginTop: "0.7rem" }}
+        style={{
+          marginLeft: "0.5rem",
+          marginTop: "0.7rem",
+          width: "100%",
+          overflow: "none",
+        }}
       >
         {posts.map((item) => (
           <div className={classes.dash} key={item._id}>

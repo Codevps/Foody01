@@ -2,9 +2,9 @@ import { makeStyles } from "@mui/styles";
 
 export default makeStyles((theme) => ({
   media: {
-    minHeight: "150px",
-    minWidth: "242px",
-    width: "280px",
+    minHeight: "100px",
+    minWidth: "180px",
+    width: "180px",
     height: "auto",
   },
   border: {
@@ -22,7 +22,7 @@ export default makeStyles((theme) => ({
     position: "relative",
     alignItems: "center",
     textDecoration: "none",
-    width: "250px",
+    width: "180px",
   },
   grid: {
     display: "flex",

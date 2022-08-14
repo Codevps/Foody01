@@ -48,11 +48,7 @@ const App = () => {
               user?.result ? <Navigate to="/home" /> : <RestaurantAuth />
             }
           />
-          <Route
-            path={`/dashboard/${user?.result._id}`}
-            exact
-            element={<DashBoard />}
-          />
+          <Route path={`/dashboard/:id`} exact element={<DashBoard />} />
           <Route path={`/cart`} exact element={<Cart />} />
           <Route path={`/cart/checkout`} exact element={<DeliveryDetails />} />
           <Route path={`breakfastCategory`} exact element={<Breakfast />} />

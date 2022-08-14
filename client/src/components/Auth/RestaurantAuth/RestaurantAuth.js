@@ -71,7 +71,7 @@ const RestaurantAuth = () => {
       );
     } else {
       if (mail1) return;
-      dispatch(restaurantSignIn(values));
+      dispatch(restaurantSignIn(values, navigate));
     }
   };
   const onSubmit = async (values, actions) => {
@@ -633,6 +633,7 @@ const RestaurantAuth = () => {
         <Button
           className={classes.mode}
           fullWidth
+          style={{ marginLeft: !isSignUp && "1.5rem" }}
           variant="contained"
           onClick={switchMode}
         >

@@ -1,7 +1,14 @@
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { Button, Container, Paper, Typography } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import {
+  Button,
+  Container,
+  IconButton,
+  Paper,
+  Typography,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import FileBase from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,7 +32,8 @@ const Carousel1 = ({ slides, rest }) => {
     setCurrent(current === 0 ? length - 1 : current - 1);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     dispatch(createImage(newImage));
   };
 
@@ -98,7 +106,11 @@ const Carousel1 = ({ slides, rest }) => {
               autoComplete="off"
               noValidate
               onSubmit={handleSubmit}
-              // style={{ display: "flex", flexDirection: "column" }}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-around",
+              }}
             >
               <FileBase
                 type="file"
@@ -107,15 +119,9 @@ const Carousel1 = ({ slides, rest }) => {
                   setNewImage({ ...newImage, images: base64 })
                 }
               />
-              <Button
-                variant="contained"
-                color="primary"
-                size="large"
-                type="submit"
-                style={{ backgroundColor: "black" }}
-              >
-                Add image
-              </Button>
+              <IconButton type="submit">
+                <AddIcon />
+              </IconButton>
             </form>
           </div>
         )}
@@ -135,16 +141,9 @@ const Carousel1 = ({ slides, rest }) => {
                 setNewImage({ ...newImage, images: base64 })
               }
             />
-            <Button
-              variant="contained"
-              color="primary"
-              size="large"
-              type="submit"
-              fullWidth
-              style={{ backgroundColor: "black" }}
-            >
-              Add image
-            </Button>
+            <IconButton type="submit">
+              <AddIcon />
+            </IconButton>
           </form>
         </div>
       </Paper>

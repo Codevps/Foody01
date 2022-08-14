@@ -17,7 +17,6 @@ const ResCard = ({ item }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // USE OPEN POST OF MEMORIES FOR OPENING RESTAURANT CARD AND SHOWING RESTAURANT DETAILS
 
   let arr = [];
   function sp(images) {
@@ -49,22 +48,24 @@ const ResCard = ({ item }) => {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
-                margin: "0.1rem",
-                marginLeft: "0.1rem",
+                // margin: "0.1rem",
+                // marginLeft: "0.1rem",
               }}
             >
               <Typography variant="h6" style={{ fontSize: "1rem" }}>
-                Name:{" "}
+                Name:
                 <b style={{ fontSize: "1rem", color: "green" }}>{item.name} </b>
               </Typography>
               <Typography variant="h6" style={{ fontSize: "1rem" }}>
-                Email:{" "}
-                <b style={{ fontSize: "1rem", color: "coral" }}>{item.email}</b>
+                Tags:
+                <b style={{ fontSize: "1rem", color: "coral" }}>
+                  {item.tags === "Both" ? " Veg & NonVeg" : ` ${item.tags}`}
+                </b>
               </Typography>
               <Typography variant="h6" style={{ fontSize: "1rem" }}>
-                Location:{" "}
+                Location:
                 <b style={{ fontSize: "1rem", color: "black" }}>
-                  {item.town}, {item.city}
+                  {` ${item.town} ${item.city}`}
                 </b>
               </Typography>
             </div>

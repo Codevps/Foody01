@@ -1,6 +1,8 @@
 import {
   CREATE_ORDER,
   CUS_UPDATE_ORDER,
+  START_LOADING,
+  END_LOADING,
   FETCH_ORDERS,
   RES_UPDATE_ORDER,
 } from "../constants/actionTypes";
@@ -28,6 +30,10 @@ const orders = (state = { orders: [] }, action) => {
           order._id === action.payload._id ? action.payload : order
         ),
       };
+    case START_LOADING:
+      return { ...state, isLoading: true };
+    case END_LOADING:
+      return { ...state, isLoading: false };
     default:
       return state;
   }

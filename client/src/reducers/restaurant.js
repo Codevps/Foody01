@@ -1,6 +1,8 @@
 import {
   FETCH_RES,
   FETCH_RES_BY_ID,
+  START_LOADING,
+  END_LOADING,
   LOGOUT,
   RESTAURANT_AUTH,
 } from "../constants/actionTypes";
@@ -20,6 +22,10 @@ const restaurant = (state = { restaurant: [] }, action) => {
     case LOGOUT:
       localStorage.clear();
       return { ...state, restaurant: null };
+    case START_LOADING:
+      return { ...state, isLoading: true };
+    case END_LOADING:
+      return { ...state, isLoading: false };
     default:
       return state;
   }

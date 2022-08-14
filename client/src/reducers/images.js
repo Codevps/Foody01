@@ -18,6 +18,7 @@ const images = (state = { images: [] }, action) => {
         ...state,
         images: state.images.filter((image) => image._id !== action.payload),
       };
+
     default:
       return state;
   }

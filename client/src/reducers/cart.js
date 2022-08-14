@@ -2,8 +2,10 @@ import {
   ADD_ITEM,
   CREATE_ITEM,
   DELETE_ITEM,
+  END_LOADING,
   FETCH_ITEMS,
   REMOVE_ITEM,
+  START_LOADING,
 } from "../constants/actionTypes";
 
 const items = (state = { items: [] }, action) => {
@@ -34,6 +36,10 @@ const items = (state = { items: [] }, action) => {
           item._id === action.payload._id ? action.payload : item
         ),
       };
+    case START_LOADING:
+      return { ...state, isLoading: true };
+    case END_LOADING:
+      return { ...state, isLoading: false };
     default:
       return state;
   }

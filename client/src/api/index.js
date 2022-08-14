@@ -16,6 +16,7 @@ export const customerSignIn = (customerAuthData) =>
   API.post("/customer/signin", customerAuthData);
 export const customerSignUp = (customerAuthData) =>
   API.post("/customer/signup", customerAuthData);
+export const fetchCus = () => API.get("/customer/");
 
 // auth for seller
 export const restaurantSignIn = (restaurantAuthData) =>

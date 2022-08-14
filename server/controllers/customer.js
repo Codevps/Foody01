@@ -53,3 +53,13 @@ export const customerSignUp = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const getCus = async (req, res) => {
+  try {
+    const customer = await CustomerAuth.find();
+    res.status(200).json({ data: customer });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
+  }
+};

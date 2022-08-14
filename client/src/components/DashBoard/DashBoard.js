@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { CircularProgress, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../../actions/posts";
@@ -11,6 +11,7 @@ import Carousel1 from "../Carousel1/Carousel1";
 const DashBoard = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const { images } = useSelector((state) => state.images);
+  const { restaurant, isLoading } = useSelector((state) => state.restaurant);
   const dispatch = useDispatch();
   const classes = useStyles();
   const [currentId, setCurrentId] = useState(null);
@@ -25,6 +26,20 @@ const DashBoard = () => {
     dispatch(getPosts());
   }, [dispatch]);
 
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "20px",
+        }}
+      >
+        <CircularProgress size="2em" />
+      </div>
+    );
+  }
   return (
     <div>
       <Grid

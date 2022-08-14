@@ -1,4 +1,10 @@
-import { Grid, TextField, Typography } from "@mui/material";
+import {
+  CircularProgress,
+  Grid,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRes } from "../../actions/restaurant";
@@ -8,7 +14,7 @@ import useStyles from "./styles";
 const ResCards = ({ y }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { restaurant } = useSelector((state) => state.restaurant);
+  const { restaurant, isLoading } = useSelector((state) => state.restaurant);
   const [search, setSearch] = useState("");
   // const [nama, setNama] = useState("");
   //   const searchPost2 = (search, e) => {
@@ -20,6 +26,22 @@ const ResCards = ({ y }) => {
   useEffect(() => {
     dispatch(getRes());
   }, [dispatch]);
+
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "20px",
+        }}
+      >
+        <CircularProgress size="2em" />
+      </div>
+    );
+  }
+
   return (
     <div style={{ width: "90vw" }}>
       {!y && (

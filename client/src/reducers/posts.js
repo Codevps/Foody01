@@ -4,6 +4,8 @@ import {
   FETCH_ALL,
   FETCH_BY_SEARCH,
   FETCH_POST,
+  START_LOADING,
+  END_LOADING,
   UPDATE,
 } from "../constants/actionTypes";
 
@@ -32,6 +34,10 @@ const posts = (state = { posts: [] }, action) => {
           post._id === action.payload._id ? action.payload : post
         ),
       };
+    case START_LOADING:
+      return { ...state, isLoading: true };
+    case END_LOADING:
+      return { ...state, isLoading: false };
     default:
       return state;
   }
