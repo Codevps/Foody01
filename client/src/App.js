@@ -10,6 +10,7 @@ import Dinner from "./components/Category/Dinner/Dinner";
 import Lunch from "./components/Category/Lunch/Lunch";
 import DashBoard from "./components/DashBoard/DashBoard";
 import DeliveryDetails from "./components/DeliveryDetails/DeliveryDetails";
+import ErrorPage from "./components/ErrorPage/ErrorPage.js";
 import Home from "./components/Home/Home";
 import NavBar from "./components/NavBar/NavBar";
 import CusOrder from "./components/OrderPage/CusOrder/CusOrder";
@@ -19,7 +20,6 @@ import ResDetails from "./components/ResCard/ResDetails";
 import MainSearch from "./components/Search/MainSearch";
 import Search1 from "./components/Search/Search1";
 import Search2 from "./components/Search/Search2";
-import Search from "./components/Search/Search2";
 
 const App = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -65,6 +65,12 @@ const App = () => {
             exact
             element={<Search2 />}
           />
+          <Route
+            path={`/search/restaurantSearch`}
+            exact
+            element={<Search2 />}
+          />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>
     </div>
