@@ -1,3 +1,5 @@
-error handling::
 server error handling
-no item available 
+orderPage design
+social media links
+no paying facility
+place order problem

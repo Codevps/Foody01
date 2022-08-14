@@ -1,27 +1,30 @@
+import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
+import SearchIcon from "@mui/icons-material/Search";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import {
   AppBar,
   Avatar,
   Button,
   IconButton,
-  InputAdornment,
-  TextField,
+  Snackbar,
   Toolbar,
   Tooltip,
   Typography,
 } from "@mui/material";
 import decode from "jwt-decode";
+import MuiAlert from "@mui/material/Alert";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import SearchIcon from "@mui/icons-material/Search";
 import { LOGOUT } from "../../constants/actionTypes";
-import useStyles from "./styles";
 import "./style.css";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
-
+import useStyles from "./styles";
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 const NavBar = () => {
   const { items } = useSelector((state) => state.items);
+  const [open, setOpen] = useState(false);
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -44,7 +47,7 @@ const NavBar = () => {
     }
   };
   const sp = () => {
-    window.alert("No items in cart yet, continue Shopping");
+    setOpen(true);
   };
   useEffect(() => {
     const token = user?.token;
@@ -58,9 +61,24 @@ const NavBar = () => {
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [location]);
   noItem = false;
-
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
   return (
     <div>
+      <Snackbar
+        anchorOrigin={{ vertical: "bottom", horizontal: "center " }}
+        open={open}
+        autoHideDuration={3000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity="error" sx={{ width: "50%" }}>
+          No items in cart yet, continue Shopping
+        </Alert>
+      </Snackbar>
       <AppBar className={classes.appBar} color="inherit">
         <Typography
           className={classes.headline}

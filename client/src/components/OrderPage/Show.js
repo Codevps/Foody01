@@ -99,7 +99,6 @@ const Show = ({ order, arr }) => {
   let cnt = 0;
 
   return (
-    // ordercompleted: if all orders are accepted and all order completed a then order completed : true
     <div>
       <Card className={classes.card}>
         <CardContent>
@@ -274,7 +273,7 @@ const Show = ({ order, arr }) => {
                 }}
               >
                 <b>
-                  {order.orderCompleted === true && arr[6] === "true"
+                  {order.orderCompleted && arr[6] === "true"
                     ? "Delivery Process Started"
                     : "Delivery Process Paused/Stopped"}
                 </b>
@@ -287,9 +286,12 @@ const Show = ({ order, arr }) => {
                         border: "1px solid black",
                         borderRadius: "4px",
                       }}
+                      disabled={
+                        arr[5] === "false" && arr[6] === "false" ? true : false
+                      }
                       onClick={() => (!order.orderCompleted ? sp() : sp2())}
                     >
-                      {!order.orderCompleted === true
+                      {order.orderCompleted
                         ? "Delivery process has started"
                         : "Process End/Paused "}
                     </button>
