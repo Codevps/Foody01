@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 const API = axios.create({
-  baseURL: "https://foody01-backend.vercel.app/5000",
+  baseURL: "https://foody01-backend.vercel.app/",
 });
 
 API.interceptors.request.use((req) => {
