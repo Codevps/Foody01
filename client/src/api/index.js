@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
-const API = axios.create({ baseURL: "http://localhost:5000" });
+const API = axios.create({
+  baseURL: "https://foody01-backend.vercel.app/5000",
+});
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("profile")) {
